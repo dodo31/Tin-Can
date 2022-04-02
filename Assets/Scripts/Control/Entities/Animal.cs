@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,8 +21,30 @@ public class Animal : Entity
 
 		List<Entity> closeEntities = this.GetCloseEntities();
 		List<Entity> hittingEntities = this.GetHittingEntities();
-		
-		Debug.Log(hittingEntities.Count);
+
+		if (closeEntities.Count > 0)
+		{
+			List<Entity> closePreys = this.ExtractClosePreys(closeEntities);
+			List<Entity> sameSpecies = this.ExtractCloseSameSpecies(closeEntities);
+			List<Entity> closePredators = this.ExtractClosePredators(closeEntities);
+
+			if (closePredators.Count > 0)
+			{
+				Debug.Log(Type + " Flee");
+			}
+			else if (sameSpecies.Count > 0)
+			{
+				Debug.Log(Type + " Reproduce");
+			}
+			else if (closePreys.Count > 0)
+			{
+				Debug.Log(Type + " Miam");
+			}
+			else
+			{
+				Debug.Log(Type + " Idle");
+			}
+		}
 	}
 
 	private List<Entity> GetCloseEntities()
@@ -37,7 +58,7 @@ public class Animal : Entity
 		List<Collider2D> collidingColliders = this.GetCollidingColliders(HitboxCollider);
 		return this.GetCollidingEntities(collidingColliders);
 	}
-	
+
 	private List<Collider2D> GetCollidingColliders(Collider2D sourceCollider)
 	{
 		List<Collider2D> collidingColliders = new List<Collider2D>();
@@ -69,5 +90,23 @@ public class Animal : Entity
 		}
 
 		return hittingEntities;
+	}
+
+	private List<Entity> ExtractClosePreys(List<Entity> entities)
+	{
+		AnimalPreset animalPreset = (AnimalPreset)Preset;
+		return new List<Entity>(entities.FindAll((entity) => animalPreset.Preys.Contains(entity.Type)));
+	}
+
+	private List<Entity> ExtractCloseSameSpecies(List<Entity> entities)
+	{
+		AnimalPreset animalPreset = (AnimalPreset)Preset;
+		return new List<Entity>(entities.FindAll((entity) => Type == entity.Type));
+	}
+
+	private List<Entity> ExtractClosePredators(List<Entity> entities)
+	{
+		AnimalPreset animalPreset = (AnimalPreset)Preset;
+		return new List<Entity>(entities.FindAll((entity) => animalPreset.Predators.Contains(entity.Type)));
 	}
 }

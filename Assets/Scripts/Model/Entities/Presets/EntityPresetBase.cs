@@ -32,7 +32,7 @@ public class EntityPresetBase
 
 				Preys = new List<EntityType>()
 				{
-					EntityType.ANIMAL_2,
+					EntityType.ANIMAL_3,
 				},
 
 				Predators = new List<EntityType>()
@@ -94,9 +94,9 @@ public class EntityPresetBase
 			}
 		},
 		{
-			EntityType.VEGETAL_1, new VegetalPreset()
+			EntityType.TREE, new VegetalPreset()
 			{
-				Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Vegetal 1"),
+				Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
 				CollideRadius = 1.76f,
 
 				StartVitality = 20,

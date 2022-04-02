@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   Vitality: 0
-  HitboxCollider: {fileID: 0}
+  HitboxCollider: {fileID: 5431626838244379063}
 --- !u!58 &5431626838244379063
 CircleCollider2D:
   m_ObjectHideFlags: 0
