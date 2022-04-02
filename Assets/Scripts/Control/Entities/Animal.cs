@@ -5,15 +5,22 @@ using UnityEngine;
 
 public class Animal : Entity
 {
+	private const float BIRTH_COOLDOWN = 0.35f;
+
 	public CircleCollider2D ProximityCollider;
 
 	private AnimalState _currentState;
+
+	private float _lastBirthTime;
+
 
 	protected override void Awake()
 	{
 		base.Awake();
 
 		_currentState = AnimalState.Idle;
+
+		_lastBirthTime = 0;
 	}
 
 	protected override void Start()
@@ -35,6 +42,7 @@ public class Animal : Entity
 
 		if (this.IsAlive())
 		{
+			this.GrowIfRequired();
 			this.ManageNormalLife();
 		}
 	}
@@ -84,7 +92,25 @@ public class Animal : Entity
 		Vector3 reproduceDelta = (closestFellow.transform.position - transform.position);
 		this.MoveToward(reproduceDelta);
 
+		bool canGiveBirth = ((Animal)closestFellow).CanGiveBirth();
+
+		if (HitboxCollider.IsTouching(closestFellow.HitboxCollider) && canGiveBirth && Id.CompareTo(closestFellow.Id) > 0)
+		{
+			Vector3 center = (transform.position + closestFellow.transform.position) / 2f;
+			this.PublishBirth(center);
+
+			Vitality -= AnimalPreset.ReproductionCost;
+			closestFellow.Vitality -= closestFellow.Preset.ReproductionCost;
+			
+			_lastBirthTime = Time.fixedTime;
+		}
+
 		_currentState = AnimalState.Reproducing;
+	}
+
+	public bool CanGiveBirth()
+	{
+		return Time.fixedTime >= _lastBirthTime + BIRTH_COOLDOWN;
 	}
 
 	private void Eat(List<Entity> closePreys)

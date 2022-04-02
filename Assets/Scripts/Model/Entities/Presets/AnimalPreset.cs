@@ -10,9 +10,6 @@ public class AnimalPreset : EntityPreset
 
 	public float Power;
 
-	public float ReproductionThreshold;
-	public float ReproductionVivality;
-
 	public float CollideBounce = 20;
 	public float CollideDrag = 12;
 

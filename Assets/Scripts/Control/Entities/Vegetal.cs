@@ -17,6 +17,12 @@ public class Vegetal : Entity
 		base.Update();
 	}
 
+	protected override void FixedUpdate()
+	{
+		base.FixedUpdate();
+		this.GrowIfRequired();
+	}
+
 	public override void Die()
 	{
 		this.PublishDeath();
