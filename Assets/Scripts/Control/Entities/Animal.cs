@@ -1,4 +1,7 @@
+using System;
+using System.Globalization;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Animal : Entity
@@ -15,81 +18,72 @@ public class Animal : Entity
 		base.Start();
 	}
 
-	protected override void Update()
+	protected override void FixedUpdate()
 	{
 		base.Update();
 
-		List<Entity> closeEntities = this.GetCloseEntities();
-		List<Entity> hittingEntities = this.GetHittingEntities();
+		List<Entity> closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
+		List<Entity> hittingEntities = _collisionsToolkit.GetHittingEntities(transform, HitboxCollider);
 
 		if (closeEntities.Count > 0)
 		{
-			List<Entity> closePreys = this.ExtractClosePreys(closeEntities);
-			List<Entity> sameSpecies = this.ExtractCloseSameSpecies(closeEntities);
 			List<Entity> closePredators = this.ExtractClosePredators(closeEntities);
+			List<Entity> closeFellows = this.ExtractCloseFellows(closeEntities);
+			List<Entity> closePreys = this.ExtractClosePreys(closeEntities);
 
 			if (closePredators.Count > 0)
 			{
-				Debug.Log(Type + " Flee");
+				this.Flee(closePredators);
 			}
-			else if (sameSpecies.Count > 0)
+			else if (closeFellows.Count > 0)
 			{
-				Debug.Log(Type + " Reproduce");
+				this.Reproduce(closeFellows);
 			}
 			else if (closePreys.Count > 0)
 			{
-				Debug.Log(Type + " Miam");
+				this.Eat(closePreys);
 			}
 			else
 			{
-				Debug.Log(Type + " Idle");
+				this.Idle();
 			}
 		}
 	}
 
-	private List<Entity> GetCloseEntities()
+	private void Flee(List<Entity> closePredators)
 	{
-		List<Collider2D> collidingColliders = this.GetCollidingColliders(ProximityCollider);
-		return this.GetCollidingEntities(collidingColliders);
+		Entity closestPredator = this.ExtractClosestEntity(closePredators);
+		Vector3 feeDelta = -(closestPredator.transform.position - transform.position);
+		this.MoveToward(feeDelta);
 	}
 
-	private List<Entity> GetHittingEntities()
+	private void Reproduce(List<Entity> closeFellows)
 	{
-		List<Collider2D> collidingColliders = this.GetCollidingColliders(HitboxCollider);
-		return this.GetCollidingEntities(collidingColliders);
+		Entity closestFellow = this.ExtractClosestEntity(closeFellows);
+		Vector3 reproduceDelta = (closestFellow.transform.position - transform.position);
+		this.MoveToward(reproduceDelta);
 	}
 
-	private List<Collider2D> GetCollidingColliders(Collider2D sourceCollider)
+	private void Eat(List<Entity> closePreys)
 	{
-		List<Collider2D> collidingColliders = new List<Collider2D>();
-		ContactFilter2D contactFilter = new ContactFilter2D()
-		{
-			layerMask = LayerMask.NameToLayer("Entities")
-		};
-
-		sourceCollider.OverlapCollider(contactFilter, collidingColliders);
-
-		return collidingColliders;
+		Entity closestPrey = this.ExtractClosestEntity(closePreys);
+		Vector3 eatDelta = (closestPrey.transform.position - transform.position);
+		this.MoveToward(eatDelta);
 	}
 
-	private List<Entity> GetCollidingEntities(List<Collider2D> collidingColliders)
+	private void MoveToward(Vector3 delta)
 	{
-		List<Entity> hittingEntities = new List<Entity>();
+		AnimalPreset animalPreset = (AnimalPreset)Preset;
+		
+		Vector3 direction = delta.normalized;
+		float speed = Math.Min(delta.magnitude, animalPreset.BaseSpeed);
+		
+		transform.position += direction * speed;
+	}
 
-		foreach (Collider2D collidingCollider in collidingColliders)
-		{
-			if (collidingCollider.transform != transform)
-			{
-				Entity collidingEntity = collidingCollider.GetComponent<Entity>();
+	private void Idle()
+	{
 
-				if (collidingEntity.HitboxCollider == collidingCollider)
-				{
-					hittingEntities.Add(collidingEntity);
-				}
-			}
-		}
-
-		return hittingEntities;
 	}
 
 	private List<Entity> ExtractClosePreys(List<Entity> entities)
@@ -98,7 +92,7 @@ public class Animal : Entity
 		return new List<Entity>(entities.FindAll((entity) => animalPreset.Preys.Contains(entity.Type)));
 	}
 
-	private List<Entity> ExtractCloseSameSpecies(List<Entity> entities)
+	private List<Entity> ExtractCloseFellows(List<Entity> entities)
 	{
 		AnimalPreset animalPreset = (AnimalPreset)Preset;
 		return new List<Entity>(entities.FindAll((entity) => Type == entity.Type));
@@ -108,5 +102,10 @@ public class Animal : Entity
 	{
 		AnimalPreset animalPreset = (AnimalPreset)Preset;
 		return new List<Entity>(entities.FindAll((entity) => animalPreset.Predators.Contains(entity.Type)));
+	}
+
+	private Entity ExtractClosestEntity(List<Entity> entities)
+	{
+		return entities.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
 	}
 }

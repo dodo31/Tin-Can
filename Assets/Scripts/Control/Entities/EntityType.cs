@@ -6,5 +6,5 @@ public enum EntityType
 	ANIMAL_1,
 	ANIMAL_2,
 	ANIMAL_3,
-	TREE
+	TREE_1
 }

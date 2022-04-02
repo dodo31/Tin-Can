@@ -22,7 +22,7 @@ public class EntityPresetBase
 				CollideRadius = 2.404756f,
 
 				ViewDistance = 15,
-				BaseSpeed = 3,
+				BaseSpeed = 0.05f,
 
 				StartVitality = 50,
 				MaxVitality = 100,
@@ -32,12 +32,14 @@ public class EntityPresetBase
 
 				Preys = new List<EntityType>()
 				{
+					EntityType.ANIMAL_2,
 					EntityType.ANIMAL_3,
+					EntityType.TREE_1,
 				},
 
 				Predators = new List<EntityType>()
 				{
-					EntityType.ANIMAL_2,
+					
 				},
 			}
 		},
@@ -48,7 +50,7 @@ public class EntityPresetBase
 				CollideRadius = 1.76f,
 
 				ViewDistance = 8,
-				BaseSpeed = 1.5f,
+				BaseSpeed = 0.08f,
 
 				StartVitality = 20,
 				MaxVitality = 70,
@@ -58,12 +60,13 @@ public class EntityPresetBase
 
 				Preys = new List<EntityType>()
 				{
-					EntityType.ANIMAL_1,
+					EntityType.ANIMAL_3,
+					EntityType.TREE_1,
 				},
 
 				Predators = new List<EntityType>()
 				{
-					EntityType.ANIMAL_3,
+					EntityType.ANIMAL_1,
 				},
 			}
 		},
@@ -74,7 +77,7 @@ public class EntityPresetBase
 				CollideRadius = 2.35f,
 
 				ViewDistance = 12,
-				BaseSpeed = 2.5f,
+				BaseSpeed = 0.03f,
 
 				StartVitality = 35,
 				MaxVitality = 85,
@@ -84,17 +87,18 @@ public class EntityPresetBase
 
 				Preys = new List<EntityType>()
 				{
-					EntityType.ANIMAL_2,
+					EntityType.TREE_1,
 				},
 
 				Predators = new List<EntityType>()
 				{
 					EntityType.ANIMAL_1,
+					EntityType.ANIMAL_2,
 				},
 			}
 		},
 		{
-			EntityType.TREE, new VegetalPreset()
+			EntityType.TREE_1, new VegetalPreset()
 			{
 				Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
 				CollideRadius = 1.76f,
