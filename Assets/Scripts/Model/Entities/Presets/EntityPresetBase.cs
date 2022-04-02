@@ -22,12 +22,15 @@ public class EntityPresetBase
 				CollideRadius = 2.404756f,
 
 				ViewDistance = 15,
-				
+
 				VitalitySpeed = -0.1f,
-				MoveSpeed = 0.05f,
+				MoveSpeed = 0.15f,
 
 				StartVitality = 60,
 				MaxVitality = 100,
+
+				NutritionalValue = 30,
+				Power = 5,
 
 				ReproductionThreshold = 0.5f,
 				ReproductionVivality = 20,
@@ -36,12 +39,11 @@ public class EntityPresetBase
 				{
 					EntityType.ANIMAL_2,
 					EntityType.ANIMAL_3,
-					EntityType.TREE_1,
 				},
 
 				Predators = new List<EntityType>()
 				{
-					
+
 				},
 			}
 		},
@@ -52,12 +54,15 @@ public class EntityPresetBase
 				CollideRadius = 1.76f,
 
 				ViewDistance = 8,
-				
+
 				VitalitySpeed = -0.08f,
 				MoveSpeed = 0.08f,
 
 				StartVitality = 20,
 				MaxVitality = 70,
+
+				NutritionalValue = 15,
+				Power = 6,
 
 				ReproductionThreshold = 0.3f,
 				ReproductionVivality = 35,
@@ -81,12 +86,15 @@ public class EntityPresetBase
 				CollideRadius = 2.35f,
 
 				ViewDistance = 12,
-				
+
 				VitalitySpeed = -0.12f,
 				MoveSpeed = 0.03f,
 
 				StartVitality = 35,
 				MaxVitality = 85,
+
+				NutritionalValue = 36,
+				Power = 8,
 
 				ReproductionThreshold = 0.45f,
 				ReproductionVivality = 35,
@@ -113,6 +121,8 @@ public class EntityPresetBase
 
 				StartVitality = 20,
 				MaxVitality = 70,
+
+				NutritionalValue = 50,
 			}
 		},
 	};

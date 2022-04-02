@@ -11,4 +11,6 @@ public abstract class EntityPreset
 
 	public float StartVitality;
 	public float MaxVitality;
+	
+	public float NutritionalValue;
 }

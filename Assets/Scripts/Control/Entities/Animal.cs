@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,16 +7,23 @@ public class Animal : Entity
 {
 	public CircleCollider2D ProximityCollider;
 
+	private AnimalState _currentState;
+
 	protected override void Awake()
 	{
 		base.Awake();
+
+		_currentState = AnimalState.Idle;
 	}
 
 	protected override void Start()
 	{
 		base.Start();
+
+		Rigidbody2D rigidBody = this.GetComponent<Rigidbody2D>();
+		rigidBody.drag = AnimalPreset.CollideDrag;
 	}
-	
+
 	protected override void Update()
 	{
 		base.Update();
@@ -26,7 +32,15 @@ public class Animal : Entity
 	protected override void FixedUpdate()
 	{
 		base.FixedUpdate();
+		
+		if (this.IsAlive())
+		{
+			this.ManageNormalLife();
+		}
+	}
 
+	private void ManageNormalLife()
+	{
 		List<Entity> closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
 		List<Entity> hittingEntities = _collisionsToolkit.GetHittingEntities(transform, HitboxCollider);
 
@@ -48,10 +62,10 @@ public class Animal : Entity
 			{
 				this.Eat(closePreys);
 			}
-			else
-			{
-				this.Idle();
-			}
+		}
+		else
+		{
+			this.Idle();
 		}
 	}
 
@@ -60,6 +74,8 @@ public class Animal : Entity
 		Entity closestPredator = this.ExtractClosestEntity(closePredators);
 		Vector3 feeDelta = -(closestPredator.transform.position - transform.position);
 		this.MoveToward(feeDelta);
+
+		_currentState = AnimalState.Fleeing;
 	}
 
 	private void Reproduce(List<Entity> closeFellows)
@@ -67,6 +83,8 @@ public class Animal : Entity
 		Entity closestFellow = this.ExtractClosestEntity(closeFellows);
 		Vector3 reproduceDelta = (closestFellow.transform.position - transform.position);
 		this.MoveToward(reproduceDelta);
+
+		_currentState = AnimalState.Reproducing;
 	}
 
 	private void Eat(List<Entity> closePreys)
@@ -74,6 +92,36 @@ public class Animal : Entity
 		Entity closestPrey = this.ExtractClosestEntity(closePreys);
 		Vector3 eatDelta = (closestPrey.transform.position - transform.position);
 		this.MoveToward(eatDelta);
+
+		if (HitboxCollider.IsTouching(closestPrey.HitboxCollider) && closestPrey.CanTakeHit())
+		{
+			Vector3 preyDelta = (closestPrey.transform.position - transform.position);
+			closestPrey.TakeHit(AnimalPreset.Power, -preyDelta.normalized);
+		}
+
+		_currentState = AnimalState.Eating;
+	}
+
+	public override bool TakeHit(float damage, Vector3 hitDirection)
+	{
+		bool isDead = base.TakeHit(damage, hitDirection);
+
+		if (!isDead)
+		{
+			Rigidbody2D rigidbody = this.GetComponent<Rigidbody2D>();
+			rigidbody.velocity = -hitDirection * AnimalPreset.CollideBounce;
+			return isDead;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	public override void Die()
+	{
+		_currentState = AnimalState.Dead;
+		this.PublishDeath();
 	}
 
 	private void MoveToward(Vector3 delta)
@@ -86,7 +134,7 @@ public class Animal : Entity
 
 	private void Idle()
 	{
-
+		_currentState = AnimalState.Idle;
 	}
 
 	private List<Entity> ExtractClosePreys(List<Entity> entities)
@@ -108,10 +156,15 @@ public class Animal : Entity
 	{
 		return entities.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
 	}
-	
+
 	private bool HasEnoughVitalityToReproduce()
 	{
 		return Vitality >= AnimalPreset.ReproductionThreshold * AnimalPreset.MaxVitality;
+	}
+
+	private Boolean IsAlive()
+	{
+		return _currentState != AnimalState.Dead;
 	}
 
 	private AnimalPreset AnimalPreset

@@ -42,11 +42,13 @@ public class EntitiesController : MonoBehaviour
 	{
 		newEntity.transform.SetParent(transform);
 		newEntity.transform.position = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+		
+		newEntity.OnDeath += this.KillEntity;
 	}
 
 	public void KillEntity(Entity entity)
 	{
-		DestroyImmediate(entity);
+		DestroyImmediate(entity.gameObject);
 	}
 
 	private Entity[] GetEntities()
