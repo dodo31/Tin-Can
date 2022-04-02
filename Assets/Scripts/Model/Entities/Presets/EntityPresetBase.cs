@@ -5,7 +5,16 @@ using UnityEngine;
 [Serializable]
 public class EntityPresetBase
 {
-	private Dictionary<EntityType, EntityPreset> _presets = new Dictionary<EntityType, EntityPreset> {
+	private Dictionary<EntityType, EntityPreset> _presets;
+
+	private EntityPresetBase()
+	{
+		Dictionary<EntityType, EntityPreset> _presets = new Dictionary<EntityType, EntityPreset>();
+	}
+
+	public void CreatePresets()
+	{
+		_presets = new Dictionary<EntityType, EntityPreset> {
 		{
 			EntityType.ANIMAL_1, new AnimalPreset()
 			{
@@ -50,10 +59,6 @@ public class EntityPresetBase
 			}
 		},
 	};
-
-	private EntityPresetBase()
-	{
-
 	}
 
 	public static EntityPresetBase GetInstance()

@@ -7,5 +7,6 @@ public abstract class EntitiesFactory : MonoBehaviour
 	protected virtual void Awake()
 	{
 		_presetBase = EntityPresetBase.GetInstance();
+		_presetBase.CreatePresets();
 	}
 }
