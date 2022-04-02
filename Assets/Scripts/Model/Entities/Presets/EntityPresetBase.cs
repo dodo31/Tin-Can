@@ -27,9 +27,18 @@ public class EntityPresetBase
 				StartVitality = 50,
 				MaxVitality = 100,
 
-
 				ReproductionThreshold = 0.5f,
 				ReproductionVivality = 20,
+
+				Preys = new List<EntityType>()
+				{
+					EntityType.ANIMAL_2,
+				},
+
+				Predators = new List<EntityType>()
+				{
+					EntityType.ANIMAL_2,
+				},
 			}
 		},
 		{
@@ -46,6 +55,42 @@ public class EntityPresetBase
 
 				ReproductionThreshold = 0.3f,
 				ReproductionVivality = 35,
+
+				Preys = new List<EntityType>()
+				{
+					EntityType.ANIMAL_1,
+				},
+
+				Predators = new List<EntityType>()
+				{
+					EntityType.ANIMAL_3,
+				},
+			}
+		},
+		{
+			EntityType.ANIMAL_3, new AnimalPreset()
+			{
+				Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Animal 3"),
+				CollideRadius = 2.2f,
+
+				ViewDistance = 35,
+				BaseSpeed = 2.5f,
+
+				StartVitality = 35,
+				MaxVitality = 85,
+
+				ReproductionThreshold = 0.45f,
+				ReproductionVivality = 35,
+
+				Preys = new List<EntityType>()
+				{
+					EntityType.ANIMAL_2,
+				},
+
+				Predators = new List<EntityType>()
+				{
+					EntityType.ANIMAL_1,
+				},
 			}
 		},
 		{

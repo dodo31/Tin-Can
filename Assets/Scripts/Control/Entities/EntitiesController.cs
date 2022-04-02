@@ -7,12 +7,12 @@ public class EntitiesController : MonoBehaviour
 
 	protected void Start()
 	{
-        AnimalSpawnButton[] spwnButtons = GameObject.FindObjectsOfType<AnimalSpawnButton>();
-        
-        foreach (AnimalSpawnButton spawnButton in spwnButtons)
-        {
-            spawnButton.OnClick += SpawnAnimal;
-        }
+		AnimalSpawnButton[] spwnButtons = GameObject.FindObjectsOfType<AnimalSpawnButton>();
+
+		foreach (AnimalSpawnButton spawnButton in spwnButtons)
+		{
+			spawnButton.OnClick += SpawnAnimal;
+		}
 	}
 
 	protected void Update()
@@ -22,19 +22,19 @@ public class EntitiesController : MonoBehaviour
 
 	public void SpawnVegetable(EntityType type)
 	{
-        Vegetal newVegetal = VegetalsFactory.CreateVegetable(type);
-        newVegetal.transform.SetParent(transform);
+		Vegetal newVegetal = VegetalsFactory.CreateVegetable(type);
+		newVegetal.transform.SetParent(transform);
 	}
-    
+
 	public void SpawnAnimal(EntityType type)
 	{
-        Animal newAnimal = AnimalsFactory.CreateAnimal(type);
-        newAnimal.transform.SetParent(transform);
+		Animal newAnimal = AnimalsFactory.CreateAnimal(type);
+		newAnimal.transform.SetParent(transform);
 	}
 
 	public void KillEntity(Entity entity)
 	{
-        DestroyImmediate(entity);
+		DestroyImmediate(entity);
 	}
 
 	private Entity[] GetEntities()
