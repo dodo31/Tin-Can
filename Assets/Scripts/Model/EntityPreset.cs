@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class EntityPreset
 {
 	public Sprite sprite;
+	public float CollideRadius;
 	
 	public float StartVitality;
 	public float MaxVitality;

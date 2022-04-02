@@ -19,6 +19,9 @@ public class AnimalsFactory : MonoBehaviour
 
 		SpriteRenderer spriteRenderer = newAnimal.GetComponent<SpriteRenderer>();
 		spriteRenderer.sprite = newAnimal.Preset.sprite;
+		
+		CircleCollider2D collider = newAnimal.GetComponent<CircleCollider2D>();
+		collider.radius = newAnimal.Preset.CollideRadius;
 
 		return newAnimal;
 	}
