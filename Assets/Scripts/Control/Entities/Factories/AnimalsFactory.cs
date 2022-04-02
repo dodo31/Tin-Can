@@ -6,6 +6,8 @@ public class AnimalsFactory : EntitiesFactory
 
 	public Animal CreateAnimal(EntityType type)
 	{
+		Debug.Log(type);
+		
 		AnimalPreset animalPreset = (AnimalPreset)_presetBase[type];
 		Animal newAnimal = Instantiate(AnimalPrefab);
 		
