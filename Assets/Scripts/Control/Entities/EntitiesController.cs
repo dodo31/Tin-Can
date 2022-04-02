@@ -7,9 +7,15 @@ public class EntitiesController : MonoBehaviour
 
 	protected void Start()
 	{
-		AnimalSpawnButton[] spwnButtons = GameObject.FindObjectsOfType<AnimalSpawnButton>();
+		VegetalSpawnButton[] vegetalSpawnButtons = GameObject.FindObjectsOfType<VegetalSpawnButton>();
+		AnimalSpawnButton[] animalSpawnButtons = GameObject.FindObjectsOfType<AnimalSpawnButton>();
 
-		foreach (AnimalSpawnButton spawnButton in spwnButtons)
+		foreach (VegetalSpawnButton spawnButton in vegetalSpawnButtons)
+		{
+			spawnButton.OnClick += SpawnVegetal;
+		}
+
+		foreach (AnimalSpawnButton spawnButton in animalSpawnButtons)
 		{
 			spawnButton.OnClick += SpawnAnimal;
 		}
@@ -20,22 +26,22 @@ public class EntitiesController : MonoBehaviour
 
 	}
 
-	public void SpawnVegetable(EntityType type)
+	public void SpawnVegetal(EntityType type)
 	{
 		Vegetal newVegetal = VegetalsFactory.CreateVegetable(type);
-        this.SpawnEntity(newVegetal);
+		this.SpawnEntity(newVegetal);
 	}
 
 	public void SpawnAnimal(EntityType type)
 	{
 		Animal newAnimal = AnimalsFactory.CreateAnimal(type);
-        this.SpawnEntity(newAnimal);
+		this.SpawnEntity(newAnimal);
 	}
 
 	private void SpawnEntity(Entity newEntity)
 	{
-        newEntity.transform.SetParent(transform);
-        newEntity.transform.position = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+		newEntity.transform.SetParent(transform);
+		newEntity.transform.position = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
 	}
 
 	public void KillEntity(Entity entity)
