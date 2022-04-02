@@ -6,7 +6,7 @@ public class AnimalPreset : EntityPreset
 {
 	public float ViewDistance;
 
-	public float BaseSpeed;
+	public float MoveSpeed;
 
 	public float ReproductionThreshold;
 	public float ReproductionVivality;

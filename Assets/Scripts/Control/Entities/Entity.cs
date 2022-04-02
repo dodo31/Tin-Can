@@ -33,12 +33,12 @@ public abstract class Entity : MonoBehaviour
 
 	protected virtual void Update()
 	{
-
+		
 	}
 	
 	protected virtual void FixedUpdate()
 	{
-
+		Vitality = Mathf.Clamp(Vitality + Preset.VitalitySpeed, 0, Preset.MaxVitality);
 	}
 
 	public Guid Id { get => _id; set => _id = value; }

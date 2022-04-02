@@ -22,9 +22,11 @@ public class EntityPresetBase
 				CollideRadius = 2.404756f,
 
 				ViewDistance = 15,
-				BaseSpeed = 0.05f,
+				
+				VitalitySpeed = -0.1f,
+				MoveSpeed = 0.05f,
 
-				StartVitality = 40,
+				StartVitality = 60,
 				MaxVitality = 100,
 
 				ReproductionThreshold = 0.5f,
@@ -50,7 +52,9 @@ public class EntityPresetBase
 				CollideRadius = 1.76f,
 
 				ViewDistance = 8,
-				BaseSpeed = 0.08f,
+				
+				VitalitySpeed = -0.08f,
+				MoveSpeed = 0.08f,
 
 				StartVitality = 20,
 				MaxVitality = 70,
@@ -77,7 +81,9 @@ public class EntityPresetBase
 				CollideRadius = 2.35f,
 
 				ViewDistance = 12,
-				BaseSpeed = 0.03f,
+				
+				VitalitySpeed = -0.12f,
+				MoveSpeed = 0.03f,
 
 				StartVitality = 35,
 				MaxVitality = 85,
@@ -102,6 +108,8 @@ public class EntityPresetBase
 			{
 				Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
 				CollideRadius = 1.76f,
+
+				VitalitySpeed = 0.12f,
 
 				StartVitality = 20,
 				MaxVitality = 70,

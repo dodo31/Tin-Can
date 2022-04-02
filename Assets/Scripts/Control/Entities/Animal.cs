@@ -17,10 +17,15 @@ public class Animal : Entity
 	{
 		base.Start();
 	}
+	
+	protected override void Update()
+	{
+		base.Update();
+	}
 
 	protected override void FixedUpdate()
 	{
-		base.Update();
+		base.FixedUpdate();
 
 		List<Entity> closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
 		List<Entity> hittingEntities = _collisionsToolkit.GetHittingEntities(transform, HitboxCollider);
@@ -74,7 +79,7 @@ public class Animal : Entity
 	private void MoveToward(Vector3 delta)
 	{
 		Vector3 direction = delta.normalized;
-		float speed = Math.Min(delta.magnitude, AnimalPreset.BaseSpeed);
+		float speed = Math.Min(delta.magnitude, AnimalPreset.MoveSpeed);
 
 		transform.position += direction * speed;
 	}
@@ -106,7 +111,7 @@ public class Animal : Entity
 	
 	private bool HasEnoughVitalityToReproduce()
 	{
-		return Vitality > AnimalPreset.ReproductionThreshold * AnimalPreset.MaxVitality;
+		return Vitality >= AnimalPreset.ReproductionThreshold * AnimalPreset.MaxVitality;
 	}
 
 	private AnimalPreset AnimalPreset
