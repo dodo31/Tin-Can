@@ -32,12 +32,14 @@ public class EntityPresetBase
 
 				Preys = new List<EntityType>()
 				{
+					EntityType.ANIMAL_2,
 					EntityType.ANIMAL_3,
+					EntityType.TREE_1,
 				},
 
 				Predators = new List<EntityType>()
 				{
-					EntityType.ANIMAL_2,
+					
 				},
 			}
 		},
@@ -58,12 +60,13 @@ public class EntityPresetBase
 
 				Preys = new List<EntityType>()
 				{
-					EntityType.ANIMAL_1,
+					EntityType.ANIMAL_3,
+					EntityType.TREE_1,
 				},
 
 				Predators = new List<EntityType>()
 				{
-					EntityType.ANIMAL_3,
+					EntityType.ANIMAL_1,
 				},
 			}
 		},
@@ -84,12 +87,13 @@ public class EntityPresetBase
 
 				Preys = new List<EntityType>()
 				{
-					EntityType.ANIMAL_2,
+					EntityType.TREE_1,
 				},
 
 				Predators = new List<EntityType>()
 				{
 					EntityType.ANIMAL_1,
+					EntityType.ANIMAL_2,
 				},
 			}
 		},
