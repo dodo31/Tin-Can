@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public abstract class Entity : MonoBehaviour
 {
-	
 	public EntityType Type;
 	public EntityPreset Preset;
 
@@ -18,6 +17,8 @@ public abstract class Entity : MonoBehaviour
 	protected List<Entity> _proximityEntities;
 
 	protected CollisionsToolkit _collisionsToolkit;
+	
+	public event Action<Entity> OnDeath;
 
 	protected virtual void Awake()
 	{

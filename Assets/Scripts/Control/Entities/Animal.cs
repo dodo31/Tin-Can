@@ -35,7 +35,7 @@ public class Animal : Entity
 			{
 				this.Flee(closePredators);
 			}
-			else if (closeFellows.Count > 0)
+			else if (closeFellows.Count > 0 && this.HasEnoughVitalityToReproduce())
 			{
 				this.Reproduce(closeFellows);
 			}
@@ -73,11 +73,9 @@ public class Animal : Entity
 
 	private void MoveToward(Vector3 delta)
 	{
-		AnimalPreset animalPreset = (AnimalPreset)Preset;
-		
 		Vector3 direction = delta.normalized;
-		float speed = Math.Min(delta.magnitude, animalPreset.BaseSpeed);
-		
+		float speed = Math.Min(delta.magnitude, AnimalPreset.BaseSpeed);
+
 		transform.position += direction * speed;
 	}
 
@@ -88,24 +86,34 @@ public class Animal : Entity
 
 	private List<Entity> ExtractClosePreys(List<Entity> entities)
 	{
-		AnimalPreset animalPreset = (AnimalPreset)Preset;
-		return new List<Entity>(entities.FindAll((entity) => animalPreset.Preys.Contains(entity.Type)));
+		return new List<Entity>(entities.FindAll((entity) => AnimalPreset.Preys.Contains(entity.Type)));
 	}
 
 	private List<Entity> ExtractCloseFellows(List<Entity> entities)
 	{
-		AnimalPreset animalPreset = (AnimalPreset)Preset;
 		return new List<Entity>(entities.FindAll((entity) => Type == entity.Type));
 	}
 
 	private List<Entity> ExtractClosePredators(List<Entity> entities)
 	{
-		AnimalPreset animalPreset = (AnimalPreset)Preset;
-		return new List<Entity>(entities.FindAll((entity) => animalPreset.Predators.Contains(entity.Type)));
+		return new List<Entity>(entities.FindAll((entity) => AnimalPreset.Predators.Contains(entity.Type)));
 	}
 
 	private Entity ExtractClosestEntity(List<Entity> entities)
 	{
 		return entities.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
+	}
+	
+	private bool HasEnoughVitalityToReproduce()
+	{
+		return Vitality > AnimalPreset.ReproductionThreshold * AnimalPreset.MaxVitality;
+	}
+
+	private AnimalPreset AnimalPreset
+	{
+		get
+		{
+			return (AnimalPreset)Preset;
+		}
 	}
 }

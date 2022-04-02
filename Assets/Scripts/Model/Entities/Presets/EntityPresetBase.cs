@@ -24,7 +24,7 @@ public class EntityPresetBase
 				ViewDistance = 15,
 				BaseSpeed = 0.05f,
 
-				StartVitality = 50,
+				StartVitality = 40,
 				MaxVitality = 100,
 
 				ReproductionThreshold = 0.5f,
