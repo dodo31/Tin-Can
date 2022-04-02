@@ -5,21 +5,23 @@ public class AnimalsFactory : MonoBehaviour
 {
 	public Animal AnimalPrefab;
 
-	public Dictionary<EntityType, AnimalPreset> Presets = new Dictionary<EntityType, AnimalPreset> {
-		{ EntityType.ANIMAL_1, new AnimalPreset() },
-		{ EntityType.ANIMAL_2, new AnimalPreset() },
-	};
+	private EntityPresetBase _presetBase;
+
+	protected void Awake()
+	{
+		_presetBase = EntityPresetBase.GetInstance();
+	}
 
 	private Animal CreateAnimal(EntityType type)
 	{
 		Animal newAnimal = Instantiate(AnimalPrefab);
 		newAnimal.Type = type;
-		newAnimal.Preset = Presets[type];
+		newAnimal.Preset = _presetBase[type];
 		newAnimal.Vitality = newAnimal.Preset.StartVitality;
 
 		SpriteRenderer spriteRenderer = newAnimal.GetComponent<SpriteRenderer>();
-		spriteRenderer.sprite = newAnimal.Preset.sprite;
-		
+		spriteRenderer.sprite = newAnimal.Preset.Sprite;
+
 		CircleCollider2D collider = newAnimal.GetComponent<CircleCollider2D>();
 		collider.radius = newAnimal.Preset.CollideRadius;
 
