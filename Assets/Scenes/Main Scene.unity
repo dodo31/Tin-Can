@@ -212,7 +212,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -331,6 +331,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3387918214497184434, guid: 25ca73b86dcf97c42944c800adc9b446, type: 3}
   m_PrefabInstance: {fileID: 640614478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &807650890
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1399188524}
+    m_Modifications:
+    - target: {fileID: 3387918214497184429, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_Name
+      value: Vegetal 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+--- !u!4 &807650891 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3387918214497184434, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+  m_PrefabInstance: {fileID: 807650890}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &908495020
 GameObject:
@@ -538,6 +600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1399188524}
   - component: {fileID: 1399188525}
+  - component: {fileID: 1399188527}
   - component: {fileID: 1399188526}
   m_Layer: 0
   m_Name: Entities Container
@@ -559,6 +622,7 @@ Transform:
   m_Children:
   - {fileID: 360373296}
   - {fileID: 640614479}
+  - {fileID: 807650891}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -574,6 +638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0125a9abcd8ba449b88342910d5e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VegatablesFactory: {fileID: 1399188527}
+  AnimalsFactory: {fileID: 1399188526}
 --- !u!114 &1399188526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,10 +649,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399188523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e74478d3937f8140bc07ac5f1f9f0a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 820486b9aee921d40b0d11c540f47898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AnimalPrefab: {fileID: 3387918214497184432, guid: 25ca73b86dcf97c42944c800adc9b446, type: 3}
+--- !u!114 &1399188527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399188523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810b67ffbe200d4468c5de457dc84644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VegetablePrefab: {fileID: -8139648244333446675, guid: 206766e342001e043a9686bd72158ffd, type: 3}
 --- !u!1 &1680217178
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +728,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 29.315258, y: 16.966774}
+  m_Size: {x: 76.324745, y: 33.885353}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
@@ -663,8 +742,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680217178}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0549, y: 0.3074, z: 0.06219717}
-  m_LocalScale: {x: 0.614, y: 0.614, z: 0.614}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 465239078}
   m_RootOrder: 0
@@ -742,11 +821,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3387918214497184434, guid: 25ca73b86dcf97c42944c800adc9b446, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.85
+      value: -6.97
       objectReference: {fileID: 0}
     - target: {fileID: 3387918214497184434, guid: 25ca73b86dcf97c42944c800adc9b446, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.69
+      value: 2.28
       objectReference: {fileID: 0}
     - target: {fileID: 3387918214497184434, guid: 25ca73b86dcf97c42944c800adc9b446, type: 3}
       propertyPath: m_LocalPosition.z

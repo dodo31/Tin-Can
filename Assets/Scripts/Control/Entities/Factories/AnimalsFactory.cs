@@ -1,18 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimalsFactory : MonoBehaviour
+public class AnimalsFactory : EntitiesFactory
 {
 	public Animal AnimalPrefab;
 
-	private EntityPresetBase _presetBase;
-
-	protected void Awake()
-	{
-		_presetBase = EntityPresetBase.GetInstance();
-	}
-
-	private Animal CreateAnimal(EntityType type)
+	public Animal CreateAnimal(EntityType type)
 	{
 		Animal newAnimal = Instantiate(AnimalPrefab);
 		newAnimal.Type = type;

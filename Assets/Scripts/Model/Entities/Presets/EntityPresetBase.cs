@@ -39,6 +39,16 @@ public class EntityPresetBase
 				ReproductionVivality = 35,
 			}
 		},
+		{
+			EntityType.VEGETAL_1, new VegetalPreset()
+			{
+				Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Vegetal 1"),
+				CollideRadius = 1.76f,
+
+				StartVitality = 20,
+				MaxVitality = 70,
+			}
+		},
 	};
 
 	private EntityPresetBase()
