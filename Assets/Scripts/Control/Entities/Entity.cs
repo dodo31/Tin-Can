@@ -31,6 +31,11 @@ public abstract class Entity : MonoBehaviour
 	{
 
 	}
+	
+	protected virtual void FixedUpdate()
+	{
+
+	}
 
 	public Guid Id { get => _id; set => _id = value; }
 }

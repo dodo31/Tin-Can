@@ -1,4 +1,7 @@
+using System;
+using System.Globalization;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Animal : Entity
@@ -15,7 +18,7 @@ public class Animal : Entity
 		base.Start();
 	}
 
-	protected override void Update()
+	protected override void FixedUpdate()
 	{
 		base.Update();
 
@@ -24,27 +27,63 @@ public class Animal : Entity
 
 		if (closeEntities.Count > 0)
 		{
-			List<Entity> closePreys = this.ExtractClosePreys(closeEntities);
-			List<Entity> sameSpecies = this.ExtractCloseSameSpecies(closeEntities);
 			List<Entity> closePredators = this.ExtractClosePredators(closeEntities);
+			List<Entity> closeFellows = this.ExtractCloseFellows(closeEntities);
+			List<Entity> closePreys = this.ExtractClosePreys(closeEntities);
 
 			if (closePredators.Count > 0)
 			{
-				Debug.Log(Type + " Flee");
+				this.Flee(closePredators);
 			}
-			else if (sameSpecies.Count > 0)
+			else if (closeFellows.Count > 0)
 			{
-				Debug.Log(Type + " Reproduce");
+				this.Reproduce(closeFellows);
 			}
 			else if (closePreys.Count > 0)
 			{
-				Debug.Log(Type + " Miam");
+				this.Eat(closePreys);
 			}
 			else
 			{
-				Debug.Log(Type + " Idle");
+				this.Idle();
 			}
 		}
+	}
+
+	private void Flee(List<Entity> closePredators)
+	{
+		Entity closestPredator = this.ExtractClosestEntity(closePredators);
+		Vector3 feeDelta = -(closestPredator.transform.position - transform.position);
+		this.MoveToward(feeDelta);
+	}
+
+	private void Reproduce(List<Entity> closeFellows)
+	{
+		Entity closestFellow = this.ExtractClosestEntity(closeFellows);
+		Vector3 reproduceDelta = (closestFellow.transform.position - transform.position);
+		this.MoveToward(reproduceDelta);
+	}
+
+	private void Eat(List<Entity> closePreys)
+	{
+		Entity closestPrey = this.ExtractClosestEntity(closePreys);
+		Vector3 eatDelta = (closestPrey.transform.position - transform.position);
+		this.MoveToward(eatDelta);
+	}
+
+	private void MoveToward(Vector3 delta)
+	{
+		AnimalPreset animalPreset = (AnimalPreset)Preset;
+		
+		Vector3 direction = delta.normalized;
+		float speed = Math.Min(delta.magnitude, animalPreset.BaseSpeed);
+		
+		transform.position += direction * speed;
+	}
+
+	private void Idle()
+	{
+
 	}
 
 	private List<Entity> GetCloseEntities()
@@ -98,7 +137,7 @@ public class Animal : Entity
 		return new List<Entity>(entities.FindAll((entity) => animalPreset.Preys.Contains(entity.Type)));
 	}
 
-	private List<Entity> ExtractCloseSameSpecies(List<Entity> entities)
+	private List<Entity> ExtractCloseFellows(List<Entity> entities)
 	{
 		AnimalPreset animalPreset = (AnimalPreset)Preset;
 		return new List<Entity>(entities.FindAll((entity) => Type == entity.Type));
@@ -108,5 +147,10 @@ public class Animal : Entity
 	{
 		AnimalPreset animalPreset = (AnimalPreset)Preset;
 		return new List<Entity>(entities.FindAll((entity) => animalPreset.Predators.Contains(entity.Type)));
+	}
+
+	private Entity ExtractClosestEntity(List<Entity> entities)
+	{
+		return entities.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
 	}
 }
