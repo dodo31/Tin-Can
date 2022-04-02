@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Vegetal : Entity
 {
 	protected override void Awake()
@@ -13,5 +15,16 @@ public class Vegetal : Entity
 	protected override void Update()
 	{
 		base.Update();
+	}
+
+	protected override void FixedUpdate()
+	{
+		base.FixedUpdate();
+		this.GrowIfRequired();
+	}
+
+	public override void Die()
+	{
+		this.PublishDeath();
 	}
 }

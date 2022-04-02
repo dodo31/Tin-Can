@@ -12,12 +12,12 @@ public class EntitiesController : MonoBehaviour
 
 		foreach (VegetalSpawnButton spawnButton in vegetalSpawnButtons)
 		{
-			spawnButton.OnClick += SpawnVegetal;
+			spawnButton.OnClick += this.SpawnVegetal;
 		}
 
 		foreach (AnimalSpawnButton spawnButton in animalSpawnButtons)
 		{
-			spawnButton.OnClick += SpawnAnimal;
+			spawnButton.OnClick += this.SpawnAnimal;
 		}
 	}
 
@@ -26,27 +26,35 @@ public class EntitiesController : MonoBehaviour
 
 	}
 
-	public void SpawnVegetal(EntityType type)
+	public void SpawnVegetal(EntityType type, Vector3 position)
 	{
 		Vegetal newVegetal = VegetalsFactory.CreateVegetable(type);
-		this.SpawnEntity(newVegetal);
+		newVegetal.OnBirth += this.SpawnVegetal;
+
+		this.SpawnEntity(newVegetal, position);
 	}
 
-	public void SpawnAnimal(EntityType type)
+	public void SpawnAnimal(EntityType type, Vector3 position)
 	{
 		Animal newAnimal = AnimalsFactory.CreateAnimal(type);
-		this.SpawnEntity(newAnimal);
+		newAnimal.OnBirth += this.SpawnAnimal;
+
+		this.SpawnEntity(newAnimal, position);
 	}
 
-	private void SpawnEntity(Entity newEntity)
+	private void SpawnEntity(Entity newEntity, Vector3 position)
 	{
-		newEntity.transform.SetParent(transform);
-		newEntity.transform.position = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+		if (transform.childCount < 100)
+		{
+			newEntity.transform.SetParent(transform);
+			newEntity.transform.position = position;
+			newEntity.OnDeath += this.KillEntity;
+		}
 	}
 
 	public void KillEntity(Entity entity)
 	{
-		DestroyImmediate(entity);
+		DestroyImmediate(entity.gameObject);
 	}
 
 	private Entity[] GetEntities()

@@ -6,10 +6,12 @@ public class AnimalPreset : EntityPreset
 {
 	public float ViewDistance;
 
-	public float BaseSpeed;
+	public float MoveSpeed;
 
-	public float ReproductionThreshold;
-	public float ReproductionVivality;
+	public float Power;
+
+	public float CollideBounce = 20;
+	public float CollideDrag = 12;
 
 	public List<EntityType> Preys = new List<EntityType>();
 	public List<EntityType> Predators = new List<EntityType>();
