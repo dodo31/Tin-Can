@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,37 +10,16 @@ public class AnimalsFactory : MonoBehaviour
 		{ EntityType.ANIMAL_2, new AnimalPreset() },
 	};
 
-	public GameObject CreateAnimal(EntityType type)
+	private Animal CreateAnimal(EntityType type)
 	{
-		switch (type)
-		{
-		case EntityType.ANIMAL_1:
-			return this.CreateAnimal1();
-		case EntityType.ANIMAL_2:
-			return this.CreateAnimal2();
-		default:
-			return null;
-		}
-	}
+		Animal newAnimal = Instantiate(AnimalPrefab);
+		newAnimal.Type = type;
+		newAnimal.Preset = Presets[type];
+		newAnimal.Vitality = newAnimal.Preset.StartVitality;
 
-	public GameObject CreateAnimal1()
-	{
-		return this.InstantiateAnimal(EntityType.ANIMAL_1);
-	}
+		SpriteRenderer spriteRenderer = newAnimal.GetComponent<SpriteRenderer>();
+		spriteRenderer.sprite = newAnimal.Preset.sprite;
 
-	public GameObject CreateAnimal2()
-	{
-		return this.InstantiateAnimal(EntityType.ANIMAL_2);
-	}
-
-	private GameObject InstantiateAnimal(EntityType type)
-	{
-		AnimalPreset animalPreset = Presets[type];
-
-		Animal animal = Instantiate(AnimalPrefab);
-		
-		
-
-		return null;
+		return newAnimal;
 	}
 }

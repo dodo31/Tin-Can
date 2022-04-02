@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
 	public EntityType Type;
 	public EntityPreset Preset;
-	
+
 	public float Vitality;
 
 	protected virtual void Awake()
