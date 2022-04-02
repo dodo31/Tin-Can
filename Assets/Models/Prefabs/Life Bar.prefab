@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4263941451535357561}
   - component: {fileID: 2646410100938794819}
   m_Layer: 0
-  m_Name: LifeBar
+  m_Name: Life Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,10 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 504768437862013944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd9cf0e848aa334db03aa555922651a, type: 3}
+  m_Script: {fileID: 11500000, guid: c13a25e8c2b6b79489b9a816d47d734d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bluepart: {fileID: 8323812325843445986}
+  bluePart: {fileID: 8323812325843445986}
 --- !u!1 &6550473704921701672
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1245023331155183371}
   - component: {fileID: 6753952878659424950}
   m_Layer: 0
-  m_Name: Bluepart
+  m_Name: Blue Part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

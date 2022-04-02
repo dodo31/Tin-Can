@@ -99,8 +99,8 @@ public class Animal : Entity
 			Vector3 center = (transform.position + closestFellow.transform.position) / 2f;
 			this.PublishBirth(center);
 
-			Vitality -= AnimalPreset.ReproductionCost;
-			closestFellow.Vitality -= closestFellow.Preset.ReproductionCost;
+			this.OffsetVitality(-AnimalPreset.ReproductionCost);
+			closestFellow.OffsetVitality(-closestFellow.Preset.ReproductionCost);
 			
 			_lastBirthTime = Time.fixedTime;
 		}
@@ -126,7 +126,7 @@ public class Animal : Entity
 
 			if (isDead)
 			{
-				Vitality = Math.Min(Vitality + closestPrey.Preset.NutritionalValue, AnimalPreset.MaxVitality);
+				this.SetVitality(Math.Min(Vitality + closestPrey.Preset.NutritionalValue, AnimalPreset.MaxVitality));
 			}
 		}
 

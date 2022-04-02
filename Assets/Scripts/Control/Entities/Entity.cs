@@ -16,6 +16,8 @@ public abstract class Entity : MonoBehaviour
 
 	protected Guid _id;
 
+	private LifeBarView _lifeBarView;
+
 	protected CollisionsToolkit _collisionsToolkit;
 
 	private float _lastHitTime;
@@ -27,16 +29,18 @@ public abstract class Entity : MonoBehaviour
 	{
 		_id = Guid.NewGuid();
 
+		_lifeBarView = this.GetComponentInChildren<LifeBarView>();
+
 		_collisionsToolkit = new CollisionsToolkit();
 
 		_lastHitTime = 0;
-		
+
 		transform.localScale = Vector3.zero;
 	}
 
 	protected virtual void Start()
 	{
-		
+
 	}
 
 	protected virtual void Update()
@@ -46,7 +50,7 @@ public abstract class Entity : MonoBehaviour
 
 	protected virtual void FixedUpdate()
 	{
-		Vitality = Mathf.Clamp(Vitality + Preset.VitalitySpeed, 0, Preset.MaxVitality);
+		this.SetVitality(Mathf.Clamp(Vitality + Preset.VitalitySpeed, 0, Preset.MaxVitality));
 
 		if (Vitality <= 0)
 		{
@@ -67,8 +71,8 @@ public abstract class Entity : MonoBehaviour
 	{
 		_lastHitTime = Time.fixedTime;
 
-		Vitality = Math.Max(Vitality - damage, 0);
-		bool isDead = Vitality <= 0;
+		this.SetVitality(Math.Max(Vitality - damage, 0));
+		bool isDead = (Vitality <= 0);
 
 		if (isDead)
 		{
@@ -93,6 +97,24 @@ public abstract class Entity : MonoBehaviour
 	public void PublishDeath()
 	{
 		OnDeath?.Invoke(this);
+	}
+
+	public void SetVitality(float newVitality)
+	{
+		Vitality = newVitality;
+		this.UpdateLifeBar();
+	}
+
+	public void OffsetVitality(float vitalityOffset)
+	{
+		Vitality += vitalityOffset;
+		this.UpdateLifeBar();
+	}
+
+	private void UpdateLifeBar()
+	{
+		float virtalityFactor = Vitality / Preset.MaxVitality;
+		_lifeBarView.UpdateSizeTo(virtalityFactor);
 	}
 
 	public Guid Id { get => _id; set => _id = value; }

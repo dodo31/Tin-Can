@@ -142,7 +142,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 504768437862013944, guid: 417419c898a71ef499cd0f5f837db970, type: 3}
       propertyPath: m_Name
-      value: LifeBar
+      value: Life Bar
       objectReference: {fileID: 0}
     - target: {fileID: 4263941451535357561, guid: 417419c898a71ef499cd0f5f837db970, type: 3}
       propertyPath: m_RootOrder

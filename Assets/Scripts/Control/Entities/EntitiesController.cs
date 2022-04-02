@@ -44,12 +44,9 @@ public class EntitiesController : MonoBehaviour
 
 	private void SpawnEntity(Entity newEntity, Vector3 position)
 	{
-		if (transform.childCount < 100)
-		{
-			newEntity.transform.SetParent(transform);
-			newEntity.transform.position = position;
-			newEntity.OnDeath += this.KillEntity;
-		}
+		newEntity.transform.SetParent(transform);
+		newEntity.transform.position = position;
+		newEntity.OnDeath += this.KillEntity;
 	}
 
 	public void KillEntity(Entity entity)
