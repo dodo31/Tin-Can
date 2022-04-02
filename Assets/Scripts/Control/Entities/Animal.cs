@@ -32,7 +32,7 @@ public class Animal : Entity
 	protected override void FixedUpdate()
 	{
 		base.FixedUpdate();
-		
+
 		if (this.IsAlive())
 		{
 			this.ManageNormalLife();
@@ -96,7 +96,12 @@ public class Animal : Entity
 		if (HitboxCollider.IsTouching(closestPrey.HitboxCollider) && closestPrey.CanTakeHit())
 		{
 			Vector3 preyDelta = (closestPrey.transform.position - transform.position);
-			closestPrey.TakeHit(AnimalPreset.Power, -preyDelta.normalized);
+			bool isDead = closestPrey.TakeHit(AnimalPreset.Power, -preyDelta.normalized);
+
+			if (isDead)
+			{
+				Vitality = Math.Min(Vitality + closestPrey.Preset.NutritionalValue, AnimalPreset.MaxVitality);
+			}
 		}
 
 		_currentState = AnimalState.Eating;
