@@ -21,7 +21,7 @@ public class EntityPresetBase
 				Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Animal 1"),
 				CollideRadius = 2.404756f,
 
-				ViewDistance = 50,
+				ViewDistance = 15,
 				BaseSpeed = 3,
 
 				StartVitality = 50,
@@ -47,7 +47,7 @@ public class EntityPresetBase
 				Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Animal 2"),
 				CollideRadius = 1.76f,
 
-				ViewDistance = 20,
+				ViewDistance = 8,
 				BaseSpeed = 1.5f,
 
 				StartVitality = 20,
@@ -71,9 +71,9 @@ public class EntityPresetBase
 			EntityType.ANIMAL_3, new AnimalPreset()
 			{
 				Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Animal 3"),
-				CollideRadius = 2.2f,
+				CollideRadius = 2.35f,
 
-				ViewDistance = 35,
+				ViewDistance = 12,
 				BaseSpeed = 2.5f,
 
 				StartVitality = 35,

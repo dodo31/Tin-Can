@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3387918214497184435}
   - component: {fileID: -8139648244333446675}
   - component: {fileID: 5431626838244379063}
-  m_Layer: 0
+  - component: {fileID: 7681758113669956857}
+  m_Layer: 3
   m_Name: Vegetal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +99,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   Vitality: 0
+  HitboxCollider: {fileID: 0}
 --- !u!58 &5431626838244379063
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387918214497184429}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
+--- !u!58 &7681758113669956857
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

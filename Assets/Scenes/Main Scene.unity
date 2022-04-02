@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746d1ddd66b38294e84623d91c3ccc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 1
 --- !u!1 &465239077
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0125a9abcd8ba449b88342910d5e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VegatablesFactory: {fileID: 1399188527}
+  VegetalsFactory: {fileID: 0}
   AnimalsFactory: {fileID: 1399188526}
 --- !u!114 &1399188526
 MonoBehaviour:

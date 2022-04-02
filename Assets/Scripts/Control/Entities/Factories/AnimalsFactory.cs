@@ -6,16 +6,18 @@ public class AnimalsFactory : EntitiesFactory
 
 	public Animal CreateAnimal(EntityType type)
 	{
+		AnimalPreset animalPreset = (AnimalPreset)_presetBase[type];
 		Animal newAnimal = Instantiate(AnimalPrefab);
+		
 		newAnimal.Type = type;
-		newAnimal.Preset = _presetBase[type];
-		newAnimal.Vitality = newAnimal.Preset.StartVitality;
+		newAnimal.Preset = animalPreset;
+		newAnimal.Vitality = animalPreset.StartVitality;
 
 		SpriteRenderer spriteRenderer = newAnimal.GetComponent<SpriteRenderer>();
-		spriteRenderer.sprite = newAnimal.Preset.Sprite;
+		spriteRenderer.sprite = animalPreset.Sprite;
 
-		CircleCollider2D collider = newAnimal.GetComponent<CircleCollider2D>();
-		collider.radius = newAnimal.Preset.CollideRadius;
+		newAnimal.HitboxCollider.radius = animalPreset.CollideRadius;
+		newAnimal.ProximityCollider.radius = animalPreset.ViewDistance;
 
 		return newAnimal;
 	}

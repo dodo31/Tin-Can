@@ -6,16 +6,18 @@ public class VegetalsFactory : EntitiesFactory
 
 	public Vegetal CreateVegetable(EntityType type)
 	{
+		VegetalPreset vegetalPreset = (VegetalPreset)_presetBase[type];
 		Vegetal newVegetable = Instantiate(VegetablePrefab);
+		
 		newVegetable.Type = type;
-		newVegetable.Preset = _presetBase[type];
-		newVegetable.Vitality = newVegetable.Preset.StartVitality;
+		newVegetable.Preset = vegetalPreset;
+		newVegetable.Vitality = vegetalPreset.StartVitality;
 
 		SpriteRenderer spriteRenderer = newVegetable.GetComponent<SpriteRenderer>();
-		spriteRenderer.sprite = newVegetable.Preset.Sprite;
+		spriteRenderer.sprite = vegetalPreset.Sprite;
 
 		CircleCollider2D collider = newVegetable.GetComponent<CircleCollider2D>();
-		collider.radius = newVegetable.Preset.CollideRadius;
+		collider.radius = vegetalPreset.CollideRadius;
 
 		return newVegetable;
 	}

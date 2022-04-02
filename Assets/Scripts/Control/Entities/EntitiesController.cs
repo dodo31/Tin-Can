@@ -23,13 +23,19 @@ public class EntitiesController : MonoBehaviour
 	public void SpawnVegetable(EntityType type)
 	{
 		Vegetal newVegetal = VegetalsFactory.CreateVegetable(type);
-		newVegetal.transform.SetParent(transform);
+        this.SpawnEntity(newVegetal);
 	}
 
 	public void SpawnAnimal(EntityType type)
 	{
 		Animal newAnimal = AnimalsFactory.CreateAnimal(type);
-		newAnimal.transform.SetParent(transform);
+        this.SpawnEntity(newAnimal);
+	}
+
+	private void SpawnEntity(Entity newEntity)
+	{
+        newEntity.transform.SetParent(transform);
+        newEntity.transform.position = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
 	}
 
 	public void KillEntity(Entity entity)
