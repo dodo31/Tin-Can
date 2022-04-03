@@ -192,7 +192,12 @@ public class Animal : Entity
 		}
 	}
 
-	public override void Die()
+	protected override bool IsAlive()
+	{
+		return _currentState != AnimalState.Dead;
+	}
+	
+	protected override void Die()
 	{
 		_currentState = AnimalState.Dead;
 		this.PublishDeath();
@@ -233,11 +238,6 @@ public class Animal : Entity
 	private bool HasEnoughVitalityToReproduce()
 	{
 		return Vitality >= AnimalPreset.ReproductionThreshold * AnimalPreset.MaxVitality;
-	}
-
-	private Boolean IsAlive()
-	{
-		return _currentState != AnimalState.Dead;
 	}
 
 	private AnimalPreset AnimalPreset

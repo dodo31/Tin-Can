@@ -102,6 +102,7 @@ public class EntityPresetBase
 					{
 						EntityType.ANIMAL_3,
 						EntityType.TREE_1,
+						EntityType.BUSH_1,
 					},
 
 					Predators = new List<EntityType>()
@@ -133,6 +134,7 @@ public class EntityPresetBase
 					Preys = new List<EntityType>()
 					{
 						EntityType.TREE_1,
+						EntityType.BUSH_1,
 					},
 
 					Predators = new List<EntityType>()
@@ -149,13 +151,13 @@ public class EntityPresetBase
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
 					CollideRadius = 1.76f,
 
-					VitalitySpeed = 0.12f,
+					VitalitySpeed = 0.4f,
 
 					StartVitality = 20,
 					MaxVitality = 100,
 
 					ReproductionThreshold = 0.6f,
-					ReproductionCost = 40,
+					ReproductionCost = 20,
 
 					NutritionalValue = 50,
 				}

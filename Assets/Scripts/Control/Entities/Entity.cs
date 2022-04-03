@@ -87,7 +87,8 @@ public abstract class Entity : MonoBehaviour
 		return Time.fixedTime >= _lastHitTime + HIT_COOLDOWN;
 	}
 
-	public abstract void Die();
+	protected abstract Boolean IsAlive();
+	protected abstract void Die();
 
 	public void PublishBirth(Vector3 position)
 	{

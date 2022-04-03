@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class Human : Entity
 {
+	private HumanState _currentState;
+	
 	protected override void Awake()
 	{
 		base.Awake();
+		
+		_currentState = HumanState.Idle;
 		transform.localScale = Vector3.one;
 	}
 
@@ -33,7 +37,12 @@ public class Human : Entity
 		}
 	}
 
-	public override void Die()
+	protected override bool IsAlive()
+	{
+		return _currentState != HumanState.Dead;
+	}
+
+	protected override void Die()
 	{
 		this.PublishDeath();
 	}
