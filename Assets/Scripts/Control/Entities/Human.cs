@@ -1,39 +1,77 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Human : Entity
 {
+	public Weapon Weapon;
+
 	private HumanState _currentState;
-	
+
 	protected override void Awake()
 	{
 		base.Awake();
-		
+
 		_currentState = HumanState.Idle;
 		transform.localScale = Vector3.one;
+
+		Weapon.OnHit += this.HitEntity;
 	}
 
 	protected override void Update()
 	{
 		base.Update();
 
+		this.Move();
+		this.Attack();
+	}
+
+	private void Move()
+	{
 		if (Input.GetKey(KeyCode.UpArrow))
 		{
-			transform.position += Vector3.up * HumandPreset.MoveSpeed * Time.timeScale;
+			transform.position += Vector3.up * HumanPreset.MoveSpeed * Time.timeScale;
 		}
-		
+
 		if (Input.GetKey(KeyCode.DownArrow))
 		{
-			transform.position += Vector3.down * HumandPreset.MoveSpeed * Time.timeScale;
+			transform.position += Vector3.down * HumanPreset.MoveSpeed * Time.timeScale;
 		}
-		
+
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
-			transform.position += Vector3.left * HumandPreset.MoveSpeed * Time.timeScale;
+			transform.position += Vector3.left * HumanPreset.MoveSpeed * Time.timeScale;
 		}
-		
+
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
-			transform.position += Vector3.right * HumandPreset.MoveSpeed * Time.timeScale;
+			transform.position += Vector3.right * HumanPreset.MoveSpeed * Time.timeScale;
+		}
+	}
+
+	private void Attack()
+	{
+		if (Weapon.IsHitting())
+		{
+			List<Entity> hitEntities = _collisionsToolkit.GetHittingEntities(transform, HitboxCollider);
+
+			foreach (Entity hitEntity in hitEntities)
+			{
+				this.HitEntity(hitEntity);
+			}
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Weapon.Attack();
+		}
+	}
+
+	private void HitEntity(Entity entityToHit)
+	{
+		if (entityToHit.CanTakeHit() && entityToHit != this)
+		{
+			Vector3 hitDirection = (entityToHit.transform.position - transform.position).normalized;
+			entityToHit.TakeHit(HumanPreset.Power, -hitDirection);
 		}
 	}
 
@@ -47,7 +85,7 @@ public class Human : Entity
 		this.PublishDeath();
 	}
 
-	private HumanPreset HumandPreset
+	private HumanPreset HumanPreset
 	{
 		get
 		{

@@ -15,19 +15,19 @@ public class CollisionsToolkit
 		};
 	}
 
-	public List<Entity> GetCloseEntities(Transform transform, CircleCollider2D proximityCollider)
+	public List<Entity> GetCloseEntities(Transform transform, Collider2D proximityCollider)
 	{
 		List<Collider2D> collidingColliders = this.GetCollidingColliders(proximityCollider);
 		return this.GetCollidingEntities(transform, collidingColliders);
 	}
 
-	public List<Entity> GetHittingEntities(Transform transform, CircleCollider2D hitboxCollider)
+	public List<Entity> GetHittingEntities(Transform transform, Collider2D hitboxCollider)
 	{
 		List<Collider2D> collidingColliders = this.GetCollidingColliders(hitboxCollider);
 		return this.GetCollidingEntities(transform, collidingColliders);
 	}
 
-	private List<Collider2D> GetCollidingColliders(CircleCollider2D sourceCollider)
+	private List<Collider2D> GetCollidingColliders(Collider2D sourceCollider)
 	{
 		List<Collider2D> collidingColliders = new List<Collider2D>();
 		sourceCollider.OverlapCollider(_contactFilter, collidingColliders);

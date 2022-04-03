@@ -22,13 +22,13 @@ public class EntityPresetBase
 					CollideRadius = 0.34f,
 
 					VitalitySpeed = 0,
-					MoveSpeed = 0.02f,
+					MoveSpeed = 0.08f, // 0.02f,
 
 					StartVitality = 30,
 					MaxVitality = 100,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 20,
 
 					ReproductionThreshold = 0.5f,
 					ReproductionCost = 38,
@@ -74,7 +74,7 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-						EntityType.HUMAN_1
+						// EntityType.HUMAN_1
 					},
 				}
 			},
@@ -108,7 +108,7 @@ public class EntityPresetBase
 					Predators = new List<EntityType>()
 					{
 						EntityType.FOX_1,
-						EntityType.HUMAN_1
+						// EntityType.HUMAN_1
 					},
 				}
 			},
@@ -142,7 +142,7 @@ public class EntityPresetBase
 					{
 						EntityType.FOX_1,
 						EntityType.RABBIT_1,
-						EntityType.HUMAN_1
+						// EntityType.HUMAN_1
 					},
 				}
 			},

@@ -48,7 +48,7 @@ public class Vegetal : Entity
 		float birthAngle = UnityEngine.Random.Range(0, Mathf.PI * 2);
 
 		float birthPosX = transform.position.x + Mathf.Cos(birthAngle) * birthRadius;
-		float birthPosY = transform.position.x + Mathf.Sin(birthAngle) * birthRadius;
+		float birthPosY = transform.position.y + Mathf.Sin(birthAngle) * birthRadius;
 
 		Vector3 birthPosition = new Vector3(birthPosX, birthPosY, 0);
 
