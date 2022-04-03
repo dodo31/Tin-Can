@@ -35,10 +35,10 @@ public class EntitiesController : MonoBehaviour
 		// 	this.SpawnAnimal(EntityType.CHIKEN_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
 		// }
 
-		// for (int i = 0; i < 30; i++)
-		// {
-		// 	this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
-		// }
+		for (int i = 0; i < 30; i++)
+		{
+			this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+		}
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -73,12 +73,22 @@ public class EntitiesController : MonoBehaviour
 	{
 		Egg newEgg = EggsFactory.CreateVegetalEgg(type);
 		this.SpawnEntity(newEgg, position);
+
+		newEgg.OnDeath += (Entity entityToKill) =>
+		{
+			this.SpawnVegetal(type, position);
+		};
 	}
 
 	public void SpawnAnimalEgg(EntityType type, Vector3 position)
 	{
 		Egg newEgg = EggsFactory.CreateAnimalEgg(type);
 		this.SpawnEntity(newEgg, position);
+
+		newEgg.OnDeath += (Entity entityToKill) =>
+		{
+			this.SpawnAnimal(type, position);
+		};
 	}
 
 	private void SpawnEntity(Entity newEntity, Vector3 position)
@@ -101,6 +111,11 @@ public class EntitiesController : MonoBehaviour
 		}
 
 		OnEntityKilled?.Invoke(entityToKill);
+
+		if (entityToKill is Egg egg)
+		{
+
+		}
 
 		DestroyImmediate(entityToKill.gameObject);
 	}

@@ -12,7 +12,7 @@ public class EggsFactory : EntitiesFactory
 		VegetalPreset vegetalPreset = (VegetalPreset)_presetBase[type];
 
 		SpriteRenderer spriteRenderer = newEgg.GetComponent<SpriteRenderer>();
-		// spriteRenderer.sprite = animalPreset.EggSprite;
+		// spriteRenderer.sprite = vegetalPreset.EggSprite;
 		spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Plain Eggs");
 
 		return newEgg;

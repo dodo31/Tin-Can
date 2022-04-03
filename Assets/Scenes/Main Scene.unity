@@ -806,8 +806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2858054cdced04183e5e2e967fa692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bounds: {x: 25, y: 25}
-  MarginFactor: 0.2
+  Bounds: {x: 35, y: 25}
+  MarginFactor: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
