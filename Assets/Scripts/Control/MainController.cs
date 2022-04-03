@@ -9,7 +9,7 @@ public class MainController : MonoBehaviour
 
 	protected void Awake()
 	{
-		// EntitiesController.OnHumanMoved += CameraController.FollowPlayer;
+		EntitiesController.OnHumanMoved += CameraController.FollowPlayer;
 
 		EntitiesController.OnEntityKilled += this.DecreaseEntityAmountInUi;
 		EntitiesController.OnEntitySpawned += this.IncreaseEntityAmountInUi;
