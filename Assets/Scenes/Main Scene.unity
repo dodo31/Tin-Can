@@ -642,6 +642,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358277565}
   m_CullTransparentMesh: 1
+--- !u!114 &389135773 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2301784102092488396, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+  m_PrefabInstance: {fileID: 2301784102366270288}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34103bdd9108c4949bd4ac91eb140891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &465239077
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,6 +2113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntitiesController: {fileID: 1399188525}
   CameraController: {fileID: 519420030}
+  BottomBarController: {fileID: 389135773}
 --- !u!1 &1926931462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,6 +2383,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2301784102092488395, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301784102660128810, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+      propertyPath: m_Name
+      value: QuitButton
+      objectReference: {fileID: 0}
     - target: {fileID: 2301784102660128811, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2402,6 +2422,10 @@ PrefabInstance:
     - target: {fileID: 2301784102865008205, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301784103333193201, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+      propertyPath: m_Name
+      value: PlayPauseButton
       objectReference: {fileID: 0}
     - target: {fileID: 2301784103333193202, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2450,6 +2474,10 @@ PrefabInstance:
     - target: {fileID: 2301784103390598017, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301784103390598019, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2301784103646246978, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchorMax.y
