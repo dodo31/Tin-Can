@@ -27,7 +27,7 @@ public class EntitiesController : MonoBehaviour
 		// {
 		// 	this.SpawnAnimal(EntityType.RABBIT_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
 		// }
-		
+
 		// for (int i = 0; i < 30; i++)
 		// {
 		// 	this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
@@ -68,9 +68,17 @@ public class EntitiesController : MonoBehaviour
 		newEntity.OnDeath += this.KillEntity;
 	}
 
-	public void KillEntity(Entity entity)
+	public void KillEntity(Entity entityToKill)
 	{
-		DestroyImmediate(entity.gameObject);
+		foreach (Entity entity in this.GetEntities())
+		{
+			if (entity is Animal animal)
+			{
+				animal.RemoveCloseEntity(entityToKill);
+			}
+		}
+
+		DestroyImmediate(entityToKill.gameObject);
 	}
 
 	private Entity[] GetEntities()

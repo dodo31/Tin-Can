@@ -38,9 +38,6 @@ public class Animal : Entity
 	protected override void Start()
 	{
 		base.Start();
-
-		// Rigidbody2D rigidBody = this.GetComponent<Rigidbody2D>();
-		// rigidBody.drag = AnimalPreset.CollideDrag;
 	}
 
 	protected override void Update()
@@ -69,6 +66,11 @@ public class Animal : Entity
 	private void ScanCloseEntities()
 	{
 		closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
+	}
+
+	public void RemoveCloseEntity(Entity entity)
+	{
+		closeEntities.Remove(entity);
 	}
 
 	private void ManageNormalLife()
