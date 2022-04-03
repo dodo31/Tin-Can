@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EntitiesController : MonoBehaviour
@@ -5,6 +6,8 @@ public class EntitiesController : MonoBehaviour
 	public HumansFactory HumansFactory;
 	public VegetalsFactory VegetalsFactory;
 	public AnimalsFactory AnimalsFactory;
+	
+	public event Action<Vector3> OnHumanMoved;
 
 	protected void Start()
 	{
@@ -43,6 +46,7 @@ public class EntitiesController : MonoBehaviour
 	{
 		Human newHuman = HumansFactory.CreateHuman(type);
 		this.SpawnEntity(newHuman, position);
+		newHuman.OnMoved += this.OnHumanMoved;
 	}
 
 	public void SpawnVegetal(EntityType type, Vector3 position)

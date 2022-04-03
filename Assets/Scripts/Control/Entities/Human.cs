@@ -1,12 +1,14 @@
-using System.Globalization;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Human : Entity
 {
 	public Weapon Weapon;
 
 	private HumanState _currentState;
+	
+	public event Action<Vector3> OnMoved;
 
 	protected override void Awake()
 	{
@@ -34,33 +36,36 @@ public class Human : Entity
 
 	protected Vector3 GetPlayerMotion()
 	{
+		Vector3 totalMotion = Vector3.zero;
+		
 		if (Input.GetKey(KeyCode.UpArrow))
 		{
-			return Vector3.up * HumanPreset.MoveSpeed * Time.timeScale;
+			totalMotion += Vector3.up * HumanPreset.MoveSpeed * Time.timeScale;
 		}
 
 		if (Input.GetKey(KeyCode.DownArrow))
 		{
-			return Vector3.down * HumanPreset.MoveSpeed * Time.timeScale;
+			totalMotion += Vector3.down * HumanPreset.MoveSpeed * Time.timeScale;
 		}
 
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
-			return Vector3.left * HumanPreset.MoveSpeed * Time.timeScale;
+			totalMotion += Vector3.left * HumanPreset.MoveSpeed * Time.timeScale;
 		}
 
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
-			return Vector3.right * HumanPreset.MoveSpeed * Time.timeScale;
+			totalMotion += Vector3.right * HumanPreset.MoveSpeed * Time.timeScale;
 		}
 
-		return Vector3.zero;
+		return totalMotion;
 	}
 
 	protected override void Move(Vector3 delta)
 	{
 		transform.position += delta;
 		transform.localScale = new Vector3(Mathf.Sign(delta.x), 1, 1);
+		OnMoved?.Invoke(transform.position);
 	}
 
 	private void Attack()

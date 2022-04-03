@@ -15,13 +15,13 @@ public abstract class Entity : MonoBehaviour
 	public CircleCollider2D HitboxCollider;
 
 	protected Guid _id;
-	
+
 	protected CollisionsToolkit _collisionsToolkit;
 
 	protected SpriteRenderer _mainSprite;
 	private LifeBarView _lifeBarView;
-	
-	
+
+
 	private float _lastHitTime;
 
 	public event Action<EntityType, Vector3> OnBirth;
