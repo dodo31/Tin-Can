@@ -22,7 +22,7 @@ public class EntityPresetBase
 					CollideRadius = 0.34f,
 
 					VitalitySpeed = 0,
-					MoveSpeed = 0.15f,
+					MoveSpeed = 0.02f,
 
 					StartVitality = 30,
 					MaxVitality = 100,
@@ -41,11 +41,11 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-
+						EntityType.HUMAN_1
 					},
 				}
 			},
-			
+
 			{
 				EntityType.FOX_1, new AnimalPreset()
 				{
@@ -74,7 +74,7 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-
+						EntityType.HUMAN_1
 					},
 				}
 			},
@@ -108,6 +108,7 @@ public class EntityPresetBase
 					Predators = new List<EntityType>()
 					{
 						EntityType.FOX_1,
+						EntityType.HUMAN_1
 					},
 				}
 			},
@@ -141,23 +142,24 @@ public class EntityPresetBase
 					{
 						EntityType.FOX_1,
 						EntityType.RABBIT_1,
+						EntityType.HUMAN_1
 					},
 				}
 			},
-			
+
 			{
 				EntityType.TREE_1, new VegetalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
 					CollideRadius = 1.76f,
 
-					VitalitySpeed = 0.4f,
+					VitalitySpeed = 0.12f,
 
 					StartVitality = 20,
 					MaxVitality = 100,
 
 					ReproductionThreshold = 0.6f,
-					ReproductionCost = 20,
+					ReproductionCost = 40,
 
 					NutritionalValue = 50,
 				}

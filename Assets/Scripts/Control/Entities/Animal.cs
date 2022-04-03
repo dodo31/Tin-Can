@@ -66,6 +66,11 @@ public class Animal : Entity
 	private void ScanCloseEntities()
 	{
 		closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
+		
+		foreach (Entity entity in closeEntities)
+		{
+			Debug.Log(entity.Type);
+		}
 	}
 
 	public void RemoveCloseEntity(Entity entity)
