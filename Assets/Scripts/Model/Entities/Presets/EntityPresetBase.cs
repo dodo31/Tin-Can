@@ -89,7 +89,7 @@ public class EntityPresetBase
 					VitalitySpeed = -0.008f,
 					MoveSpeed = 0.08f,
 
-					StartVitality = 35,
+					StartVitality = 100,
 					MaxVitality = 100,
 
 					NutritionalValue = 80,

@@ -8,27 +8,39 @@ public class Animal : Entity
 	private const float BIRTH_COOLDOWN = 0.35f;
 
 	public CircleCollider2D ProximityCollider;
-
-	private AnimalState _currentState;
+	private List<Entity> closeEntities;
 
 	private float _lastBirthTime;
+	private int _frameCountOffset;
 
+	private float _hitForce;
+
+	private float _hitSpeed;
+	private Vector3 _hitDirection;
+
+	private AnimalState _currentState;
 
 	protected override void Awake()
 	{
 		base.Awake();
 
-		_currentState = AnimalState.Idle;
+		closeEntities = new List<Entity>();
 
 		_lastBirthTime = 0;
+		_frameCountOffset = UnityEngine.Random.Range(0, 10);
+
+		_hitSpeed = 0;
+		_hitDirection = Vector3.zero;
+
+		_currentState = AnimalState.Idle;
 	}
 
 	protected override void Start()
 	{
 		base.Start();
 
-		Rigidbody2D rigidBody = this.GetComponent<Rigidbody2D>();
-		rigidBody.drag = AnimalPreset.CollideDrag;
+		// Rigidbody2D rigidBody = this.GetComponent<Rigidbody2D>();
+		// rigidBody.drag = AnimalPreset.CollideDrag;
 	}
 
 	protected override void Update()
@@ -42,16 +54,25 @@ public class Animal : Entity
 
 		if (this.IsAlive())
 		{
+			if ((Time.frameCount + _frameCountOffset) % 10 == 0)
+			{
+				// Refresh close entities list using colliders
+				this.ScanCloseEntities();
+			}
+
 			this.GrowIfRequired();
 			this.ManageNormalLife();
+			this.ManageHit();
 		}
+	}
+
+	private void ScanCloseEntities()
+	{
+		closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
 	}
 
 	private void ManageNormalLife()
 	{
-		List<Entity> closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
-		List<Entity> hittingEntities = _collisionsToolkit.GetHittingEntities(transform, HitboxCollider);
-
 		if (closeEntities.Count > 0)
 		{
 			List<Entity> closePredators = this.ExtractClosePredators(closeEntities);
@@ -77,6 +98,18 @@ public class Animal : Entity
 		}
 	}
 
+	private void ManageHit()
+	{
+		if (_hitSpeed > 0 || _hitForce > 0)
+		{
+			_hitSpeed = _hitForce;
+			Vector3 hitVelocity = _hitDirection * -_hitSpeed;
+			transform.position += hitVelocity;
+
+			_hitForce = Math.Max(_hitForce - AnimalPreset.CollideDrag, 0);
+		}
+	}
+
 	private void Flee(List<Entity> closePredators)
 	{
 		Entity closestPredator = this.ExtractClosestEntity(closePredators);
@@ -94,14 +127,14 @@ public class Animal : Entity
 
 		bool canGiveBirth = ((Animal)closestFellow).CanGiveBirth();
 
-		if (HitboxCollider.IsTouching(closestFellow.HitboxCollider) && canGiveBirth && Id.CompareTo(closestFellow.Id) > 0)
+		if (this.IsTouchingEntity(closestFellow) && canGiveBirth && Id.CompareTo(closestFellow.Id) > 0)
 		{
 			Vector3 center = (transform.position + closestFellow.transform.position) / 2f;
 			this.PublishBirth(center);
 
 			this.OffsetVitality(-AnimalPreset.ReproductionCost);
 			closestFellow.OffsetVitality(-closestFellow.Preset.ReproductionCost);
-			
+
 			_lastBirthTime = Time.fixedTime;
 		}
 
@@ -119,7 +152,7 @@ public class Animal : Entity
 		Vector3 eatDelta = (closestPrey.transform.position - transform.position);
 		this.MoveToward(eatDelta);
 
-		if (HitboxCollider.IsTouching(closestPrey.HitboxCollider) && closestPrey.CanTakeHit())
+		if (this.IsTouchingEntity(closestPrey) && closestPrey.CanTakeHit())
 		{
 			Vector3 preyDelta = (closestPrey.transform.position - transform.position);
 			bool isDead = closestPrey.TakeHit(AnimalPreset.Power, -preyDelta.normalized);
@@ -133,14 +166,22 @@ public class Animal : Entity
 		_currentState = AnimalState.Eating;
 	}
 
+	public bool IsTouchingEntity(Entity otherEntity)
+	{
+		float entitiesDistance = Vector3.Distance(transform.position, otherEntity.transform.position);
+		return entitiesDistance <= Preset.CollideRadius || entitiesDistance <= otherEntity.Preset.CollideRadius;
+	}
+
 	public override bool TakeHit(float damage, Vector3 hitDirection)
 	{
 		bool isDead = base.TakeHit(damage, hitDirection);
 
 		if (!isDead)
 		{
-			Rigidbody2D rigidbody = this.GetComponent<Rigidbody2D>();
-			rigidbody.velocity = -hitDirection * AnimalPreset.CollideBounce;
+			_hitForce = AnimalPreset.CollideBounce;
+			_hitDirection = hitDirection;
+			_hitSpeed = 0;
+
 			return isDead;
 		}
 		else
@@ -159,7 +200,6 @@ public class Animal : Entity
 	{
 		Vector3 direction = delta.normalized;
 		float speed = Math.Min(delta.magnitude, AnimalPreset.MoveSpeed);
-
 		transform.position += direction * speed;
 	}
 

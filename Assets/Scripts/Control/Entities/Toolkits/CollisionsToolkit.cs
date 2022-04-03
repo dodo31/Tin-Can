@@ -3,30 +3,38 @@ using UnityEngine;
 
 public class CollisionsToolkit
 {
+	private ContactFilter2D _contactFilter;
+
 	public CollisionsToolkit()
 	{
-		
+		_contactFilter = new ContactFilter2D()
+		{
+			layerMask = 1 << LayerMask.NameToLayer("Entities"),
+			useLayerMask = true,
+			useTriggers = true,
+		};
 	}
 
 	public List<Entity> GetCloseEntities(Transform transform, CircleCollider2D proximityCollider)
 	{
-		Collider2D[] collidingColliders = this.GetCollidingColliders(proximityCollider);
+		List<Collider2D> collidingColliders = this.GetCollidingColliders(proximityCollider);
 		return this.GetCollidingEntities(transform, collidingColliders);
 	}
 
 	public List<Entity> GetHittingEntities(Transform transform, CircleCollider2D hitboxCollider)
 	{
-		Collider2D[] collidingColliders = this.GetCollidingColliders(hitboxCollider);
+		List<Collider2D> collidingColliders = this.GetCollidingColliders(hitboxCollider);
 		return this.GetCollidingEntities(transform, collidingColliders);
 	}
 
-	private Collider2D[] GetCollidingColliders(CircleCollider2D sourceCollider)
+	private List<Collider2D> GetCollidingColliders(CircleCollider2D sourceCollider)
 	{
-		int layerMask = 1 << LayerMask.NameToLayer("Entities");
-		return Physics2D.OverlapCircleAll(sourceCollider.transform.position, sourceCollider.radius, layerMask, 0f);
+		List<Collider2D> collidingColliders = new List<Collider2D>();
+		sourceCollider.OverlapCollider(_contactFilter, collidingColliders);
+		return collidingColliders;
 	}
 
-	private List<Entity> GetCollidingEntities(Transform transform, Collider2D[] collidingColliders)
+	private List<Entity> GetCollidingEntities(Transform transform, List<Collider2D> collidingColliders)
 	{
 		List<Entity> hittingEntities = new List<Entity>();
 
@@ -45,4 +53,6 @@ public class CollisionsToolkit
 
 		return hittingEntities;
 	}
+
+	public ContactFilter2D ContactFilter { get => _contactFilter; }
 }

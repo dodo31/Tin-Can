@@ -8,8 +8,8 @@ public abstract class NonVegetalPreset : EntityPreset
 	
 	public float Power;
 
-	public float CollideBounce = 20;
-	public float CollideDrag = 12;
+	public float CollideBounce = 1.2f;
+	public float CollideDrag = 0.4f;
 
 	public List<EntityType> Preys = new List<EntityType>();
 	public List<EntityType> Predators = new List<EntityType>();
