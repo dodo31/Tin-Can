@@ -1643,6 +1643,7 @@ GameObject:
   - component: {fileID: 1399188528}
   - component: {fileID: 1399188527}
   - component: {fileID: 1399188526}
+  - component: {fileID: 1399188529}
   m_Layer: 0
   m_Name: Entities Container
   m_TagString: Untagged
@@ -1679,6 +1680,7 @@ MonoBehaviour:
   HumansFactory: {fileID: 1399188528}
   VegetalsFactory: {fileID: 1399188527}
   AnimalsFactory: {fileID: 1399188526}
+  EggsFactory: {fileID: 1399188529}
 --- !u!114 &1399188526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1718,6 +1720,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HumanPrefab: {fileID: 1150786829024421913, guid: e628a6d4a17b5e44ab51e67a2641f918, type: 3}
+--- !u!114 &1399188529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399188523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6afc387d43785f946af0dea71e03db36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EggPrefab: {fileID: -6681692055802935940, guid: 28b9b848cb1efac4e90467cd7c96ea2f, type: 3}
 --- !u!1 &1531692459
 GameObject:
   m_ObjectHideFlags: 0

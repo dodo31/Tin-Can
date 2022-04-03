@@ -6,9 +6,10 @@ public class EntitiesController : MonoBehaviour
 	public HumansFactory HumansFactory;
 	public VegetalsFactory VegetalsFactory;
 	public AnimalsFactory AnimalsFactory;
-	
+	public EggsFactory EggsFactory;
+
 	public event Action<Vector3> OnHumanMoved;
-	
+
 	public event Action<Entity> OnEntitySpawned;
 	public event Action<Entity> OnEntityKilled;
 
@@ -29,14 +30,19 @@ public class EntitiesController : MonoBehaviour
 
 		this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
 
+		// for (int i = 0; i < 10; i++)
+		// {
+		// 	this.SpawnAnimal(EntityType.CHIKEN_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+		// }
+
+		// for (int i = 0; i < 30; i++)
+		// {
+		// 	this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+		// }
+
 		for (int i = 0; i < 10; i++)
 		{
-			this.SpawnAnimal(EntityType.CHIKEN_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
-		}
-
-		for (int i = 0; i < 30; i++)
-		{
-			this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+			this.SpawnAnimalEgg(EntityType.RABBIT_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
 		}
 	}
 
@@ -63,12 +69,24 @@ public class EntitiesController : MonoBehaviour
 		this.SpawnEntity(newAnimal, position);
 	}
 
+	public void SpawnVegetalEgg(EntityType type, Vector3 position)
+	{
+		Egg newEgg = EggsFactory.CreateVegetalEgg(type);
+		this.SpawnEntity(newEgg, position);
+	}
+
+	public void SpawnAnimalEgg(EntityType type, Vector3 position)
+	{
+		Egg newEgg = EggsFactory.CreateAnimalEgg(type);
+		this.SpawnEntity(newEgg, position);
+	}
+
 	private void SpawnEntity(Entity newEntity, Vector3 position)
 	{
 		newEntity.transform.SetParent(transform);
 		newEntity.transform.position = position;
 		newEntity.OnDeath += this.KillEntity;
-		
+
 		OnEntitySpawned?.Invoke(newEntity);
 	}
 
@@ -81,9 +99,9 @@ public class EntitiesController : MonoBehaviour
 				animal.RemoveCloseEntity(entityToKill);
 			}
 		}
-		
+
 		OnEntityKilled?.Invoke(entityToKill);
-		
+
 		DestroyImmediate(entityToKill.gameObject);
 	}
 
