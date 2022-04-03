@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746d1ddd66b38294e84623d91c3ccc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 1
 --- !u!1 &52311231
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746d1ddd66b38294e84623d91c3ccc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 2
 --- !u!114 &246903836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f4322179f974e45a935cae1cae8754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 3
+  Type: 4
 --- !u!114 &358277568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,6 +767,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -782,6 +783,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2858054cdced04183e5e2e967fa692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bounds: {x: 18, y: 18}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -810,7 +824,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 15
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -837,7 +851,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &643682007
 GameObject:
@@ -891,7 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f4322179f974e45a935cae1cae8754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 4
+  Type: 5
 --- !u!114 &643682010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1135,7 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746d1ddd66b38294e84623d91c3ccc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 2
+  Type: 3
 --- !u!114 &804117905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1614,6 +1628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1399188524}
   - component: {fileID: 1399188525}
+  - component: {fileID: 1399188528}
   - component: {fileID: 1399188527}
   - component: {fileID: 1399188526}
   m_Layer: 0
@@ -1649,6 +1664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0125a9abcd8ba449b88342910d5e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HumansFactory: {fileID: 1399188528}
   VegetalsFactory: {fileID: 1399188527}
   AnimalsFactory: {fileID: 1399188526}
 --- !u!114 &1399188526
@@ -1677,6 +1693,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VegetablePrefab: {fileID: -8139648244333446675, guid: 206766e342001e043a9686bd72158ffd, type: 3}
+--- !u!114 &1399188528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399188523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f95fd1b77c88e0408678f0752008cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HumanPrefab: {fileID: 1150786829024421913, guid: e628a6d4a17b5e44ab51e67a2641f918, type: 3}
 --- !u!1 &1531692459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,7 +2085,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1705389409
 MonoBehaviour:
@@ -2071,6 +2100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntitiesController: {fileID: 1399188525}
+  CameraController: {fileID: 519420030}
 --- !u!1 &1926931462
 GameObject:
   m_ObjectHideFlags: 0

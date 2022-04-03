@@ -16,6 +16,37 @@ public class EntityPresetBase
 	{
 		_presets = new Dictionary<EntityType, EntityPreset> {
 			{
+				EntityType.HUMAN_1, new HumanPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Humans/Human 1"),
+					CollideRadius = 0.34f,
+
+					VitalitySpeed = 0,
+					MoveSpeed = 0.08f, // 0.02f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 20,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.RABBIT_1,
+						EntityType.ANIMAL_3,
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.HUMAN_1
+					},
+				}
+			},
+
+			{
 				EntityType.FOX_1, new AnimalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Fox 1"),
@@ -44,7 +75,7 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-
+						// EntityType.HUMAN_1
 					},
 				}
 			},
@@ -61,7 +92,7 @@ public class EntityPresetBase
 					VitalitySpeed = -0.008f,
 					MoveSpeed = 0.08f,
 
-					StartVitality = 35,
+					StartVitality = 100,
 					MaxVitality = 100,
 
 					NutritionalValue = 80,
@@ -74,11 +105,13 @@ public class EntityPresetBase
 					{
 						EntityType.ANIMAL_3,
 						EntityType.TREE_1,
+						EntityType.BUSH_1,
 					},
 
 					Predators = new List<EntityType>()
 					{
 						EntityType.FOX_1,
+						// EntityType.HUMAN_1
 					},
 				}
 			},
@@ -105,15 +138,18 @@ public class EntityPresetBase
 					Preys = new List<EntityType>()
 					{
 						EntityType.TREE_1,
+						EntityType.BUSH_1,
 					},
 
 					Predators = new List<EntityType>()
 					{
 						EntityType.FOX_1,
 						EntityType.RABBIT_1,
+						// EntityType.HUMAN_1
 					},
 				}
 			},
+
 			{
 				EntityType.TREE_1, new VegetalPreset()
 				{
