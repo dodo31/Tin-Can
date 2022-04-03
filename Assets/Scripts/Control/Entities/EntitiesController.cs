@@ -31,13 +31,13 @@ public class EntitiesController : MonoBehaviour
 
 		for (int i = 0; i < 10; i++)
 		{
-			this.SpawnAnimal(EntityType.RABBIT_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+			this.SpawnAnimal(EntityType.CHIKEN_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
 		}
 
-		// for (int i = 0; i < 30; i++)
-		// {
-		// 	this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
-		// }
+		for (int i = 0; i < 30; i++)
+		{
+			this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+		}
 	}
 
 	public void SpawnHuman(EntityType type, Vector3 position)

@@ -13,6 +13,9 @@ public class MainController : MonoBehaviour
 
 		EntitiesController.OnEntityKilled += this.DecreaseEntityAmountInUi;
 		EntitiesController.OnEntitySpawned += this.IncreaseEntityAmountInUi;
+
+		BottomBarController.OnPauseButtonClick += this.TogglePause;
+		BottomBarController.OnQuitButtonClick += Application.Quit;
 	}
 
 	private void DecreaseEntityAmountInUi(Entity entity)
@@ -23,5 +26,10 @@ public class MainController : MonoBehaviour
 	private void IncreaseEntityAmountInUi(Entity entity)
 	{
 		BottomBarController.OffsetEntityAmout(entity.Type, 1);
+	}
+
+	private void TogglePause()
+	{
+		Time.timeScale = (Time.timeScale == 0 ? 1 : 0);
 	}
 }
