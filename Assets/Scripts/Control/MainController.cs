@@ -7,7 +7,7 @@ public class MainController : MonoBehaviour
     
     protected void Awake()
     {
-        EntitiesController.OnHumanMoved += CameraController.FollowPlayer;
+        // EntitiesController.OnHumanMoved += CameraController.FollowPlayer;
     }
 
     protected void Update()

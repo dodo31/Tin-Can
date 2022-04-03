@@ -16,9 +16,8 @@ public class LifeBarView : MonoBehaviour
 
     private float timeSinceLastUpdate;
 
-    protected void Start()
+    protected void Awake()
     {
-        gameObject.SetActive(false);
         bluePartSprite = bluePart.GetComponent<SpriteRenderer>();
         backgroundSprite = background.GetComponent<SpriteRenderer>();
         currentSize = 0;
