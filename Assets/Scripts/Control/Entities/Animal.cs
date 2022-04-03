@@ -66,11 +66,6 @@ public class Animal : Entity
 	private void ScanCloseEntities()
 	{
 		closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
-		
-		foreach (Entity entity in closeEntities)
-		{
-			Debug.Log(entity.Type);
-		}
 	}
 
 	public void RemoveCloseEntity(Entity entity)
@@ -162,12 +157,12 @@ public class Animal : Entity
 		if (this.IsTouchingEntity(closestPrey) && closestPrey.CanTakeHit())
 		{
 			Vector3 preyDelta = (closestPrey.transform.position - transform.position);
-			bool isDead = closestPrey.TakeHit(AnimalPreset.Power, -preyDelta.normalized);
-
-			if (isDead)
-			{
-				this.SetVitality(Math.Min(Vitality + closestPrey.Preset.NutritionalValue, AnimalPreset.MaxVitality));
-			}
+			
+			float effectiveDamage = Math.Min(AnimalPreset.Power, closestPrey.Vitality);
+			bool isDead = closestPrey.TakeHit(effectiveDamage, -preyDelta.normalized);
+			
+			float vitalityGain = closestPrey.Preset.NutritionalValue * (effectiveDamage / closestPrey.Preset.MaxVitality);
+			this.SetVitality(Math.Min(vitalityGain, AnimalPreset.MaxVitality));
 		}
 
 		_currentState = AnimalState.Eating;

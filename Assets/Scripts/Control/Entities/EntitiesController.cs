@@ -21,7 +21,7 @@ public class EntitiesController : MonoBehaviour
 			spawnButton.OnClick += this.SpawnAnimal;
 		}
 
-		this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
+		// this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
 
 		// for (int i = 0; i < 100; i++)
 		// {
