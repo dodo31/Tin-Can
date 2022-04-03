@@ -28,10 +28,10 @@ public class EntitiesController : MonoBehaviour
 		// 	this.SpawnAnimal(EntityType.RABBIT_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
 		// }
 
-		for (int i = 0; i < 30; i++)
-		{
-			this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
-		}
+		// for (int i = 0; i < 30; i++)
+		// {
+		// 	this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+		// }
 	}
 
 	protected void Update()

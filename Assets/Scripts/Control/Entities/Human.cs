@@ -22,31 +22,45 @@ public class Human : Entity
 	{
 		base.Update();
 
-		this.Move(Vector3.zero);
+		Vector3 motion = this.GetPlayerMotion();
+
+		if (motion.sqrMagnitude > 0)
+		{
+			this.Move(motion);
+		}
+
 		this.Attack();
 	}
-	
-	protected override void Move(Vector3 delta)
+
+	protected Vector3 GetPlayerMotion()
 	{
 		if (Input.GetKey(KeyCode.UpArrow))
 		{
-			base.Move(Vector3.up * HumanPreset.MoveSpeed * Time.timeScale);
+			return Vector3.up * HumanPreset.MoveSpeed * Time.timeScale;
 		}
 
 		if (Input.GetKey(KeyCode.DownArrow))
 		{
-			base.Move(Vector3.down * HumanPreset.MoveSpeed * Time.timeScale);
+			return Vector3.down * HumanPreset.MoveSpeed * Time.timeScale;
 		}
 
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
-			base.Move(Vector3.left * HumanPreset.MoveSpeed * Time.timeScale);
+			return Vector3.left * HumanPreset.MoveSpeed * Time.timeScale;
 		}
 
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
-			base.Move(Vector3.right * HumanPreset.MoveSpeed * Time.timeScale);
+			return Vector3.right * HumanPreset.MoveSpeed * Time.timeScale;
 		}
+
+		return Vector3.zero;
+	}
+
+	protected override void Move(Vector3 delta)
+	{
+		transform.position += delta;
+		transform.localScale = new Vector3(Mathf.Sign(delta.x), 1, 1);
 	}
 
 	private void Attack()
