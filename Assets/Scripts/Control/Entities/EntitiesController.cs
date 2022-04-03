@@ -8,6 +8,9 @@ public class EntitiesController : MonoBehaviour
 	public AnimalsFactory AnimalsFactory;
 	
 	public event Action<Vector3> OnHumanMoved;
+	
+	public event Action<Entity> OnEntitySpawned;
+	public event Action<Entity> OnEntityKilled;
 
 	protected void Start()
 	{
@@ -26,20 +29,15 @@ public class EntitiesController : MonoBehaviour
 
 		this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
 
-		// for (int i = 0; i < 100; i++)
-		// {
-		// 	this.SpawnAnimal(EntityType.RABBIT_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
-		// }
+		for (int i = 0; i < 10; i++)
+		{
+			this.SpawnAnimal(EntityType.RABBIT_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+		}
 
 		// for (int i = 0; i < 30; i++)
 		// {
 		// 	this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
 		// }
-	}
-
-	protected void Update()
-	{
-
 	}
 
 	public void SpawnHuman(EntityType type, Vector3 position)
@@ -70,6 +68,8 @@ public class EntitiesController : MonoBehaviour
 		newEntity.transform.SetParent(transform);
 		newEntity.transform.position = position;
 		newEntity.OnDeath += this.KillEntity;
+		
+		OnEntitySpawned?.Invoke(newEntity);
 	}
 
 	public void KillEntity(Entity entityToKill)
@@ -81,7 +81,9 @@ public class EntitiesController : MonoBehaviour
 				animal.RemoveCloseEntity(entityToKill);
 			}
 		}
-
+		
+		OnEntityKilled?.Invoke(entityToKill);
+		
 		DestroyImmediate(entityToKill.gameObject);
 	}
 
