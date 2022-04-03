@@ -89,9 +89,10 @@ public class BottomBarController : MonoBehaviour
         entityTypes = new List<EntityType>();
         foreach (EntityType type in (EntityType[])EntityType.GetValues(typeof(EntityType)))
         {
-            // TODO if entitytype != humain
-            entityInfoGroupViews.Add(InstantiateEntityInfoGroup(type));
-            entityTypes.Add(type);
+            if(type != EntityType.HUMAN_1){
+                entityInfoGroupViews.Add(InstantiateEntityInfoGroup(type));
+                entityTypes.Add(type);
+            }
         }
     }
 

@@ -16,6 +16,7 @@ public class EntityPresetBase
 	{
 		_presets = new Dictionary<EntityType, EntityPreset> {
 			{
+				// ===== HUMANS =====
 				EntityType.HUMAN_1, new HumanPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Humans/Human 1"),
@@ -35,23 +36,21 @@ public class EntityPresetBase
 
 					Preys = new List<EntityType>()
 					{
-						EntityType.RABBIT_1,
-						EntityType.ANIMAL_3,
 					},
 
 					Predators = new List<EntityType>()
 					{
-						EntityType.HUMAN_1
 					},
 				}
 			},
 
+			// ===== ANIMALS =====
 			{
-				EntityType.FOX_1, new AnimalPreset()
+				EntityType.CHIKEN_1, new AnimalPreset()
 				{
-					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Fox 1"),
-					SpriteHeadCenter = new Vector2(-12, -6),
-					CollideRadius = 0.72f,
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Chiken 1"),
+					SpriteHeadCenter = new Vector2(-1, -2),
+					CollideRadius = 0.36f,
 
 					ViewDistance = 15,
 
@@ -69,13 +68,172 @@ public class EntityPresetBase
 
 					Preys = new List<EntityType>()
 					{
-						EntityType.RABBIT_1,
-						EntityType.ANIMAL_3,
+						EntityType.TERMITE_1, EntityType.SNAKE_1
 					},
 
 					Predators = new List<EntityType>()
 					{
-						// EntityType.HUMAN_1
+						EntityType.HUMAN_1, EntityType.FOX_1, EntityType.T_REX_1
+					},
+				}
+			},
+			{
+				EntityType.COW_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Cow 1"),
+					SpriteHeadCenter = new Vector2(-19, -7),
+					CollideRadius = 0.88f,
+
+					ViewDistance = 15,
+
+					VitalitySpeed = -0.01f,
+					MoveSpeed = 0.15f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 5,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.FLOWER_1
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.T_REX_1
+					},
+				}
+			},
+			{
+				EntityType.DIPLODOCUS_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Diplodocus 1"),
+					SpriteHeadCenter = new Vector2(-18, -32),
+					CollideRadius = 0.83f,
+
+					ViewDistance = 15,
+
+					VitalitySpeed = -0.01f,
+					MoveSpeed = 0.15f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 5,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.TREE_1, EntityType.BUSH_1
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.T_REX_1
+					},
+				}
+			},
+			{
+				EntityType.FOX_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Fox 1"),
+					SpriteHeadCenter = new Vector2(-12, -6),
+					CollideRadius = 0.64f,
+
+					ViewDistance = 15,
+
+					VitalitySpeed = -0.01f,
+					MoveSpeed = 0.15f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 5,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.TAPIR_1, EntityType.CHIKEN_1, EntityType.RABBIT_1
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.T_REX_1,
+					},
+				}
+			},
+			{
+				EntityType.FROG_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Frog 1"),
+					SpriteHeadCenter = new Vector2(-2, -1),
+					CollideRadius = 0.42f,
+
+					ViewDistance = 15,
+
+					VitalitySpeed = -0.01f,
+					MoveSpeed = 0.15f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 5,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.MOSQUITO_1
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.FOX_1
+					},
+				}
+			},
+			{
+				EntityType.GOAT_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Goat 1"),
+					SpriteHeadCenter = new Vector2(-12, -6),
+					CollideRadius = 0.74f,
+
+					ViewDistance = 15,
+
+					VitalitySpeed = -0.01f,
+					MoveSpeed = 0.15f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 5,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.FLOWER_1, EntityType.BUSH_1
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.T_REX_1
 					},
 				}
 			},
@@ -84,8 +242,104 @@ public class EntityPresetBase
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Rabbit 1"),
 					SpriteHeadCenter = new Vector2(-1, -1),
+					CollideRadius = 0.49f,
 
-					CollideRadius = 0.43f,
+					ViewDistance = 15,
+
+					VitalitySpeed = -0.01f,
+					MoveSpeed = 0.15f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 5,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.FLOWER_1
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.FOX_1, EntityType.T_REX_1,
+					},
+				}
+			},
+			{
+				EntityType.SNAKE_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Snake 1"),
+					SpriteHeadCenter = new Vector2(-10, -5),
+					CollideRadius = 0.73f,
+
+					ViewDistance = 15,
+
+					VitalitySpeed = -0.01f,
+					MoveSpeed = 0.15f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 5,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.RABBIT_1, EntityType.FOX_1, EntityType.TAPIR_1
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.CHIKEN_1
+					},
+				}
+			},
+			{
+				EntityType.T_REX_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/T-Rex 1"),
+					SpriteHeadCenter = new Vector2(-19, -23),
+					CollideRadius = 1.19f,
+
+					ViewDistance = 15,
+
+					VitalitySpeed = -0.01f,
+					MoveSpeed = 0.15f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 5,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.DIPLODOCUS_1, EntityType.GOAT_1, EntityType.FOX_1, EntityType.TAPIR_1, EntityType.COW_1
+					},
+
+					Predators = new List<EntityType>()
+					{
+
+					},
+				}
+			},
+			{
+				EntityType.TAPIR_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Tapir 1"),
+					SpriteHeadCenter = new Vector2(-11, -4),
+
+					CollideRadius = 0.69f,
 
 					ViewDistance = 8,
 
@@ -103,7 +357,6 @@ public class EntityPresetBase
 
 					Preys = new List<EntityType>()
 					{
-						EntityType.ANIMAL_3,
 						EntityType.TREE_1,
 						EntityType.BUSH_1,
 					},
@@ -116,10 +369,11 @@ public class EntityPresetBase
 				}
 			},
 			{
-				EntityType.ANIMAL_3, new AnimalPreset()
+				EntityType.TERMITE_1, new AnimalPreset()
 				{
-					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Animal 3"),
-					CollideRadius = 2.35f,
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Termite 1"),
+					SpriteHeadCenter = new Vector2(0, 0),
+					CollideRadius = 0.26f,
 
 					ViewDistance = 12,
 
@@ -150,13 +404,14 @@ public class EntityPresetBase
 				}
 			},
 
+			// ===== VEGETALS =====
 			{
-				EntityType.TREE_1, new VegetalPreset()
+				EntityType.BEE_HIVE_1, new VegetalPreset()
 				{
-					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
-					SpriteHeadCenter = new Vector2(0, -6),
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Bee Hive 1"),
+					SpriteHeadCenter = new Vector2(-1, -5),
 
-					CollideRadius = 1.76f,
+					CollideRadius = 0.4f,
 
 					VitalitySpeed = 0.02f,
 
@@ -173,7 +428,45 @@ public class EntityPresetBase
 				EntityType.BUSH_1, new VegetalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Bush 1"),
-					SpriteHeadCenter = new Vector2(0, 0),
+					SpriteHeadCenter = new Vector2(0, -1),
+
+					CollideRadius = 0.67f,
+
+					VitalitySpeed = 0.02f,
+
+					StartVitality = 20,
+					MaxVitality = 100,
+
+					ReproductionThreshold = 0.6f,
+					ReproductionCost = 40,
+
+					NutritionalValue = 50,
+				}
+			},
+			{
+				EntityType.FLOWER_1, new VegetalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Flower 1"),
+					SpriteHeadCenter = new Vector2(-1, -6),
+
+					CollideRadius = 0.49f,
+
+					VitalitySpeed = 0.02f,
+
+					StartVitality = 20,
+					MaxVitality = 100,
+
+					ReproductionThreshold = 0.6f,
+					ReproductionCost = 40,
+
+					NutritionalValue = 50,
+				}
+			},
+			{
+				EntityType.MOSQUITO_1, new VegetalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Mosquito 1"),
+					SpriteHeadCenter = new Vector2(0, -2),
 
 					CollideRadius = 0.7f,
 
@@ -188,6 +481,25 @@ public class EntityPresetBase
 					NutritionalValue = 50,
 				}
 			},
+			{
+				EntityType.TREE_1, new VegetalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
+					SpriteHeadCenter = new Vector2(-1, -6),
+
+					CollideRadius = 0.41f,
+
+					VitalitySpeed = 0.02f,
+
+					StartVitality = 20,
+					MaxVitality = 100,
+
+					ReproductionThreshold = 0.6f,
+					ReproductionCost = 40,
+
+					NutritionalValue = 50,
+				}
+			}
 		};
 	}
 

@@ -20,7 +20,7 @@ public class EntityInfoGroupView : MonoBehaviour
     {
         hasBeenEnabled = false;
         image.sprite = preset.Sprite;
-        RectTransform rectTransform = (RectTransform)image.transform;
+        RectTransform rectTransform = (RectTransform)image.transform;        
         rectTransform.sizeDelta = new Vector2(preset.Sprite.rect.width * 1.5f, preset.Sprite.rect.height * 1.5f);
         image.gameObject.transform.localPosition = preset.SpriteHeadCenter;
     }
