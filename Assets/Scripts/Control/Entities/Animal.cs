@@ -43,7 +43,7 @@ public class Animal : Entity
 		if (this.IsAlive())
 		{
 			this.GrowIfRequired();
-			this.ManageNormalLife();
+			//this.ManageNormalLife();
 		}
 	}
 

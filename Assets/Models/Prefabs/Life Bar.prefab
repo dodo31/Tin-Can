@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bluePart: {fileID: 8323812325843445986}
+  background: {fileID: 6550473704921701672}
 --- !u!1 &6550473704921701672
 GameObject:
   m_ObjectHideFlags: 0

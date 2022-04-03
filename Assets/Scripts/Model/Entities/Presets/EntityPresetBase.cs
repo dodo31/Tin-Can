@@ -19,11 +19,12 @@ public class EntityPresetBase
 				EntityType.FOX_1, new AnimalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Fox 1"),
+					SpriteHeadCenter = new Vector2(-12, -6),
 					CollideRadius = 0.72f,
 
 					ViewDistance = 15,
 
-					VitalitySpeed = -0.1f,
+					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
 					StartVitality = 30,
@@ -51,11 +52,13 @@ public class EntityPresetBase
 				EntityType.RABBIT_1, new AnimalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Rabbit 1"),
+					SpriteHeadCenter = new Vector2(-1, -1),
+
 					CollideRadius = 0.43f,
 
 					ViewDistance = 8,
 
-					VitalitySpeed = -0.08f,
+					VitalitySpeed = -0.008f,
 					MoveSpeed = 0.08f,
 
 					StartVitality = 35,
@@ -87,7 +90,7 @@ public class EntityPresetBase
 
 					ViewDistance = 12,
 
-					VitalitySpeed = -0.12f,
+					VitalitySpeed = -0.012f,
 					MoveSpeed = 0.03f,
 
 					StartVitality = 28,
@@ -115,9 +118,11 @@ public class EntityPresetBase
 				EntityType.TREE_1, new VegetalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
+					SpriteHeadCenter = new Vector2(0, -6),
+
 					CollideRadius = 1.76f,
 
-					VitalitySpeed = 0.12f,
+					VitalitySpeed = 0.02f,
 
 					StartVitality = 20,
 					MaxVitality = 100,
@@ -132,9 +137,11 @@ public class EntityPresetBase
 				EntityType.BUSH_1, new VegetalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Bush 1"),
+					SpriteHeadCenter = new Vector2(0, 0),
+
 					CollideRadius = 0.7f,
 
-					VitalitySpeed = 0.12f,
+					VitalitySpeed = 0.02f,
 
 					StartVitality = 20,
 					MaxVitality = 100,
