@@ -796,6 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bounds: {x: 18, y: 18}
+  MarginFactor: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
