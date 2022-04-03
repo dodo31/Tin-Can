@@ -13,8 +13,11 @@ public class VegetalSpawnButton : MonoBehaviour
 		Button button = this.GetComponent<Button>();
 		button.onClick.AddListener(() =>
 		{
-			Vector3 spawnPosition = new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0);
-			OnClick?.Invoke(Type, spawnPosition);
+			for (int i = 0; i < 1; i++)
+			{
+				Vector3 spawnPosition = new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0);
+				OnClick?.Invoke(Type, spawnPosition);
+			}
 		});
 	}
 }

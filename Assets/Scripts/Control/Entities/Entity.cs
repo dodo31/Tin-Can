@@ -16,9 +16,11 @@ public abstract class Entity : MonoBehaviour
 
 	protected Guid _id;
 
+	protected CollisionsToolkit _collisionsToolkit;
+
+	protected SpriteRenderer _mainSprite;
 	private LifeBarView _lifeBarView;
 
-	protected CollisionsToolkit _collisionsToolkit;
 
 	private float _lastHitTime;
 
@@ -29,6 +31,7 @@ public abstract class Entity : MonoBehaviour
 	{
 		_id = Guid.NewGuid();
 
+		_mainSprite = this.GetComponent<SpriteRenderer>();
 		_lifeBarView = this.GetComponentInChildren<LifeBarView>();
 
 		_collisionsToolkit = new CollisionsToolkit();
@@ -67,6 +70,12 @@ public abstract class Entity : MonoBehaviour
 		}
 	}
 
+	protected virtual void Move(Vector3 delta)
+	{
+		transform.position += delta;
+		_mainSprite.flipX = (delta.x < 0);
+	}
+
 	public virtual bool TakeHit(float damage, Vector3 hitDirection)
 	{
 		_lastHitTime = Time.fixedTime;
@@ -87,7 +96,8 @@ public abstract class Entity : MonoBehaviour
 		return Time.fixedTime >= _lastHitTime + HIT_COOLDOWN;
 	}
 
-	public abstract void Die();
+	protected abstract Boolean IsAlive();
+	protected abstract void Die();
 
 	public void PublishBirth(Vector3 position)
 	{

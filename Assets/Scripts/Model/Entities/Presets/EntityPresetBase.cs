@@ -16,14 +16,46 @@ public class EntityPresetBase
 	{
 		_presets = new Dictionary<EntityType, EntityPreset> {
 			{
+				EntityType.HUMAN_1, new HumanPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Humans/Human 1"),
+					CollideRadius = 0.34f,
+
+					VitalitySpeed = 0,
+					MoveSpeed = 0.08f, // 0.02f,
+
+					StartVitality = 30,
+					MaxVitality = 100,
+
+					NutritionalValue = 30,
+					Power = 20,
+
+					ReproductionThreshold = 0.5f,
+					ReproductionCost = 38,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.RABBIT_1,
+						EntityType.ANIMAL_3,
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.HUMAN_1
+					},
+				}
+			},
+
+			{
 				EntityType.FOX_1, new AnimalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Fox 1"),
+					SpriteHeadCenter = new Vector2(-12, -6),
 					CollideRadius = 0.72f,
 
 					ViewDistance = 15,
 
-					VitalitySpeed = -0.1f,
+					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
 					StartVitality = 30,
@@ -43,7 +75,7 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-
+						// EntityType.HUMAN_1
 					},
 				}
 			},
@@ -51,14 +83,16 @@ public class EntityPresetBase
 				EntityType.RABBIT_1, new AnimalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Rabbit 1"),
+					SpriteHeadCenter = new Vector2(-1, -1),
+
 					CollideRadius = 0.43f,
 
 					ViewDistance = 8,
 
-					VitalitySpeed = -0.08f,
+					VitalitySpeed = -0.008f,
 					MoveSpeed = 0.08f,
 
-					StartVitality = 35,
+					StartVitality = 100,
 					MaxVitality = 100,
 
 					NutritionalValue = 80,
@@ -71,11 +105,13 @@ public class EntityPresetBase
 					{
 						EntityType.ANIMAL_3,
 						EntityType.TREE_1,
+						EntityType.BUSH_1,
 					},
 
 					Predators = new List<EntityType>()
 					{
 						EntityType.FOX_1,
+						// EntityType.HUMAN_1
 					},
 				}
 			},
@@ -87,7 +123,7 @@ public class EntityPresetBase
 
 					ViewDistance = 12,
 
-					VitalitySpeed = -0.12f,
+					VitalitySpeed = -0.012f,
 					MoveSpeed = 0.03f,
 
 					StartVitality = 28,
@@ -102,22 +138,27 @@ public class EntityPresetBase
 					Preys = new List<EntityType>()
 					{
 						EntityType.TREE_1,
+						EntityType.BUSH_1,
 					},
 
 					Predators = new List<EntityType>()
 					{
 						EntityType.FOX_1,
 						EntityType.RABBIT_1,
+						// EntityType.HUMAN_1
 					},
 				}
 			},
+
 			{
 				EntityType.TREE_1, new VegetalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
+					SpriteHeadCenter = new Vector2(0, -6),
+
 					CollideRadius = 1.76f,
 
-					VitalitySpeed = 0.12f,
+					VitalitySpeed = 0.02f,
 
 					StartVitality = 20,
 					MaxVitality = 100,
@@ -132,9 +173,11 @@ public class EntityPresetBase
 				EntityType.BUSH_1, new VegetalPreset()
 				{
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Bush 1"),
+					SpriteHeadCenter = new Vector2(0, 0),
+
 					CollideRadius = 0.7f,
 
-					VitalitySpeed = 0.12f,
+					VitalitySpeed = 0.02f,
 
 					StartVitality = 20,
 					MaxVitality = 100,
