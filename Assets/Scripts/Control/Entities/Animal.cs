@@ -106,7 +106,8 @@ public class Animal : Entity
 		{
 			_hitSpeed = _hitForce;
 			Vector3 hitVelocity = _hitDirection * -_hitSpeed;
-			transform.position += hitVelocity;
+			
+			this.Move(hitVelocity);
 
 			_hitForce = Math.Max(_hitForce - AnimalPreset.CollideDrag, 0);
 		}
@@ -116,7 +117,7 @@ public class Animal : Entity
 	{
 		Entity closestPredator = this.ExtractClosestEntity(closePredators);
 		Vector3 feeDelta = -(closestPredator.transform.position - transform.position);
-		this.MoveToward(feeDelta);
+		this.Move(feeDelta);
 
 		_currentState = AnimalState.Fleeing;
 	}
@@ -125,7 +126,7 @@ public class Animal : Entity
 	{
 		Entity closestFellow = this.ExtractClosestEntity(closeFellows);
 		Vector3 reproduceDelta = (closestFellow.transform.position - transform.position);
-		this.MoveToward(reproduceDelta);
+		this.Move(reproduceDelta);
 
 		bool canGiveBirth = ((Animal)closestFellow).CanGiveBirth();
 
@@ -152,7 +153,7 @@ public class Animal : Entity
 	{
 		Entity closestPrey = this.ExtractClosestEntity(closePreys);
 		Vector3 eatDelta = (closestPrey.transform.position - transform.position);
-		this.MoveToward(eatDelta);
+		this.Move(eatDelta);
 
 		if (this.IsTouchingEntity(closestPrey) && closestPrey.CanTakeHit())
 		{
@@ -203,11 +204,12 @@ public class Animal : Entity
 		this.PublishDeath();
 	}
 
-	private void MoveToward(Vector3 delta)
+	protected override void Move(Vector3 delta)
 	{
 		Vector3 direction = delta.normalized;
 		float speed = Math.Min(delta.magnitude, AnimalPreset.MoveSpeed);
-		transform.position += direction * speed;
+		
+		base.Move(direction * speed);
 	}
 
 	private void Idle()

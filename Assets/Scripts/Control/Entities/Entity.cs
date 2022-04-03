@@ -15,11 +15,13 @@ public abstract class Entity : MonoBehaviour
 	public CircleCollider2D HitboxCollider;
 
 	protected Guid _id;
-
-	private LifeBarView _lifeBarView;
-
+	
 	protected CollisionsToolkit _collisionsToolkit;
 
+	protected SpriteRenderer _mainSprite;
+	private LifeBarView _lifeBarView;
+	
+	
 	private float _lastHitTime;
 
 	public event Action<EntityType, Vector3> OnBirth;
@@ -29,6 +31,7 @@ public abstract class Entity : MonoBehaviour
 	{
 		_id = Guid.NewGuid();
 
+		_mainSprite = this.GetComponent<SpriteRenderer>();
 		_lifeBarView = this.GetComponentInChildren<LifeBarView>();
 
 		_collisionsToolkit = new CollisionsToolkit();
@@ -65,6 +68,12 @@ public abstract class Entity : MonoBehaviour
 			float scaleFactor = Math.Min(transform.localScale.x + GROW_SPEED, 1);
 			transform.localScale = Vector3.one * scaleFactor;
 		}
+	}
+
+	protected virtual void Move(Vector3 delta)
+	{
+		transform.position += delta;
+		_mainSprite.flipX = (delta.x < 0);
 	}
 
 	public virtual bool TakeHit(float damage, Vector3 hitDirection)

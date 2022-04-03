@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,30 +22,30 @@ public class Human : Entity
 	{
 		base.Update();
 
-		this.Move();
+		this.Move(Vector3.zero);
 		this.Attack();
 	}
-
-	private void Move()
+	
+	protected override void Move(Vector3 delta)
 	{
 		if (Input.GetKey(KeyCode.UpArrow))
 		{
-			transform.position += Vector3.up * HumanPreset.MoveSpeed * Time.timeScale;
+			base.Move(Vector3.up * HumanPreset.MoveSpeed * Time.timeScale);
 		}
 
 		if (Input.GetKey(KeyCode.DownArrow))
 		{
-			transform.position += Vector3.down * HumanPreset.MoveSpeed * Time.timeScale;
+			base.Move(Vector3.down * HumanPreset.MoveSpeed * Time.timeScale);
 		}
 
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
-			transform.position += Vector3.left * HumanPreset.MoveSpeed * Time.timeScale;
+			base.Move(Vector3.left * HumanPreset.MoveSpeed * Time.timeScale);
 		}
 
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
-			transform.position += Vector3.right * HumanPreset.MoveSpeed * Time.timeScale;
+			base.Move(Vector3.right * HumanPreset.MoveSpeed * Time.timeScale);
 		}
 	}
 
