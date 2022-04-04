@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenuView : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
 	public Button ResumeButton;
 	public Button QuitButton;
