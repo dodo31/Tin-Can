@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class BottomBarController : MonoBehaviour
 {
-	private EntityPresetBase presetBase;
-    
 	[SerializeField]
 	EntityInfoGroupView entityInfoGroupPrefab;
 	[SerializeField]
@@ -25,18 +23,22 @@ public class BottomBarController : MonoBehaviour
 	EntityInfoGroupView newEggEntityInfoGroupView;
 	[SerializeField]
 	Button newEggButton;
-    
-	public event Action OnNewEggButtonClick;
-	public event Action OnPauseButtonClick;
-	public event Action OnQuitButtonClick;
+
+	private EntityPresetBase _presetBase;
+	private EggsSequence _eggsSequence;
 
 	private Dictionary<EntityType, EntityInfoGroupView> entityInfoGroupViews;
 	private List<EntityType> entityTypes;
 
+	public event Action OnNewEggButtonClick;
+	public event Action OnPauseButtonClick;
+	public event Action OnQuitButtonClick;
+
 	protected void Awake()
 	{
-        presetBase = EntityPresetBase.GetInstance();
-        
+		_presetBase = EntityPresetBase.GetInstance();
+		_eggsSequence = EggsSequence.GetInstance();
+
 		entityInfoGroupViews = new Dictionary<EntityType, EntityInfoGroupView>();
 	}
 
@@ -49,10 +51,12 @@ public class BottomBarController : MonoBehaviour
 	{
 		OnPauseButtonClick?.Invoke();
 	}
+	
 	public void ClickNewEggButton()
 	{
 		OnNewEggButtonClick?.Invoke();
 	}
+	
 	public void ClickQuitButton()
 	{
 		OnQuitButtonClick?.Invoke();
@@ -60,7 +64,8 @@ public class BottomBarController : MonoBehaviour
 
 	public void SetNewEggEntityPreset(EntityType type)
 	{
-		this.SetNewEggEntityPreset(EntityPresetBase.GetInstance()[type]);
+		EntityPreset preset = _presetBase[type];
+		this.SetNewEggEntityPreset(preset);
 	}
 
 	public void SetNewEggEntityPreset(EntityPreset preset)
@@ -75,12 +80,13 @@ public class BottomBarController : MonoBehaviour
 		newEggText.gameObject.SetActive(amount > 0);
 		newEggEntityInfoGroupView.UpdateEntityAmount(amount);
 	}
-
+	
 	public void SetPlayPauseButtonTo(bool isPaused)
 	{
 		playPauseButtonText.text = isPaused ? "Play" : "Pause";
 	}
 
+	// Not used (yet)
 	public void SetEntityAmount(EntityType type, int amount)
 	{
 		if (entityInfoGroupViews.ContainsKey(type))
@@ -89,8 +95,8 @@ public class BottomBarController : MonoBehaviour
 			infoGroupView.UpdateEntityAmount(amount);
 		}
 	}
-    
-    public void OffsetEntityAmout(EntityType type, int offset)
+
+	public void OffsetEntityAmout(EntityType type, int offset)
 	{
 		if (entityInfoGroupViews.ContainsKey(type))
 		{
@@ -116,7 +122,7 @@ public class BottomBarController : MonoBehaviour
 
 	private EntityInfoGroupView InstantiateEntityInfoGroup(EntityType type)
 	{
-		EntityPreset entityPreset = presetBase[type];
+		EntityPreset entityPreset = _presetBase[type];
 		EntityInfoGroupView entityInfoGroupView = Instantiate(entityInfoGroupPrefab);
 
 		entityInfoGroupView.type = type;

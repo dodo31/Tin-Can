@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
 public abstract class Entity : MonoBehaviour
 {
 	private const float HIT_COOLDOWN = 0.5f;
