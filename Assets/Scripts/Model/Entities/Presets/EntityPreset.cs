@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class EntityPreset
 {
 	public Sprite Sprite;
+	public Sprite EggSprite;
+	
 	public Vector2 SpriteHeadCenter;
 	public float CollideRadius;
 

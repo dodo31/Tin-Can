@@ -44,8 +44,7 @@ public class EggPreview : MonoBehaviour
 
 	public void SetEgg(EntityPreset preset)
 	{
-		// Egg.sprite = Resources.Load<Sprite>(preset.EggSprite);
-		Egg.sprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Plain Egg");
+		Egg.sprite = preset.EggSprite;
 	}
 
 	public void SetEggAmount(int newAmount)

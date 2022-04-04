@@ -21,6 +21,7 @@ public class EntityPresetBase
 				{
 					MaxEntities = 1,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Humans/Human 1"),
+					
 					CollideRadius = 0.34f,
 
 					VitalitySpeed = -0.03f,
@@ -51,6 +52,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 20,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Chiken 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Chiken Egg"),
+					
 					SpriteHeadCenter = new Vector2(-1, -2),
 					CollideRadius = 0.36f,
 
@@ -84,6 +87,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 10,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Cow 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Cow Egg"),
+					
 					SpriteHeadCenter = new Vector2(-19, -7),
 					CollideRadius = 0.88f,
 
@@ -117,6 +122,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 5,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Diplodocus 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Diplodocus Egg"),
+					
 					SpriteHeadCenter = new Vector2(-18, -32),
 					CollideRadius = 0.83f,
 
@@ -150,6 +157,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 10,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Fox 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Fox Egg"),
+					
 					SpriteHeadCenter = new Vector2(-12, -6),
 					CollideRadius = 0.64f,
 
@@ -183,6 +192,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 20,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Frog 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Frog Egg"),
+					
 					SpriteHeadCenter = new Vector2(-2, -1),
 					CollideRadius = 0.42f,
 
@@ -216,6 +227,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 10,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Goat 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Goat Egg"),
+					
 					SpriteHeadCenter = new Vector2(-12, -6),
 					CollideRadius = 0.74f,
 
@@ -249,6 +262,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 30,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Rabbit 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Rabbit Egg"),
+					
 					SpriteHeadCenter = new Vector2(-1, -1),
 					CollideRadius = 0.49f,
 
@@ -282,6 +297,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 10,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Snake 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Snake Egg"),
+					
 					SpriteHeadCenter = new Vector2(-10, -5),
 					CollideRadius = 0.73f,
 
@@ -315,6 +332,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 4,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/T-Rex 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/T-Rex Egg"),
+					
 					SpriteHeadCenter = new Vector2(-19, -23),
 					CollideRadius = 1.19f,
 
@@ -348,6 +367,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 10,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Tapir 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Tapir Egg"),
+					
 					SpriteHeadCenter = new Vector2(-11, -4),
 
 					CollideRadius = 0.69f,
@@ -385,6 +406,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 20,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Termite 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Termite Egg"),
+					
 					SpriteHeadCenter = new Vector2(0, 0),
 					CollideRadius = 0.26f,
 
@@ -418,6 +441,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 5,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Bear 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Bear Egg"),
+					
 					SpriteHeadCenter = new Vector2(-19, -7),
 					CollideRadius = 0.8f,
 
@@ -458,6 +483,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 10,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Bee Hive 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Bear Egg"),
+					
 					SpriteHeadCenter = new Vector2(-1, -5),
 
 					CollideRadius = 0.4f,
@@ -478,6 +505,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 25,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Bush 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Bush Egg"),
+					
 					SpriteHeadCenter = new Vector2(0, -1),
 
 					CollideRadius = 0.67f,
@@ -498,6 +527,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 25,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Flower 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Flower Egg"),
+					
 					SpriteHeadCenter = new Vector2(-1, -6),
 
 					CollideRadius = 0.49f,
@@ -518,6 +549,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 15,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Mosquito 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Mosquito Egg"),
+					
 					SpriteHeadCenter = new Vector2(0, -2),
 
 					CollideRadius = 0.7f,
@@ -538,6 +571,8 @@ public class EntityPresetBase
 				{
 					MaxEntities = 25,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Tree 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Tree Egg"),
+					
 					SpriteHeadCenter = new Vector2(-1, -6),
 
 					CollideRadius = 0.41f,
@@ -557,7 +592,9 @@ public class EntityPresetBase
 				EntityType.GRASS_1, new VegetalPreset()
 				{
 					MaxEntities = 70,
-					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Grass1"),
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Grass 1"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Grass Egg"),
+					
 					SpriteHeadCenter = new Vector2(-1, -6),
 
 					CollideRadius = 0.41f,
