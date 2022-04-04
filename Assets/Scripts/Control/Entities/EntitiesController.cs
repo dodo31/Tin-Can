@@ -61,9 +61,9 @@ public class EntitiesController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.T))
 		{
-			for (int i = 0; i < 30; i++)
+			for (int i = 0; i < 10; i++)
 			{
-				this.SpawnAnimal(EntityType.CHIKEN_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+				this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
 			}
 		}
 	}
