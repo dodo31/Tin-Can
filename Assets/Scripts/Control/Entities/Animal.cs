@@ -5,248 +5,298 @@ using UnityEngine;
 
 public class Animal : Entity
 {
-	private const float BIRTH_COOLDOWN = 0.35f;
+    private const float BIRTH_COOLDOWN = 0.35f;
 
-	public CircleCollider2D ProximityCollider;
-	private List<Entity> closeEntities;
+    public CircleCollider2D ProximityCollider;
+    private List<Entity> closeEntities;
 
-	private float _lastBirthTime;
-	private int _frameCountOffset;
+    private float _lastBirthTime;
+    private int _frameCountOffset;
 
-	private float _hitForce;
+    private float _hitForce;
 
-	private float _hitSpeed;
-	private Vector3 _hitDirection;
+    private float _hitSpeed;
+    private Vector3 _hitDirection;
+    private Vector3 _idleDirection;
 
-	private AnimalState _currentState;
+    private AnimalState _currentState;
 
-	protected override void Awake()
-	{
-		base.Awake();
+    protected override void Awake()
+    {
+        base.Awake();
 
-		closeEntities = new List<Entity>();
+        closeEntities = new List<Entity>();
 
-		_lastBirthTime = 0;
-		_frameCountOffset = UnityEngine.Random.Range(0, 10);
+        _lastBirthTime = 0;
+        _frameCountOffset = UnityEngine.Random.Range(0, 10);
 
-		_hitSpeed = 0;
-		_hitDirection = Vector3.zero;
+        _hitSpeed = 0;
+        _hitDirection = Vector3.zero;
 
-		_currentState = AnimalState.Idle;
-	}
+        _currentState = AnimalState.Idle;
+    }
 
-	protected override void Start()
-	{
-		base.Start();
-	}
+    protected override void Start()
+    {
+        base.Start();
+    }
 
-	protected override void Update()
-	{
-		base.Update();
-	}
+    protected override void Update()
+    {
+        base.Update();
+    }
 
-	protected override void FixedUpdate()
-	{
-		base.FixedUpdate();
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
 
-		if (this.IsAlive())
-		{
-			if ((Time.frameCount + _frameCountOffset) % 10 == 0)
-			{
-				// Refresh close entities list using colliders
-				this.ScanCloseEntities();
-			}
+        if (this.IsAlive())
+        {
+            if ((Time.frameCount + _frameCountOffset) % 10 == 0)
+            {
+                // Refresh close entities list using colliders
+                this.ScanCloseEntities();
+            }
 
-			this.GrowIfRequired();
-			this.ManageNormalLife();
-			this.ManageHit();
-		}
-	}
+            this.UpdateIdleDirection();
 
-	private void ScanCloseEntities()
-	{
-		closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
-	}
+            this.GrowIfRequired();
+            this.ManageNormalLife();
+            this.ManageHit();
+        }
+    }
 
-	public void RemoveCloseEntity(Entity entity)
-	{
-		closeEntities.Remove(entity);
-	}
+    private void UpdateIdleDirection()
+    {
+        System.Random random = new System.Random();
+        if (random.NextDouble() > 1 / 200)
+        {
+            _idleDirection = new Vector3((float)(random.NextDouble() * 2 - 1), (float)(random.NextDouble() * 2 - 1), 0).normalized;
+        }
+    }
 
-	private void ManageNormalLife()
-	{
-		if (closeEntities.Count > 0)
-		{
-			List<Entity> closePredators = this.ExtractClosePredators(closeEntities);
-			List<Entity> closeFellows = this.ExtractCloseFellows(closeEntities);
-			List<Entity> closePreys = this.ExtractClosePreys(closeEntities);
+    private void ScanCloseEntities()
+    {
+        closeEntities = _collisionsToolkit.GetCloseEntities(transform, ProximityCollider);
+    }
 
-			if (closePredators.Count > 0)
-			{
-				this.Flee(closePredators);
-			}
-			else if (closeFellows.Count > 0 && this.HasEnoughVitalityToReproduce())
-			{
-				this.Reproduce(closeFellows);
-			}
-			else if (closePreys.Count > 0)
-			{
-				this.Eat(closePreys);
-			}
-		}
-		else
-		{
-			this.Idle();
-		}
-	}
+    public void RemoveCloseEntity(Entity entity)
+    {
+        closeEntities.Remove(entity);
+    }
 
-	private void ManageHit()
-	{
-		if (_hitSpeed > 0 || _hitForce > 0)
-		{
-			_hitSpeed = _hitForce;
-			Vector3 hitVelocity = _hitDirection * -_hitSpeed;
-			
-			this.Move(hitVelocity);
+    private void ManageNormalLife()
+    {
+        Vector3 oldPosition = transform.position;
+        if (closeEntities.Count > 0)
+        {
+            List<Entity> closePredators = this.ExtractClosePredators(closeEntities);
+            List<Entity> closeFellows = this.ExtractCloseFellows(closeEntities);
+            List<Entity> closePreys = this.ExtractClosePreys(closeEntities);
 
-			_hitForce = Math.Max(_hitForce - AnimalPreset.CollideDrag, 0);
-		}
-	}
+            if (closePredators.Count > 0)
+            {
+                this.Flee(closePredators);
+            }
+            else if (closeFellows.Count > 0 && this.HasEnoughVitalityToReproduce())
+            {
+                this.Reproduce(closeFellows);
+            }
+            else if (closePreys.Count > 0)
+            {
+                this.Eat(closePreys);
+            }
+            Entity closest = ExtractClosestEntity(closeEntities);
+            if (closest != null && this.IsTouchingEntity(closest))
+            {
+                float totalRadius = closest.HitboxCollider.radius + HitboxCollider.radius;
+                Vector3 distanceFromEntity = (transform.position - closest.transform.position);
+                transform.position = closest.transform.position + (distanceFromEntity.normalized * totalRadius);
+            }
+        }
+        else
+        {
+            this.Idle();
+        }
+        Collider2D wall = Physics2D.OverlapPoint(transform.position, 1 << 6);
+        if (wall != null)
+        {
+            Vector3 newPosition = new Vector3(transform.position.x, oldPosition.y, transform.position.z);
+            wall = Physics2D.OverlapPoint(newPosition, 1 << 6);
+            if (wall == null)
+            {
+                transform.position = newPosition;
+            }
+            else
+            {
+                newPosition = new Vector3(oldPosition.x, transform.position.y, transform.position.z);
+                wall = Physics2D.OverlapPoint(newPosition, 1 << 6);
+                if (wall == null)
+                {
+                    transform.position = newPosition;
+                }
+                else
+                {
+                    transform.position = oldPosition;
+                }
+            }
+        }
+    }
 
-	private void Flee(List<Entity> closePredators)
-	{
-		Entity closestPredator = this.ExtractClosestEntity(closePredators);
-		Vector3 feeDelta = -(closestPredator.transform.position - transform.position);
-		this.Move(feeDelta);
 
-		_currentState = AnimalState.Fleeing;
-	}
+    private void ManageHit()
+    {
+        if (_hitSpeed > 0 || _hitForce > 0)
+        {
+            _hitSpeed = _hitForce;
+            Vector3 hitVelocity = _hitDirection * -_hitSpeed;
 
-	private void Reproduce(List<Entity> closeFellows)
-	{
-		Entity closestFellow = this.ExtractClosestEntity(closeFellows);
-		Vector3 reproduceDelta = (closestFellow.transform.position - transform.position);
-		this.Move(reproduceDelta);
+            this.Move(hitVelocity);
 
-		bool canGiveBirth = ((Animal)closestFellow).CanGiveBirth();
+            _hitForce = Math.Max(_hitForce - AnimalPreset.CollideDrag, 0);
+        }
+    }
 
-		if (this.IsTouchingEntity(closestFellow) && canGiveBirth && Id.CompareTo(closestFellow.Id) > 0)
-		{
-			Vector3 center = (transform.position + closestFellow.transform.position) / 2f;
-			this.PublishBirth(center);
+    private void Flee(List<Entity> closePredators)
+    {
+        Entity closestPredator = this.ExtractClosestEntity(closePredators);
+        Vector3 feeDelta = -(closestPredator.transform.position - transform.position);
+        this.Move(feeDelta);
 
-			this.OffsetVitality(-AnimalPreset.ReproductionCost);
-			closestFellow.OffsetVitality(-closestFellow.Preset.ReproductionCost);
+        _currentState = AnimalState.Fleeing;
+    }
 
-			_lastBirthTime = Time.fixedTime;
-		}
+    private void Reproduce(List<Entity> closeFellows)
+    {
+        Entity closestFellow = this.ExtractClosestEntity(closeFellows);
+        Vector3 reproduceDelta = (closestFellow.transform.position - transform.position);
+        this.Move(reproduceDelta);
 
-		_currentState = AnimalState.Reproducing;
-	}
+        bool canGiveBirth = ((Animal)closestFellow).CanGiveBirth();
 
-	public bool CanGiveBirth()
-	{
-		return Time.fixedTime >= _lastBirthTime + BIRTH_COOLDOWN;
-	}
+        if (this.IsTouchingEntity(closestFellow) && canGiveBirth && Id.CompareTo(closestFellow.Id) > 0)
+        {
+            Vector3 center = (transform.position + closestFellow.transform.position) / 2f;
+            this.PublishBirth(center);
 
-	private void Eat(List<Entity> closePreys)
-	{
-		Entity closestPrey = this.ExtractClosestEntity(closePreys);
-		Vector3 eatDelta = (closestPrey.transform.position - transform.position);
-		this.Move(eatDelta);
+            this.OffsetVitality(-AnimalPreset.ReproductionCost);
+            closestFellow.OffsetVitality(-closestFellow.Preset.ReproductionCost);
 
-		if (this.IsTouchingEntity(closestPrey) && closestPrey.CanTakeHit())
-		{
-			Vector3 preyDelta = (closestPrey.transform.position - transform.position);
-			
-			float effectiveDamage = Math.Min(AnimalPreset.Power, closestPrey.Vitality);
-			bool isDead = closestPrey.TakeHit(effectiveDamage, -preyDelta.normalized);
-			
-			float vitalityGain = closestPrey.Preset.NutritionalValue * (effectiveDamage / closestPrey.Preset.MaxVitality);
-			this.SetVitality(Math.Min(vitalityGain, AnimalPreset.MaxVitality));
-		}
+            _lastBirthTime = Time.fixedTime;
+        }
 
-		_currentState = AnimalState.Eating;
-	}
+        _currentState = AnimalState.Reproducing;
+    }
 
-	public bool IsTouchingEntity(Entity otherEntity)
-	{
-		float entitiesDistance = Vector3.Distance(transform.position, otherEntity.transform.position);
-		return entitiesDistance <= Preset.CollideRadius || entitiesDistance <= otherEntity.Preset.CollideRadius;
-	}
+    public bool CanGiveBirth()
+    {
+        return Time.fixedTime >= _lastBirthTime + BIRTH_COOLDOWN;
+    }
 
-	public override bool TakeHit(float damage, Vector3 hitDirection)
-	{
-		bool isDead = base.TakeHit(damage, hitDirection);
+    private void Eat(List<Entity> closePreys)
+    {
+        Entity closestPrey = this.ExtractClosestEntity(closePreys);
+        Vector3 eatDelta = (closestPrey.transform.position - transform.position);
+        this.Move(eatDelta);
 
-		if (!isDead)
-		{
-			_hitForce = AnimalPreset.CollideBounce;
-			_hitDirection = hitDirection;
-			_hitSpeed = 0;
+        if (this.IsTouchingEntity(closestPrey) && closestPrey.CanTakeHit())
+        {
+            Vector3 preyDelta = (closestPrey.transform.position - transform.position);
 
-			return isDead;
-		}
-		else
-		{
-			return true;
-		}
-	}
+            float effectiveDamage = Math.Min(AnimalPreset.Power, closestPrey.Vitality);
+            bool isDead = closestPrey.TakeHit(effectiveDamage, -preyDelta.normalized);
 
-	protected override bool IsAlive()
-	{
-		return _currentState != AnimalState.Dead;
-	}
-	
-	protected override void Die()
-	{
-		_currentState = AnimalState.Dead;
-		this.PublishDeath();
-	}
+            float vitalityGain = closestPrey.Preset.NutritionalValue * (effectiveDamage / closestPrey.Preset.MaxVitality);
+            this.SetVitality(Math.Min(vitalityGain, AnimalPreset.MaxVitality));
+        }
 
-	protected override void Move(Vector3 delta)
-	{
-		Vector3 direction = delta.normalized;
-		float speed = Math.Min(delta.magnitude, AnimalPreset.MoveSpeed);
-		
-		base.Move(direction * speed);
-	}
+        _currentState = AnimalState.Eating;
+    }
 
-	private void Idle()
-	{
-		_currentState = AnimalState.Idle;
-	}
+    public bool IsTouchingEntity(Entity otherEntity)
+    {
+        float entitiesDistance = Vector3.Distance(transform.position, otherEntity.transform.position);
+        return entitiesDistance <= Preset.CollideRadius + otherEntity.Preset.CollideRadius;
+    }
 
-	private List<Entity> ExtractClosePreys(List<Entity> entities)
-	{
-		return new List<Entity>(entities.FindAll((entity) => AnimalPreset.Preys.Contains(entity.Type)));
-	}
+    public override bool TakeHit(float damage, Vector3 hitDirection)
+    {
+        bool isDead = base.TakeHit(damage, hitDirection);
 
-	private List<Entity> ExtractCloseFellows(List<Entity> entities)
-	{
-		return new List<Entity>(entities.FindAll((entity) => Type == entity.Type));
-	}
+        if (!isDead)
+        {
+            _hitForce = AnimalPreset.CollideBounce;
+            _hitDirection = hitDirection;
+            _hitSpeed = 0;
 
-	private List<Entity> ExtractClosePredators(List<Entity> entities)
-	{
-		return new List<Entity>(entities.FindAll((entity) => AnimalPreset.Predators.Contains(entity.Type)));
-	}
+            return isDead;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
-	private Entity ExtractClosestEntity(List<Entity> entities)
-	{
-		return entities.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
-	}
+    protected override bool IsAlive()
+    {
+        return _currentState != AnimalState.Dead;
+    }
 
-	private bool HasEnoughVitalityToReproduce()
-	{
-		return Vitality >= AnimalPreset.ReproductionThreshold * AnimalPreset.MaxVitality;
-	}
+    protected override void Die()
+    {
+        _currentState = AnimalState.Dead;
+        this.PublishDeath();
+    }
 
-	private AnimalPreset AnimalPreset
-	{
-		get
-		{
-			return (AnimalPreset)Preset;
-		}
-	}
+    protected override void Move(Vector3 delta)
+    {
+        Vector3 direction = delta.normalized;
+        float speed = Math.Min(delta.magnitude, AnimalPreset.MoveSpeed);
+
+        base.Move(direction * speed);
+    }
+
+
+    private void Idle()
+    {
+        _currentState = AnimalState.Idle;
+        this.Move(_idleDirection);
+    }
+
+    private List<Entity> ExtractClosePreys(List<Entity> entities)
+    {
+        return new List<Entity>(entities.FindAll((entity) => AnimalPreset.Preys.Contains(entity.Type)));
+    }
+
+    private List<Entity> ExtractCloseFellows(List<Entity> entities)
+    {
+        return new List<Entity>(entities.FindAll((entity) => Type == entity.Type));
+    }
+
+    private List<Entity> ExtractClosePredators(List<Entity> entities)
+    {
+        return new List<Entity>(entities.FindAll((entity) => AnimalPreset.Predators.Contains(entity.Type)));
+    }
+
+    private Entity ExtractClosestEntity(List<Entity> entities)
+    {
+        if (entities.Count == 0)
+        {
+            return null;
+        }
+        return entities.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
+    }
+
+    private bool HasEnoughVitalityToReproduce()
+    {
+        return Vitality >= AnimalPreset.ReproductionThreshold * AnimalPreset.MaxVitality;
+    }
+
+    private AnimalPreset AnimalPreset
+    {
+        get
+        {
+            return (AnimalPreset)Preset;
+        }
+    }
 }
