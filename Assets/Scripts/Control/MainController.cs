@@ -7,7 +7,12 @@ public class MainController : MonoBehaviour
 
 	public BottomBarController BottomBarController;
 
-	public PauseMenuView PauseMenuView;
+	public PauseMenu PauseMenu;
+	public KeepGoingMenu KeepGoingMenu;
+
+	public long KeepGoingTimeout;
+
+	private bool _hasKeptGoing;
 
 	protected void Awake()
 	{
@@ -19,10 +24,16 @@ public class MainController : MonoBehaviour
 		BottomBarController.OnPauseButtonClick += this.TogglePause;
 		BottomBarController.OnQuitButtonClick += Application.Quit;
 
-		PauseMenuView.OnResume += this.TogglePause;
-		PauseMenuView.OnQuit += Application.Quit;
-		
-		PauseMenuView.Toggle(false);
+		PauseMenu.OnResume += this.TogglePause;
+		PauseMenu.OnQuit += Application.Quit;
+
+		KeepGoingMenu.OnKeepGoing += this.DisableKeepGoingMenu;
+		KeepGoingMenu.OnExit += Application.Quit;
+
+		PauseMenu.Toggle(false);
+		KeepGoingMenu.Toggle(false);
+
+		_hasKeptGoing = false;
 	}
 
 	private void DecreaseEntityAmountInUi(Entity entity)
@@ -37,9 +48,14 @@ public class MainController : MonoBehaviour
 
 	protected void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			this.TogglePause();
+		}
+
+		if (Time.fixedTime >= KeepGoingTimeout && !_hasKeptGoing)
+		{
+			this.EnableKeepGoingMenu();
 		}
 	}
 
@@ -49,13 +65,26 @@ public class MainController : MonoBehaviour
 
 		if (isPaused)
 		{
-			PauseMenuView.Toggle(false);
+			PauseMenu.Toggle(false);
 			Time.timeScale = 1;
 		}
 		else
 		{
-			PauseMenuView.Toggle(true);
+			PauseMenu.Toggle(true);
 			Time.timeScale = 0;
 		}
+	}
+
+	private void EnableKeepGoingMenu()
+	{
+		KeepGoingMenu.Toggle(true);
+		_hasKeptGoing = true;
+		Time.timeScale = 0;
+	}
+
+	private void DisableKeepGoingMenu()
+	{
+		KeepGoingMenu.Toggle(false);
+		Time.timeScale = 1;
 	}
 }
