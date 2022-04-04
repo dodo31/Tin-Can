@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System;
-using System.Text;
 using UnityEngine;
-using System.Collections;
 
 public class EggsController : MonoBehaviour
 {
@@ -11,6 +9,8 @@ public class EggsController : MonoBehaviour
 	private EggsSequence _eggsSequence;
 	private Queue<EntityType> _spwanQueue;
 
+	private GameTime _gameTime;
+
 	public event Action<EntityType, Vector3> OnEggOdered;
 
 	protected void Awake()
@@ -18,6 +18,8 @@ public class EggsController : MonoBehaviour
 		BottomBarController.OnNewEggButtonClick += this.SpawnNewEgg;
 
 		_eggsSequence = EggsSequence.GetInstance();
+		_gameTime = GameTime.GetInstance();
+
 		_spwanQueue = new Queue<EntityType>();
 
 		_eggsSequence.OnEggsAvailable += this.AddEggs;
@@ -43,7 +45,7 @@ public class EggsController : MonoBehaviour
 
 	protected void FixedUpdate()
 	{
-		_eggsSequence.RefreshSequence(Time.fixedTime);
+		_eggsSequence.RefreshSequence(_gameTime.FixedTimeSinceSceneStart);
 	}
 
 	public void SpawnNewEgg()

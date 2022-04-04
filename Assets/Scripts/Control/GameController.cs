@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
 	public DeathScreen DeathScreen;
 
 	private bool _hasKeptGoing;
+	
+	private GameTime _gameTime;
 
 	protected void Awake()
 	{
@@ -42,6 +44,9 @@ public class GameController : MonoBehaviour
 		KeepGoingMenu.Toggle(false);
 
 		_hasKeptGoing = false;
+		
+		_gameTime = GameTime.GetInstance();
+		_gameTime.SetTimeOffset(Time.fixedTime);
 	}
 
 	private void DecreaseEntityAmountInUi(Entity entity)
@@ -61,7 +66,7 @@ public class GameController : MonoBehaviour
 			this.TogglePause();
 		}
 
-		if (Time.fixedTime >= KeepGoingTimeout && !_hasKeptGoing)
+		if (_gameTime.FixedTimeSinceSceneStart >= KeepGoingTimeout && !_hasKeptGoing)
 		{
 			this.EnableKeepGoingMenu();
 		}

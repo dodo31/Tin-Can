@@ -33,7 +33,6 @@ public class EggsSequence
 				if (fixedTime >= currentPool.Timestamp)
 				{
 					OnEggsAvailable?.Invoke(currentPool.Type, currentPool.PoolSize);
-
 					_sequence.Dequeue();
 				}
 			}
