@@ -22,11 +22,11 @@ public class EntityPresetBase
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Humans/Human 1"),
 					CollideRadius = 0.34f,
 
-					VitalitySpeed = 0,
+					VitalitySpeed = -0.1f,
 					MoveSpeed = 0.08f, // 0.02f,
 
 					StartVitality = 30,
-					MaxVitality = 100,
+					MaxVitality = 10,
 
 					NutritionalValue = 30,
 					Power = 20,

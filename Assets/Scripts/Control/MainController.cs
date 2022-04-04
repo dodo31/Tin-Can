@@ -4,13 +4,17 @@ public class MainController : MonoBehaviour
 {
 	public EntitiesController EntitiesController;
 	public CameraController CameraController;
+	
+	public ScoreController ScoreController;
 
 	public BottomBarController BottomBarController;
 
 	public PauseMenu PauseMenu;
-	public KeepGoingMenu KeepGoingMenu;
 
+	public KeepGoingMenu KeepGoingMenu;
 	public long KeepGoingTimeout;
+
+	public DeathScreen DeathScreen;
 
 	private bool _hasKeptGoing;
 
@@ -20,6 +24,7 @@ public class MainController : MonoBehaviour
 
 		EntitiesController.OnEntityKilled += this.DecreaseEntityAmountInUi;
 		EntitiesController.OnEntitySpawned += this.IncreaseEntityAmountInUi;
+		EntitiesController.OnPlayerKilled += this.DisplayDeathScreen;
 
 		BottomBarController.OnPauseButtonClick += this.TogglePause;
 		BottomBarController.OnQuitButtonClick += Application.Quit;
@@ -29,6 +34,8 @@ public class MainController : MonoBehaviour
 
 		KeepGoingMenu.OnKeepGoing += this.DisableKeepGoingMenu;
 		KeepGoingMenu.OnExit += Application.Quit;
+
+		DeathScreen.OnExit += Application.Quit;
 
 		PauseMenu.Toggle(false);
 		KeepGoingMenu.Toggle(false);
@@ -56,6 +63,11 @@ public class MainController : MonoBehaviour
 		if (Time.fixedTime >= KeepGoingTimeout && !_hasKeptGoing)
 		{
 			this.EnableKeepGoingMenu();
+		}
+
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			this.DisplayDeathScreen();
 		}
 	}
 
@@ -86,5 +98,12 @@ public class MainController : MonoBehaviour
 	{
 		KeepGoingMenu.Toggle(false);
 		Time.timeScale = 1;
+	}
+
+	private void DisplayDeathScreen()
+	{
+		DeathScreen.Toggle(true);
+		ScoreController.MoveViewToDeathPose(DeathScreen.ScorePose);
+		Time.timeScale = 0;
 	}
 }

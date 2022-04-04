@@ -17,6 +17,8 @@ public class EntitiesController : MonoBehaviour
 	public event Action<Entity> OnEntitySpawned;
 	public event Action<Entity> OnEntityKilled;
 
+	public event Action OnPlayerKilled;
+
 	protected void Awake()
 	{
 		VegetalSpawnButton[] vegetalSpawnButtons = GameObject.FindObjectsOfType<VegetalSpawnButton>();
@@ -135,11 +137,9 @@ public class EntitiesController : MonoBehaviour
 			}
 		}
 
-		OnEntityKilled?.Invoke(entityToKill);
-
-		if (entityToKill is Egg egg)
+		if (entityToKill.tag == "Player")
 		{
-
+			OnPlayerKilled?.Invoke();
 		}
 
 		DestroyImmediate(entityToKill.gameObject);
