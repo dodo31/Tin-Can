@@ -5,11 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class ScoreView : MonoBehaviour
 {
-	private TextMeshProUGUI _scoreText;
+	public TextMeshProUGUI ScoreText;
+
+	private RectTransform _rectTransform;
 
 	protected void Awake()
 	{
-		_scoreText = this.GetComponent<TextMeshProUGUI>();
+		_rectTransform = this.GetComponent<RectTransform>();
 	}
 
 	public void SetScore(long newScore)
@@ -26,10 +28,15 @@ public class ScoreView : MonoBehaviour
 			{
 				scoreFormattedText = '.' + scoreFormattedText;
 			}
-            
+
 			scoreFormattedText = currentChar + scoreFormattedText;
 		}
 
-		_scoreText.text = scoreFormattedText + " km";
+		ScoreText.text = scoreFormattedText + " km";
+	}
+
+	public void SetScoreHeight(float size)
+	{
+		_rectTransform.sizeDelta = new Vector2(_rectTransform.sizeDelta.x, size);
 	}
 }

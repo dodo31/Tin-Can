@@ -14,7 +14,13 @@ public class ScoreController : MonoBehaviour
 
 	protected void FixedUpdate()
 	{
-		long score = (long) (Time.fixedTimeAsDouble * TimeToScoreFactor /** UnityEngine.Random.Range(1f, 1.001f)*/);
+		long score = (long)(Time.fixedTimeAsDouble * TimeToScoreFactor /** UnityEngine.Random.Range(1f, 1.001f)*/);
 		ScoreView.SetScore(score);
+	}
+
+	public void MoveViewToDeathPose(Transform targetPose)
+	{
+		ScoreView.transform.SetParent(targetPose, false);
+		ScoreView.SetScoreHeight(55);
 	}
 }
