@@ -8,12 +8,16 @@ public class EntitiesController : MonoBehaviour
 	public AnimalsFactory AnimalsFactory;
 	public EggsFactory EggsFactory;
 
+	public EggsController EggsController;
+
+	private EntityPresetBase _presetBase;
+
 	public event Action<Vector3> OnHumanMoved;
 
 	public event Action<Entity> OnEntitySpawned;
 	public event Action<Entity> OnEntityKilled;
 
-	protected void Start()
+	protected void Awake()
 	{
 		VegetalSpawnButton[] vegetalSpawnButtons = GameObject.FindObjectsOfType<VegetalSpawnButton>();
 		AnimalSpawnButton[] animalSpawnButtons = GameObject.FindObjectsOfType<AnimalSpawnButton>();
@@ -28,6 +32,13 @@ public class EntitiesController : MonoBehaviour
 			spawnButton.OnClick += this.SpawnAnimal;
 		}
 
+		_presetBase = EntityPresetBase.GetInstance();
+
+		EggsController.OnEggOdered += this.SpawnEgg;
+	}
+
+	protected void Start()
+	{
 		this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
 
 		// for (int i = 0; i < 10; i++)
@@ -67,6 +78,20 @@ public class EntitiesController : MonoBehaviour
 		newAnimal.OnBirth += this.SpawnAnimal;
 
 		this.SpawnEntity(newAnimal, position);
+	}
+
+	public void SpawnEgg(EntityType type, Vector3 position)
+	{
+		EntityPreset entityPreset = _presetBase[type];
+
+		if (entityPreset is VegetalPreset)
+		{
+			this.SpawnVegetalEgg(type, position);
+		}
+		else if (entityPreset is AnimalPreset)
+		{
+			this.SpawnAnimalEgg(type, position);
+		}
 	}
 
 	public void SpawnVegetalEgg(EntityType type, Vector3 position)

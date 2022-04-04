@@ -1640,6 +1640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1399188524}
   - component: {fileID: 1399188525}
+  - component: {fileID: 1399188530}
   - component: {fileID: 1399188528}
   - component: {fileID: 1399188527}
   - component: {fileID: 1399188526}
@@ -1681,6 +1682,7 @@ MonoBehaviour:
   VegetalsFactory: {fileID: 1399188527}
   AnimalsFactory: {fileID: 1399188526}
   EggsFactory: {fileID: 1399188529}
+  EggsController: {fileID: 1399188530}
 --- !u!114 &1399188526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1733,6 +1735,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EggPrefab: {fileID: -6681692055802935940, guid: 28b9b848cb1efac4e90467cd7c96ea2f, type: 3}
+--- !u!114 &1399188530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399188523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e01ae2532e53447b56046ed96f61a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BottomBarController: {fileID: 389135773}
 --- !u!1 &1531692459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2458,6 +2473,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2301784103376691303, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+      propertyPath: m_Name
+      value: NewEggPanel
+      objectReference: {fileID: 0}
     - target: {fileID: 2301784103376691304, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2494,6 +2513,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2301784103646246977, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+      propertyPath: m_Name
+      value: Text
+      objectReference: {fileID: 0}
     - target: {fileID: 2301784103646246978, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2508,6 +2531,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2301784103646246978, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996603479627086467, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+      propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
