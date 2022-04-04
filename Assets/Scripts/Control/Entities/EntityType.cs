@@ -5,6 +5,7 @@ public enum EntityType
 {
 	HUMAN_1,
 	
+	BEAR_1,
 	CHIKEN_1,
 	COW_1,
 	DIPLODOCUS_1,
@@ -20,6 +21,7 @@ public enum EntityType
 	BEE_HIVE_1,
 	BUSH_1,
 	FLOWER_1,
+	GRASS_1,
 	MOSQUITO_1,
 	TREE_1,
 }

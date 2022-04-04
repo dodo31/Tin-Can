@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CollisionsToolkit
@@ -20,7 +21,6 @@ public class CollisionsToolkit
 		List<Collider2D> collidingColliders = this.GetCollidingColliders(proximityCollider);
 		return this.GetCollidingEntities(transform, collidingColliders);
 	}
-
 	public List<Entity> GetHittingEntities(Transform transform, Collider2D hitboxCollider)
 	{
 		List<Collider2D> collidingColliders = this.GetCollidingColliders(hitboxCollider);

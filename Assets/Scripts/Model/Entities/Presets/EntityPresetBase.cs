@@ -22,16 +22,16 @@ public class EntityPresetBase
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Humans/Human 1"),
 					CollideRadius = 0.34f,
 
-					VitalitySpeed = -0.1f,
-					MoveSpeed = 0.08f, // 0.02f,
+					VitalitySpeed = -0.001f,
+					MoveSpeed = 0.02f,
 
-					StartVitality = 30,
-					MaxVitality = 10,
+					StartVitality = 500,
+					MaxVitality = 500,
 
 					NutritionalValue = 30,
-					Power = 20,
+					Power = 50,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -57,13 +57,13 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 48,
+					MaxVitality = 80,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 10,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -89,13 +89,13 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 210,
+					MaxVitality = 350,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 40,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -121,13 +121,13 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 360,
+					MaxVitality = 600,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 100,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -153,13 +153,13 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 72,
+					MaxVitality = 120,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 30,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -185,13 +185,13 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 24,
+					MaxVitality = 40,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 40,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -217,13 +217,13 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 90,
+					MaxVitality = 150,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 30,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -249,18 +249,18 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 48,
+					MaxVitality = 80,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 30,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
 					{
-						EntityType.FLOWER_1
+						EntityType.FLOWER_1, EntityType.GRASS_1
 					},
 
 					Predators = new List<EntityType>()
@@ -281,13 +281,13 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 48,
+					MaxVitality = 80,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 50,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -313,13 +313,13 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
-					MaxVitality = 100,
+					StartVitality = 240,
+					MaxVitality = 400,
 
 					NutritionalValue = 30,
-					Power = 5,
+					Power = 120,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 0.7f,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -346,11 +346,11 @@ public class EntityPresetBase
 					VitalitySpeed = -0.008f,
 					MoveSpeed = 0.08f,
 
-					StartVitality = 100,
-					MaxVitality = 100,
+					StartVitality = 72,
+					MaxVitality = 120,
 
 					NutritionalValue = 80,
-					Power = 6,
+					Power = 20,
 
 					ReproductionThreshold = 0.6f,
 					ReproductionCost = 40,
@@ -380,11 +380,46 @@ public class EntityPresetBase
 					VitalitySpeed = -0.012f,
 					MoveSpeed = 0.03f,
 
-					StartVitality = 28,
-					MaxVitality = 100,
+					StartVitality = 6,
+					MaxVitality = 10,
 
 					NutritionalValue = 100,
-					Power = 8,
+					Power = 10,
+
+					ReproductionThreshold = 0.55f,
+					ReproductionCost = 35,
+
+					Preys = new List<EntityType>()
+					{
+						EntityType.TREE_1,
+						EntityType.BUSH_1,
+					},
+
+					Predators = new List<EntityType>()
+					{
+						EntityType.FOX_1,
+						EntityType.RABBIT_1,
+						// EntityType.HUMAN_1
+					},
+				}
+			},
+			{
+				EntityType.BEAR_1, new AnimalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Bear 1"),
+					SpriteHeadCenter = new Vector2(-19, -7),
+					CollideRadius = 0.26f,
+
+					ViewDistance = 12,
+
+					VitalitySpeed = -0.012f,
+					MoveSpeed = 0.03f,
+
+					StartVitality = 150,
+					MaxVitality = 250,
+
+					NutritionalValue = 100,
+					Power = 80,
 
 					ReproductionThreshold = 0.55f,
 					ReproductionCost = 35,
@@ -415,8 +450,8 @@ public class EntityPresetBase
 
 					VitalitySpeed = 0.02f,
 
-					StartVitality = 20,
-					MaxVitality = 100,
+					StartVitality = 40,
+					MaxVitality = 80,
 
 					ReproductionThreshold = 0.6f,
 					ReproductionCost = 40,
@@ -434,8 +469,8 @@ public class EntityPresetBase
 
 					VitalitySpeed = 0.02f,
 
-					StartVitality = 20,
-					MaxVitality = 100,
+					StartVitality = 60,
+					MaxVitality = 120,
 
 					ReproductionThreshold = 0.6f,
 					ReproductionCost = 40,
@@ -453,8 +488,8 @@ public class EntityPresetBase
 
 					VitalitySpeed = 0.02f,
 
-					StartVitality = 20,
-					MaxVitality = 100,
+					StartVitality = 30,
+					MaxVitality = 60,
 
 					ReproductionThreshold = 0.6f,
 					ReproductionCost = 40,
@@ -472,8 +507,8 @@ public class EntityPresetBase
 
 					VitalitySpeed = 0.02f,
 
-					StartVitality = 20,
-					MaxVitality = 100,
+					StartVitality = 40,
+					MaxVitality = 80,
 
 					ReproductionThreshold = 0.6f,
 					ReproductionCost = 40,
@@ -491,15 +526,35 @@ public class EntityPresetBase
 
 					VitalitySpeed = 0.02f,
 
-					StartVitality = 20,
-					MaxVitality = 100,
+					StartVitality = 125,
+					MaxVitality = 250,
 
 					ReproductionThreshold = 0.6f,
 					ReproductionCost = 40,
 
-					NutritionalValue = 50,
+					NutritionalValue = 400,
+				}
+			},
+			{
+				EntityType.GRASS_1, new VegetalPreset()
+				{
+					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Flower 1"),
+					SpriteHeadCenter = new Vector2(-1, -6),
+
+					CollideRadius = 0.41f,
+
+					VitalitySpeed = 0.02f,
+
+					StartVitality = 20,
+					MaxVitality = 40,
+
+					ReproductionThreshold = 0.6f,
+					ReproductionCost = 40,
+
+					NutritionalValue = 60,
 				}
 			}
+
 		};
 	}
 
