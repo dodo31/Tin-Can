@@ -3672,6 +3672,7 @@ MonoBehaviour:
   EntitiesController: {fileID: 1399188525}
   CameraController: {fileID: 519420030}
   BottomBarController: {fileID: 389135773}
+  PauseMenuView: {fileID: 1916129865}
 --- !u!114 &1705389410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4008,6 +4009,7 @@ GameObject:
   - component: {fileID: 1916129862}
   - component: {fileID: 1916129864}
   - component: {fileID: 1916129863}
+  - component: {fileID: 1916129865}
   m_Layer: 0
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -4073,6 +4075,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916129861}
   m_CullTransparentMesh: 1
+--- !u!114 &1916129865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916129861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725ea25db2858da4f9eb5337cc13ecac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResumeButton: {fileID: 1781520458}
+  QuitButton: {fileID: 1614970819}
 --- !u!1 &1926931462
 GameObject:
   m_ObjectHideFlags: 0
