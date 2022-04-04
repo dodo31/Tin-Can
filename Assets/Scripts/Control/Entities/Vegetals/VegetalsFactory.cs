@@ -4,7 +4,7 @@ public class VegetalsFactory : EntitiesFactory
 {
 	public Vegetal VegetablePrefab;
 
-	public Vegetal CreateVegetable(EntityType type)
+	public Vegetal CreateVegetal(EntityType type)
 	{
 		VegetalPreset vegetalPreset = (VegetalPreset)_presetBase[type];
 		Vegetal newVegetable = Instantiate(VegetablePrefab);
