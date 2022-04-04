@@ -163,7 +163,7 @@ public class Animal : Entity
 			bool isDead = closestPrey.TakeHit(effectiveDamage, -preyDelta.normalized);
 			
 			float vitalityGain = closestPrey.Preset.NutritionalValue * (effectiveDamage / closestPrey.Preset.MaxVitality);
-			this.OffsetVitality(Math.Min(vitalityGain, AnimalPreset.MaxVitality));
+			this.SetVitality(Math.Min(vitalityGain, AnimalPreset.MaxVitality));
 		}
 
 		_currentState = AnimalState.Eating;

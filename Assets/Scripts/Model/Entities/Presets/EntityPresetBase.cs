@@ -22,7 +22,7 @@ public class EntityPresetBase
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Humans/Human 1"),
 					CollideRadius = 0.34f,
 
-					VitalitySpeed = -0.1f,
+					VitalitySpeed = -0.0f,
 					MoveSpeed = 0.08f, // 0.02f,
 
 					StartVitality = 30,
@@ -63,7 +63,7 @@ public class EntityPresetBase
 					NutritionalValue = 30,
 					Power = 5,
 
-					ReproductionThreshold = 0.5f,
+					ReproductionThreshold = 1,
 					ReproductionCost = 38,
 
 					Preys = new List<EntityType>()
@@ -73,7 +73,7 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-						EntityType.HUMAN_1, EntityType.FOX_1, EntityType.T_REX_1
+						/*EntityType.HUMAN_1,*/ EntityType.FOX_1, EntityType.T_REX_1
 					},
 				}
 			},
@@ -249,7 +249,7 @@ public class EntityPresetBase
 					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.15f,
 
-					StartVitality = 30,
+					StartVitality = 60,
 					MaxVitality = 100,
 
 					NutritionalValue = 30,
@@ -297,7 +297,7 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-						EntityType.CHIKEN_1
+						// EntityType.CHIKEN_1
 					},
 				}
 			},
