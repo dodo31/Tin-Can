@@ -166,7 +166,6 @@ public class Animal : Entity
             _hitSpeed = _hitForce;
             Vector3 hitVelocity = _hitDirection * -_hitSpeed;
 
-            Debug.Log(_id + "  " + hitVelocity.magnitude);
             this.Move(hitVelocity);
 
             _hitForce = Math.Max(_hitForce - AnimalPreset.CollideDrag, 0);

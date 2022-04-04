@@ -13,7 +13,7 @@ public class EggsFactory : EntitiesFactory
 
 		SpriteRenderer spriteRenderer = newEgg.GetComponent<SpriteRenderer>();
 		// spriteRenderer.sprite = vegetalPreset.EggSprite;
-		spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Plain Eggs");
+		spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Plain Egg");
 
 		return newEgg;
 	}
@@ -27,7 +27,7 @@ public class EggsFactory : EntitiesFactory
 
 		SpriteRenderer spriteRenderer = newEgg.GetComponent<SpriteRenderer>();
 		// spriteRenderer.sprite = animalPreset.EggSprite;
-		spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Plain Eggs");
+		spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Plain Egg");
 
 		return newEgg;
 	}
