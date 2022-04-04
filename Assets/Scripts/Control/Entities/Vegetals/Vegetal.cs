@@ -35,7 +35,7 @@ public class Vegetal : Entity
 
 	public void ManageNormalLife()
 	{
-		if (Vitality == VegetalPreset.MaxVitality)
+		if (Vitality == VegetalPreset.MaxVitality && UnityEngine.Random.Range(1, 50) == 1)
 		{
 			this.Reproduce();
 		}

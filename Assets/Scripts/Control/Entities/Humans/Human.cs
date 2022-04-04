@@ -91,7 +91,11 @@ public class Human : Entity
 		if (entityToHit.CanTakeHit() && entityToHit != this)
 		{
 			Vector3 hitDirection = (entityToHit.transform.position - transform.position).normalized;
+			float effectiveDamage = Math.Min(HumanPreset.Power, entityToHit.Vitality);
 			entityToHit.TakeHit(HumanPreset.Power, -hitDirection);
+
+			float vitalityGain = entityToHit.Preset.NutritionalValue * (effectiveDamage / entityToHit.Preset.MaxVitality)/2f;
+			this.OffsetVitality(Math.Min(vitalityGain, HumanPreset.MaxVitality));
 		}
 	}
 

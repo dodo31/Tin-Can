@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Animal : Entity
 {
@@ -19,7 +20,7 @@ public class Animal : Entity
     private Vector3 _hitDirection;
     private Vector3 _idleDirection;
 
-    private AnimalState _currentState;
+    [SerializeField]private AnimalState _currentState;
 
     protected override void Awake()
     {
@@ -62,16 +63,14 @@ public class Animal : Entity
 
             this.GrowIfRequired();
             this.ManageNormalLife();
-            this.ManageHit();
         }
     }
 
     private void UpdateIdleDirection()
     {
-        System.Random random = new System.Random();
-        if (random.NextDouble() > 1 / 200)
+        if (Random.Range(0f, 1f) < 1f / 200f)
         {
-            _idleDirection = new Vector3((float)(random.NextDouble() * 2 - 1), (float)(random.NextDouble() * 2 - 1), 0).normalized;
+            _idleDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized;
         }
     }
 
@@ -101,13 +100,24 @@ public class Animal : Entity
             }
             else if (closeFellows.Count > 0 && this.HasEnoughVitalityToReproduce())
             {
-                this.Reproduce(closeFellows);
+                if(!this.Reproduce(closeFellows))
+                {
+                    this.Idle();
+                }
             }
             else if (closePreys.Count > 0)
             {
-                this.Eat(closePreys);
+                if (!this.Eat(closePreys))
+                {
+                    this.Idle();
+                }
+
+            } else
+            {
+                this.Idle();
             }
-            Entity closest = ExtractClosestEntity(closeEntities);
+            //Entity closest = ExtractClosestEntity(closeEntities);
+            Entity closest = ExtractClosestAnimal(closeEntities);
             if (closest != null && this.IsTouchingEntity(closest))
             {
                 float totalRadius = closest.HitboxCollider.radius + HitboxCollider.radius;
@@ -119,7 +129,8 @@ public class Animal : Entity
         {
             this.Idle();
         }
-        
+        this.ManageHit();
+
         Collider2D wall = Physics2D.OverlapPoint(transform.position, 1 << 6);
         
         if (wall != null)
@@ -151,26 +162,40 @@ public class Animal : Entity
     {
         if (_hitSpeed > 0 || _hitForce > 0)
         {
+
             _hitSpeed = _hitForce;
             Vector3 hitVelocity = _hitDirection * -_hitSpeed;
+
+            Debug.Log(_id + "  " + hitVelocity.magnitude);
             this.Move(hitVelocity);
 
             _hitForce = Math.Max(_hitForce - AnimalPreset.CollideDrag, 0);
         }
     }
 
+    private bool CanSee(Entity other)
+    {
+        RaycastHit2D d = Physics2D.Linecast(this.transform.position, other.transform.position, 1 << 6);
+        return d.collider == null;
+    }
+
     private void Flee(List<Entity> closePredators)
     {
         Entity closestPredator = this.ExtractClosestEntity(closePredators);
+        
         Vector3 feeDelta = -(closestPredator.transform.position - transform.position);
         this.Move(feeDelta);
 
         _currentState = AnimalState.Fleeing;
     }
 
-    private void Reproduce(List<Entity> closeFellows)
+    private bool Reproduce(List<Entity> closeFellows)
     {
         Entity closestFellow = this.ExtractClosestEntity(closeFellows);
+        if (!CanSee(closestFellow))
+        {
+            return false;
+        }
         Vector3 reproduceDelta = (closestFellow.transform.position - transform.position);
         this.Move(reproduceDelta);
 
@@ -188,6 +213,7 @@ public class Animal : Entity
 		}
 
         _currentState = AnimalState.Reproducing;
+        return true;
     }
 
     public bool CanGiveBirth()
@@ -195,9 +221,14 @@ public class Animal : Entity
         return Time.fixedTime >= _lastBirthTime + BIRTH_COOLDOWN;
     }
 
-    private void Eat(List<Entity> closePreys)
+    private bool Eat(List<Entity> closePreys)
     {
-        Entity closestPrey = this.ExtractClosestEntity(closePreys);
+        Entity closestPrey = this.ExtractYummyestEntity(closePreys);
+        if (!CanSee(closestPrey))
+        {
+            return false;
+        }
+
         Vector3 eatDelta = (closestPrey.transform.position - transform.position);
         this.Move(eatDelta);
 
@@ -213,6 +244,7 @@ public class Animal : Entity
         }
 
         _currentState = AnimalState.Eating;
+        return true;
     }
 
     public bool IsTouchingEntity(Entity otherEntity)
@@ -227,7 +259,7 @@ public class Animal : Entity
 
         if (!isDead)
         {
-            _hitForce = AnimalPreset.CollideBounce;
+            _hitForce = AnimalPreset.CollideBounce * 20;
             _hitDirection = hitDirection;
             _hitSpeed = 0;
 
@@ -261,6 +293,7 @@ public class Animal : Entity
         Vector3 direction = delta.normalized;
         float speed = Math.Min(delta.magnitude, AnimalPreset.MoveSpeed);
         base.Move(direction * speed);
+        _mainSprite.sortingOrder = (int)transform.position.y+50;
     }
 
 
@@ -285,8 +318,27 @@ public class Animal : Entity
         {
             return null;
         }
-        
+
         return entities.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
+    }
+    private Entity ExtractYummyestEntity(List<Entity> entities)
+    {
+        if (entities.Count == 0)
+        {
+            return null;
+        }
+
+        return entities.OrderBy((entity) => -entity.Preset.NutritionalValue/ Vector3.Distance(transform.position, entity.transform.position)).First();
+    }
+    private Entity ExtractClosestAnimal(List<Entity> entities)
+    {
+        if (entities.Count == 0)
+        {
+            return null;
+        }
+        IEnumerable<Entity> animals = entities.Where((entity) => entity is Animal);
+        if (animals.Count() == 0) return null;
+        return animals.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
     }
 
     private bool HasEnoughVitalityToReproduce()

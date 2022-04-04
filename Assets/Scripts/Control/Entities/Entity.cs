@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
@@ -34,14 +35,26 @@ public abstract class Entity : MonoBehaviour
 		_lifeBarView = this.GetComponentInChildren<LifeBarView>();
 
 		_collisionsToolkit = new CollisionsToolkit();
-
 		_lastHitTime = 0;
 
 		transform.localScale = Vector3.zero;
+
 	}
 
 	protected virtual void Start()
 	{
+		int count = Physics2D.OverlapCircleAll(transform.position, 20).Where((collider) =>
+		{
+			GameObject go = collider.gameObject;
+			Entity entity = go.GetComponent<Entity>();
+			if (entity == null) return false;
+			return entity.Type == this.Type;
+		}).Count();
+		//Debug.Log(Type);
+		if (count > EntityPresetBase.GetInstance()[Type].MaxEntities)
+		{
+			Die();
+		}
 
 	}
 
@@ -52,7 +65,15 @@ public abstract class Entity : MonoBehaviour
 
 	protected virtual void FixedUpdate()
 	{
-		this.SetVitality(Mathf.Clamp(Vitality + Preset.VitalitySpeed, 0, Preset.MaxVitality));
+		float hourRatio = Mathf.Clamp(GameTime.GetInstance().FixedTimeSinceSceneStart / 3600f, 0f, 1f);
+		hourRatio = 0.5f;
+
+		if (Preset.VitalitySpeed > 0)
+        {
+			this.SetVitality(Mathf.Clamp(Vitality + Preset.VitalitySpeed * (1-hourRatio), 0, Preset.MaxVitality));
+
+		} else 
+			this.SetVitality(Mathf.Clamp(Vitality + Preset.VitalitySpeed * (1 + hourRatio*4), 0, Preset.MaxVitality));
 
 		if (Vitality <= 0)
 		{

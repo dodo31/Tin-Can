@@ -8,6 +8,8 @@ public abstract class EntityPreset
 	public Vector2 SpriteHeadCenter;
 	public float CollideRadius;
 
+	public int MaxEntities;
+
 	public float VitalitySpeed;
 
 	public float StartVitality;

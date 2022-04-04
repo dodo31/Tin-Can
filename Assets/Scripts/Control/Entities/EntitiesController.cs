@@ -36,20 +36,33 @@ public class EntitiesController : MonoBehaviour
 	{
 		_player = this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
 
-		// for (int i = 0; i < 10; i++)
-		// {
-		// 	this.SpawnAnimal(EntityType.CHIKEN_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
-		// }
 
-		for (int i = 0; i < 30; i++)
-		{
-			this.SpawnAnimal(EntityType.CHIKEN_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
-		}
+		float sizeX = 45;
+		float sizeY = 25;
+		EntityType[] animals = { EntityType.RABBIT_1, EntityType.FOX_1, EntityType.CHIKEN_1, EntityType.COW_1, EntityType.FROG_1 , EntityType.T_REX_1};
+		int[] amounts = { 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20};
+		System.Random random = new System.Random();
+			for (int j = 0; j < animals.Length; j++)
+			{
+				for (int i = 0; i < amounts[j]; i++)
+				{
+					Vector3 randomPos = new Vector3((float)(-sizeX + sizeX*2 * random.NextDouble()), (float)(-sizeY + sizeY * 2 * random.NextDouble()), 0);
+					if (Physics2D.OverlapPoint(randomPos, 1 << 6) == null)
+						SpawnAnimal(animals[j], randomPos);
+				}
+			}
 
-		for (int i = 0; i < 100; i++)
-		{
-			this.SpawnAnimal(EntityType.SNAKE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
-		}
+		EntityType[] plants = { EntityType.BUSH_1, EntityType.FLOWER_1, EntityType.GRASS_1, EntityType.TREE_1, EntityType.MOSQUITO_1, EntityType.BEE_HIVE_1 };
+		int[] amounts2 = { 100, 100, 200, 100, 50, 20 };
+		for (int j = 0; j < plants.Length; j++)
+			{
+				for (int i = 0; i < amounts2[j]; i++)
+				{
+					Vector3 randomPos = new Vector3((float)(-sizeX + sizeX * 2 * random.NextDouble()), (float)(-sizeY + sizeY * 2 * random.NextDouble()), 0);
+					if (Physics2D.OverlapPoint(randomPos, 1 << 6) == null)
+						SpawnVegetal(plants[j], randomPos);
+				}
+			}
 	}
 
 	protected void FixedUpdate()
