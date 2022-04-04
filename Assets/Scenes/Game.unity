@@ -5932,7 +5932,7 @@ MonoBehaviour:
   BottomBarController: {fileID: 389135773}
   PauseMenu: {fileID: 1916129865}
   KeepGoingMenu: {fileID: 1000040323}
-  KeepGoingTimeout: 5000
+  KeepGoingTimeout: 1800
   DeathScreen: {fileID: 666817536}
 --- !u!114 &1705389410
 MonoBehaviour:
@@ -7241,21 +7241,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5302111664414768943, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+    - target: {fileID: 2301784103390598017, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 775.2021
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301784103390598017, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -7.291382
-      objectReference: {fileID: 0}
-    - target: {fileID: 5302111664414768943, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 10.999188
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757150959118957188, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -6.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757150959118957188, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.6
+      value: 406.24094
       objectReference: {fileID: 0}
     - target: {fileID: 8943788494909780044, guid: 93fc023d515daa147a83964d0965bc5c, type: 3}
       propertyPath: m_AnchorMax.y
