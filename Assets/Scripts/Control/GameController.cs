@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MainController : MonoBehaviour
+public class GameController : MonoBehaviour
 {
 	public EntitiesController EntitiesController;
 	public CameraController CameraController;
-	
+
 	public ScoreController ScoreController;
 
 	public BottomBarController BottomBarController;
@@ -27,15 +28,15 @@ public class MainController : MonoBehaviour
 		EntitiesController.OnPlayerKilled += this.DisplayDeathScreen;
 
 		BottomBarController.OnPauseButtonClick += this.TogglePause;
-		BottomBarController.OnQuitButtonClick += Application.Quit;
+		BottomBarController.OnQuitButtonClick += this.ExitToMainMenu;
 
 		PauseMenu.OnResume += this.TogglePause;
-		PauseMenu.OnQuit += Application.Quit;
+		PauseMenu.OnQuit += this.ExitToMainMenu;
 
 		KeepGoingMenu.OnKeepGoing += this.DisableKeepGoingMenu;
-		KeepGoingMenu.OnExit += Application.Quit;
+		KeepGoingMenu.OnExit += this.ExitToMainMenu;
 
-		DeathScreen.OnExit += Application.Quit;
+		DeathScreen.OnExit += this.ExitToMainMenu;
 
 		PauseMenu.Toggle(false);
 		KeepGoingMenu.Toggle(false);
@@ -63,11 +64,6 @@ public class MainController : MonoBehaviour
 		if (Time.fixedTime >= KeepGoingTimeout && !_hasKeptGoing)
 		{
 			this.EnableKeepGoingMenu();
-		}
-
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			this.DisplayDeathScreen();
 		}
 	}
 
@@ -105,5 +101,10 @@ public class MainController : MonoBehaviour
 		DeathScreen.Toggle(true);
 		ScoreController.MoveViewToDeathPose(DeathScreen.ScorePose);
 		Time.timeScale = 0;
+	}
+
+	public void ExitToMainMenu()
+	{
+		SceneManager.LoadScene("Main Menu");
 	}
 }

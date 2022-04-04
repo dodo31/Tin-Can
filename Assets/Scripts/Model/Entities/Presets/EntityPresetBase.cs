@@ -73,7 +73,7 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-						EntityType.HUMAN_1, EntityType.FOX_1, EntityType.T_REX_1
+						/*EntityType.HUMAN_1,*/ EntityType.FOX_1, EntityType.T_REX_1
 					},
 				}
 			},
@@ -297,7 +297,7 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-						EntityType.CHIKEN_1
+						// EntityType.CHIKEN_1
 					},
 				}
 			},
