@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,22 +6,14 @@ using UnityEngine.UI;
 
 public class BottomBarController : MonoBehaviour
 {
+	public SpawnEggsButton SpawnEggsButton;	
+	public EggPreview EggPreview;
+
 	[SerializeField]
 	EntityInfoGroupView entityInfoGroupPrefab;
 	[SerializeField]
 	GameObject entityInfoParent;
 	[SerializeField]
-	Button playPauseButton;
-	[SerializeField]
-	TextMeshProUGUI playPauseButtonText;
-	[SerializeField]
-	GameObject QuitButton;
-	[SerializeField]
-	TextMeshProUGUI newEggText;
-	[SerializeField]
-	EntityInfoGroupView newEggEntityInfoGroupView;
-	[SerializeField]
-	Button newEggButton;
 
 	private EntityPresetBase _presetBase;
 	private EggsSequence _eggsSequence;
@@ -44,19 +35,22 @@ public class BottomBarController : MonoBehaviour
 
 	protected void Start()
 	{
-		SpawnEntityInfoGroupViews();
+		this.PopulationInfoGroupViews();
+		
+		SpawnEggsButton.SetInactive();
+		EggPreview.SetInactive();
 	}
 
 	public void ClickPauseButton()
 	{
 		OnPauseButtonClick?.Invoke();
 	}
-	
+
 	public void ClickNewEggButton()
 	{
 		OnNewEggButtonClick?.Invoke();
 	}
-	
+
 	public void ClickQuitButton()
 	{
 		OnQuitButtonClick?.Invoke();
@@ -70,30 +64,29 @@ public class BottomBarController : MonoBehaviour
 
 	public void SetNewEggEntityPreset(EntityPreset preset)
 	{
-		newEggEntityInfoGroupView.preset = preset;
-		newEggEntityInfoGroupView.UpdateFromPreset();
+		EggPreview.SetEgg(preset);
+		EggPreview.SetActive();
+		// newEggEntityInfoGroupView.UpdateFromPreset(preset);
 	}
 
 	public void SetNewEggEntityAmount(int amount)
 	{
-		newEggButton.gameObject.SetActive(amount > 0);
-		newEggText.gameObject.SetActive(amount > 0);
-		newEggEntityInfoGroupView.UpdateEntityAmount(amount);
-	}
-	
-	public void SetPlayPauseButtonTo(bool isPaused)
-	{
-		playPauseButtonText.text = isPaused ? "Play" : "Pause";
-	}
-
-	// Not used (yet)
-	public void SetEntityAmount(EntityType type, int amount)
-	{
-		if (entityInfoGroupViews.ContainsKey(type))
+		if (amount > 0)
 		{
-			EntityInfoGroupView infoGroupView = entityInfoGroupViews[type];
-			infoGroupView.UpdateEntityAmount(amount);
+			SpawnEggsButton.SetActive();
+			EggPreview.SetActive();
 		}
+		else
+		{
+			SpawnEggsButton.SetInactive();
+			EggPreview.SetInactive();
+		}
+
+		EggPreview.SetEggAmount(amount);
+
+		// newEggButton.gameObject.SetActive(amount > 0);
+		// newEggText.gameObject.SetActive(amount > 0);
+		// newEggEntityInfoGroupView.UpdateEntityAmount(amount);
 	}
 
 	public void OffsetEntityAmout(EntityType type, int offset)
@@ -105,7 +98,7 @@ public class BottomBarController : MonoBehaviour
 		}
 	}
 
-	private void SpawnEntityInfoGroupViews()
+	private void PopulationInfoGroupViews()
 	{
 		entityInfoGroupViews.Clear();
 		entityTypes = new List<EntityType>();
@@ -114,20 +107,19 @@ public class BottomBarController : MonoBehaviour
 		{
 			if (type != EntityType.HUMAN_1)
 			{
-				entityInfoGroupViews.Add(type, this.InstantiateEntityInfoGroup(type));
+				entityInfoGroupViews.Add(type, this.InstantiatePopulationInfoGroup(type));
 				entityTypes.Add(type);
 			}
 		}
 	}
 
-	private EntityInfoGroupView InstantiateEntityInfoGroup(EntityType type)
+	private EntityInfoGroupView InstantiatePopulationInfoGroup(EntityType type)
 	{
 		EntityPreset entityPreset = _presetBase[type];
 		EntityInfoGroupView entityInfoGroupView = Instantiate(entityInfoGroupPrefab);
 
 		entityInfoGroupView.type = type;
-		entityInfoGroupView.preset = entityPreset;
-		entityInfoGroupView.UpdateFromPreset();
+		entityInfoGroupView.UpdateFromPreset(entityPreset);
 		entityInfoGroupView.transform.SetParent(entityInfoParent.transform);
 
 		return entityInfoGroupView;

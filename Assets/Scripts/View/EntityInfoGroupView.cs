@@ -16,8 +16,10 @@ public class EntityInfoGroupView : MonoBehaviour
 
 	private int entityAmount;
 
-	public void UpdateFromPreset()
+	public void UpdateFromPreset(EntityPreset preset)
 	{
+		this.preset = preset;
+		
 		hasBeenEnabled = false;
 		image.sprite = preset.Sprite;
 		RectTransform rectTransform = (RectTransform)image.transform;

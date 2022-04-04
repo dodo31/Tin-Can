@@ -11,7 +11,7 @@ public class EntitiesController : MonoBehaviour
 	public EggsController EggsController;
 
 	private EntityPresetBase _presetBase;
-	
+
 	private Human _player;
 
 	public event Action<Vector3> OnHumanMoved;
@@ -76,17 +76,17 @@ public class EntitiesController : MonoBehaviour
 		Human newHuman = HumansFactory.CreateHuman(type);
 		this.SpawnEntity(newHuman, position);
 		newHuman.OnMoved += this.OnHumanMoved;
-		
+
 		return newHuman;
 	}
-	
+
 	public void SpawnVegetal(EntityType type, Vector3 position)
 	{
 		Vegetal newVegetal = VegetalsFactory.CreateVegetal(type);
 		this.SpawnEntity(newVegetal, position);
 		newVegetal.OnBirth += this.SpawnVegetal;
 	}
-	
+
 	public void SpawnAnimal(EntityType type, Vector3 position)
 	{
 		Animal newAnimal = AnimalsFactory.CreateAnimal(type);
@@ -149,11 +149,13 @@ public class EntitiesController : MonoBehaviour
 				animal.RemoveCloseEntity(entityToKill);
 			}
 		}
-		
+
 		if (entityToKill.transform == _player.transform)
 		{
 			OnPlayerKilled?.Invoke();
 		}
+
+		OnEntityKilled?.Invoke(entityToKill);
 
 		DestroyImmediate(entityToKill.gameObject);
 	}
