@@ -17,6 +17,7 @@ public class Animal : Entity
 
     private float _hitSpeed;
     private Vector3 _hitDirection;
+    private Vector3 _idleDirection;
 
     private AnimalState _currentState;
 
@@ -57,9 +58,20 @@ public class Animal : Entity
                 this.ScanCloseEntities();
             }
 
+            this.UpdateIdleDirection();
+
             this.GrowIfRequired();
             this.ManageNormalLife();
             this.ManageHit();
+        }
+    }
+
+    private void UpdateIdleDirection()
+    {
+        System.Random random = new System.Random();
+        if (random.NextDouble() > 1 / 200)
+        {
+            _idleDirection = new Vector3((float)(random.NextDouble() * 2 - 1), (float)(random.NextDouble() * 2 - 1), 0).normalized;
         }
     }
 
@@ -75,6 +87,8 @@ public class Animal : Entity
 
     private void ManageNormalLife()
     {
+        Vector3 oldPosition = transform.position;
+        
         if (closeEntities.Count > 0)
         {
             List<Entity> closePredators = this.ExtractClosePredators(closeEntities);
@@ -93,12 +107,45 @@ public class Animal : Entity
             {
                 this.Eat(closePreys);
             }
+            Entity closest = ExtractClosestEntity(closeEntities);
+            if (closest != null && this.IsTouchingEntity(closest))
+            {
+                float totalRadius = closest.HitboxCollider.radius + HitboxCollider.radius;
+                Vector3 distanceFromEntity = (transform.position - closest.transform.position);
+                transform.position = closest.transform.position + (distanceFromEntity.normalized * totalRadius);
+            }
         }
         else
         {
             this.Idle();
         }
+        
+        Collider2D wall = Physics2D.OverlapPoint(transform.position, 1 << 6);
+        
+        if (wall != null)
+        {
+            Vector3 newPosition = new Vector3(transform.position.x, oldPosition.y, transform.position.z);
+            wall = Physics2D.OverlapPoint(newPosition, 1 << 6);
+            if (wall == null)
+            {
+                transform.position = newPosition;
+            }
+            else
+            {
+                newPosition = new Vector3(oldPosition.x, transform.position.y, transform.position.z);
+                wall = Physics2D.OverlapPoint(newPosition, 1 << 6);
+                if (wall == null)
+                {
+                    transform.position = newPosition;
+                }
+                else
+                {
+                    transform.position = oldPosition;
+                }
+            }
+        }
     }
+
 
     private void ManageHit()
     {
@@ -106,7 +153,6 @@ public class Animal : Entity
         {
             _hitSpeed = _hitForce;
             Vector3 hitVelocity = _hitDirection * -_hitSpeed;
-            
             this.Move(hitVelocity);
 
             _hitForce = Math.Max(_hitForce - AnimalPreset.CollideDrag, 0);
@@ -137,9 +183,9 @@ public class Animal : Entity
 
             this.OffsetVitality(-AnimalPreset.ReproductionCost);
             closestFellow.OffsetVitality(-closestFellow.Preset.ReproductionCost);
-
+            
             _lastBirthTime = Time.fixedTime;
-        }
+		}
 
         _currentState = AnimalState.Reproducing;
     }
@@ -172,7 +218,7 @@ public class Animal : Entity
     public bool IsTouchingEntity(Entity otherEntity)
     {
         float entitiesDistance = Vector3.Distance(transform.position, otherEntity.transform.position);
-        return entitiesDistance <= Preset.CollideRadius || entitiesDistance <= otherEntity.Preset.CollideRadius;
+        return entitiesDistance <= Preset.CollideRadius + otherEntity.Preset.CollideRadius;
     }
 
     public override bool TakeHit(float damage, Vector3 hitDirection)
@@ -203,19 +249,20 @@ public class Animal : Entity
         _currentState = AnimalState.Dead;
         this.PublishDeath();
     }
+    
+    private void Idle()
+    {
+        _currentState = AnimalState.Idle;
+        this.Move(_idleDirection);
+    }
 
     protected override void Move(Vector3 delta)
     {
         Vector3 direction = delta.normalized;
         float speed = Math.Min(delta.magnitude, AnimalPreset.MoveSpeed);
-        
         base.Move(direction * speed);
     }
 
-    private void Idle()
-    {
-        _currentState = AnimalState.Idle;
-    }
 
     private List<Entity> ExtractClosePreys(List<Entity> entities)
     {
@@ -234,6 +281,11 @@ public class Animal : Entity
 
     private Entity ExtractClosestEntity(List<Entity> entities)
     {
+        if (entities.Count == 0)
+        {
+            return null;
+        }
+        
         return entities.OrderBy((entity) => Vector3.Distance(transform.position, entity.transform.position)).First();
     }
 
