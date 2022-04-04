@@ -7,6 +7,8 @@ public class MainController : MonoBehaviour
 
 	public BottomBarController BottomBarController;
 
+	public PauseMenuView PauseMenuView;
+
 	protected void Awake()
 	{
 		EntitiesController.OnHumanMoved += CameraController.FollowPlayer;
@@ -16,6 +18,11 @@ public class MainController : MonoBehaviour
 
 		BottomBarController.OnPauseButtonClick += this.TogglePause;
 		BottomBarController.OnQuitButtonClick += Application.Quit;
+
+		PauseMenuView.OnResume += this.TogglePause;
+		PauseMenuView.OnQuit += Application.Quit;
+		
+		PauseMenuView.Toggle(false);
 	}
 
 	private void DecreaseEntityAmountInUi(Entity entity)
@@ -28,8 +35,27 @@ public class MainController : MonoBehaviour
 		BottomBarController.OffsetEntityAmout(entity.Type, 1);
 	}
 
+	protected void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			this.TogglePause();
+		}
+	}
+
 	private void TogglePause()
 	{
-		Time.timeScale = (Time.timeScale == 0 ? 1 : 0);
+		bool isPaused = (Time.timeScale == 0);
+
+		if (isPaused)
+		{
+			PauseMenuView.Toggle(false);
+			Time.timeScale = 1;
+		}
+		else
+		{
+			PauseMenuView.Toggle(true);
+			Time.timeScale = 0;
+		}
 	}
 }
