@@ -11,7 +11,7 @@ public class EggsController : MonoBehaviour
 
 	private GameTime _gameTime;
 
-	public event Action<EntityType, Vector3> OnEggOdered;
+	public event Action<EntityType> OnEggOdered;
 
 	protected void Awake()
 	{
@@ -53,8 +53,7 @@ public class EggsController : MonoBehaviour
 		if (_spwanQueue.Count > 0)
 		{
 			EntityType eggType = _spwanQueue.Dequeue();
-			Vector3 eggPosition = new Vector3(UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10), 0);
-			OnEggOdered?.Invoke(eggType, eggPosition);
+			OnEggOdered?.Invoke(eggType);
 
 			EntityType? lastType = this.LastEggType();
 
