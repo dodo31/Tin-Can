@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Vegetal : Entity
@@ -8,7 +9,6 @@ public class Vegetal : Entity
 	protected override void Awake()
 	{
 		base.Awake();
-
 		_currentState = VegetalState.Idle;
 	}
 
@@ -52,8 +52,15 @@ public class Vegetal : Entity
 
 		Vector3 birthPosition = new Vector3(birthPosX, birthPosY, 0);
 
-		this.PublishBirth(birthPosition);
-		this.OffsetVitality(-VegetalPreset.ReproductionCost);
+		int layerMask = 1 << LayerMask.NameToLayer("Blocked Terrain");
+		layerMask |= 1 << LayerMask.NameToLayer("No Plants");
+		Collider2D collidingCollider = Physics2D.OverlapCircle(birthPosition, HitboxCollider.radius, layerMask);
+
+		if (collidingCollider == null)
+		{
+			this.PublishBirth(birthPosition);
+			this.OffsetVitality(-VegetalPreset.ReproductionCost);
+		}
 	}
 
 	protected override bool IsAlive()

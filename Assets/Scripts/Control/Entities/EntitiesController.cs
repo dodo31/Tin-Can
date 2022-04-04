@@ -11,6 +11,8 @@ public class EntitiesController : MonoBehaviour
 	public EggsController EggsController;
 
 	private EntityPresetBase _presetBase;
+	
+	private Human _player;
 
 	public event Action<Vector3> OnHumanMoved;
 
@@ -25,13 +27,14 @@ public class EntitiesController : MonoBehaviour
 		AnimalSpawnButton[] animalSpawnButtons = GameObject.FindObjectsOfType<AnimalSpawnButton>();
 
 		_presetBase = EntityPresetBase.GetInstance();
+		_player = null;
 
 		EggsController.OnEggOdered += this.SpawnEgg;
 	}
 
 	protected void Start()
 	{
-		this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
+		_player = this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
 
 		// for (int i = 0; i < 10; i++)
 		// {
@@ -61,23 +64,20 @@ public class EntitiesController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.T))
 		{
-			for (int i = 0; i < 30; i++)
+			for (int i = 0; i < 10; i++)
 			{
-				this.SpawnAnimal(EntityType.CHIKEN_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
+				this.SpawnVegetal(EntityType.TREE_1, new Vector3(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f), 0));
 			}
 		}
 	}
 
-	protected void Update()
-	{
-
-	}
-
-	public void SpawnHuman(EntityType type, Vector3 position)
+	public Human SpawnHuman(EntityType type, Vector3 position)
 	{
 		Human newHuman = HumansFactory.CreateHuman(type);
 		this.SpawnEntity(newHuman, position);
 		newHuman.OnMoved += this.OnHumanMoved;
+		
+		return newHuman;
 	}
 	
 	public void SpawnVegetal(EntityType type, Vector3 position)
@@ -94,17 +94,18 @@ public class EntitiesController : MonoBehaviour
 		newAnimal.OnBirth += this.SpawnAnimal;
 	}
 
-	public void SpawnEgg(EntityType type, Vector3 position)
+	public void SpawnEgg(EntityType type)
 	{
 		EntityPreset entityPreset = _presetBase[type];
+		Vector3 playerPosition = _player.transform.position;
 
 		if (entityPreset is VegetalPreset)
 		{
-			this.SpawnVegetalEgg(type, position);
+			this.SpawnVegetalEgg(type, playerPosition);
 		}
 		else if (entityPreset is AnimalPreset)
 		{
-			this.SpawnAnimalEgg(type, position);
+			this.SpawnAnimalEgg(type, playerPosition);
 		}
 	}
 
@@ -149,7 +150,7 @@ public class EntitiesController : MonoBehaviour
 			}
 		}
 		
-		if (entityToKill.tag == "Player")
+		if (entityToKill.transform == _player.transform)
 		{
 			OnPlayerKilled?.Invoke();
 		}
