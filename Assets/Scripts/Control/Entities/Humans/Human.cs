@@ -7,7 +7,7 @@ public class Human : Entity
 	public Weapon Weapon;
 
 	private HumanState _currentState;
-	
+
 	public event Action<Vector3> OnMoved;
 
 	protected override void Awake()
@@ -18,6 +18,12 @@ public class Human : Entity
 		transform.localScale = Vector3.one;
 
 		Weapon.OnHit += this.HitEntity;
+	}
+
+	protected override void FixedUpdate()
+	{
+		base.FixedUpdate();
+		Weapon.SetSortingOrder(_mainSprite.sortingOrder);
 	}
 
 	protected override void Update()
@@ -37,7 +43,7 @@ public class Human : Entity
 	protected Vector3 GetPlayerMotion()
 	{
 		Vector3 totalMotion = Vector3.zero;
-		
+
 		if (Input.GetKey(KeyCode.UpArrow))
 		{
 			totalMotion += Vector3.up * HumanPreset.MoveSpeed * Time.timeScale * Time.deltaTime;
@@ -66,7 +72,7 @@ public class Human : Entity
 		transform.position += delta;
 		transform.localScale = new Vector3(Mathf.Sign(delta.x), 1, 1);
 		_lifeBarView.transform.localScale = new Vector3(Mathf.Sign(delta.x), _lifeBarView.transform.localScale.y, 1);
-		
+
 		OnMoved?.Invoke(transform.position);
 	}
 
@@ -96,7 +102,7 @@ public class Human : Entity
 			float effectiveDamage = Math.Min(HumanPreset.Power, entityToHit.Vitality);
 			entityToHit.TakeHit(HumanPreset.Power, -hitDirection);
 
-			float vitalityGain = entityToHit.Preset.NutritionalValue * (effectiveDamage / entityToHit.Preset.MaxVitality)/2f;
+			float vitalityGain = entityToHit.Preset.NutritionalValue * (effectiveDamage / entityToHit.Preset.MaxVitality) / 2f;
 			this.OffsetVitality(Math.Min(vitalityGain, HumanPreset.MaxVitality));
 		}
 	}

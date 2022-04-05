@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Weapon : MonoBehaviour
 {
+	private SpriteRenderer _sprite;
+	
 	private Animator _animator;
-
 	private Collider2D _collider;
 
 	private CollisionsToolkit _collisionsToolkit;
@@ -15,6 +16,8 @@ public class Weapon : MonoBehaviour
 
 	protected void Awake()
 	{
+		_sprite = this.GetComponentInChildren<SpriteRenderer>();
+		
 		_animator = this.GetComponent<Animator>();
 		_collider = this.GetComponentInChildren<Collider2D>();
 
@@ -26,7 +29,7 @@ public class Weapon : MonoBehaviour
 		if (this.IsHitting())
 		{
 			_collider.enabled = true;
-			
+
 			List<Collider2D> collidingColliders = new List<Collider2D>();
 			_collider.OverlapCollider(_collisionsToolkit.ContactFilter, collidingColliders);
 
@@ -52,5 +55,10 @@ public class Weapon : MonoBehaviour
 	public void Attack()
 	{
 		_animator.SetTrigger("Hit");
+	}
+
+	public void SetSortingOrder(int order)
+	{
+		_sprite.sortingOrder = order;
 	}
 }
