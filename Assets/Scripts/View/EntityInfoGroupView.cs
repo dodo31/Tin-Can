@@ -47,7 +47,7 @@ public class EntityInfoGroupView : MonoBehaviour
 			frame.enabled = true;
 		}
 
-		textMeshProEntityAmount.text = amount > 0 ? amount.ToString() : "";
+		textMeshProEntityAmount.text = amount > 0 ? amount.ToString() : string.Empty;
 
 		image.enabled = hasBeenEnabled;
 		image.color = amount > 0 ? Color.white : Color.black;
