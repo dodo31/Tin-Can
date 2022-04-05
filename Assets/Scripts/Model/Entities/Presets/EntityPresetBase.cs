@@ -24,7 +24,7 @@ public class EntityPresetBase
 					
 					CollideRadius = 0.34f,
 
-					VitalitySpeed = -0.03f,
+					VitalitySpeed = -0.01f,
 					MoveSpeed = 0.04f,
 
 					StartVitality = 500,
@@ -69,7 +69,7 @@ public class EntityPresetBase
 					Power = 10,
 
 					ReproductionThreshold = 0.7f,
-					ReproductionCost = 25,
+					ReproductionCost = 15,
 
 					Preys = new List<EntityType>()
 					{
@@ -260,7 +260,7 @@ public class EntityPresetBase
 			{
 				EntityType.RABBIT_1, new AnimalPreset()
 				{
-					MaxEntities = 30,
+					MaxEntities = 15,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Rabbit 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Rabbit Egg"),
 					
@@ -385,7 +385,7 @@ public class EntityPresetBase
 					Power = 20,
 
 					ReproductionThreshold = 0.7f,
-					ReproductionCost = 50,
+					ReproductionCost = 30,
 
 					Preys = new List<EntityType>()
 					{
@@ -404,14 +404,14 @@ public class EntityPresetBase
 			{
 				EntityType.TERMITE_1, new AnimalPreset()
 				{
-					MaxEntities = 20,
+					MaxEntities = 40,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Termite 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Termite Egg"),
 					
 					SpriteHeadCenter = new Vector2(0, 0),
 					CollideRadius = 0.26f,
 
-					ViewDistance = 4,
+					ViewDistance = 6,
 
 					VitalitySpeed = -0.002f,
 					MoveSpeed = 0.03f,
@@ -423,7 +423,7 @@ public class EntityPresetBase
 					Power = 5,
 
 					ReproductionThreshold = 0.7f,
-					ReproductionCost = 5,
+					ReproductionCost = 2,
 
 					Preys = new List<EntityType>()
 					{
@@ -466,8 +466,8 @@ public class EntityPresetBase
 						EntityType.FOX_1,
 						EntityType.CHIKEN_1,
 						EntityType.GOAT_1,
-						EntityType.HUMAN_1
-
+						EntityType.HUMAN_1,
+						EntityType.BEE_HIVE_1
 					},
 
 					Predators = new List<EntityType>()
@@ -483,13 +483,13 @@ public class EntityPresetBase
 				{
 					MaxEntities = 10,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Bee Hive 1"),
-					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Bear Egg"),
+					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Bee Hive Egg"),
 					
 					SpriteHeadCenter = new Vector2(-1, -5),
 
 					CollideRadius = 0.4f,
 
-					VitalitySpeed = 0.03f,
+					VitalitySpeed = 0.05f,
 
 					StartVitality = 40,
 					MaxVitality = 80,
@@ -511,7 +511,7 @@ public class EntityPresetBase
 
 					CollideRadius = 0.67f,
 
-					VitalitySpeed = 0.03f,
+					VitalitySpeed = 0.05f,
 
 					StartVitality = 60,
 					MaxVitality = 120,
@@ -533,7 +533,7 @@ public class EntityPresetBase
 
 					CollideRadius = 0.49f,
 
-					VitalitySpeed = 0.02f,
+					VitalitySpeed = 0.03f,
 
 					StartVitality = 30,
 					MaxVitality = 60,
@@ -555,7 +555,7 @@ public class EntityPresetBase
 
 					CollideRadius = 0.7f,
 
-					VitalitySpeed = 0.05f,
+					VitalitySpeed = 0.1f,
 
 					StartVitality = 40,
 					MaxVitality = 80,
@@ -577,7 +577,7 @@ public class EntityPresetBase
 
 					CollideRadius = 0.41f,
 
-					VitalitySpeed = 0.03f,
+					VitalitySpeed = 0.05f,
 
 					StartVitality = 125,
 					MaxVitality = 250,
@@ -599,7 +599,7 @@ public class EntityPresetBase
 
 					CollideRadius = 0.41f,
 
-					VitalitySpeed = 0.03f,
+					VitalitySpeed = 0.07f,
 
 					StartVitality = 20,
 					MaxVitality = 40,

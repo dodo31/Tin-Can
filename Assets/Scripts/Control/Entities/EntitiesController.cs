@@ -34,7 +34,7 @@ public class EntitiesController : MonoBehaviour
 
     protected void Start()
     {
-        _player = this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0, 0, 0));
+        _player = this.SpawnHuman(EntityType.HUMAN_1, new Vector3(0f, 0f, 0f));
 
 
         /*

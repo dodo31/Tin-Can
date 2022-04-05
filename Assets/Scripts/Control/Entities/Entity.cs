@@ -64,8 +64,9 @@ public abstract class Entity : MonoBehaviour
 
 	protected virtual void FixedUpdate()
 	{
-		float hourRatio = Mathf.Clamp(GameTime.GetInstance().FixedTimeSinceSceneStart / 3600f, 0f, 1f);
-		hourRatio = 0.5f;
+		// Au final c'est à x3/2 pour que la partie soit pliée en 40 minutes à coup sûr
+		float hourRatio = Mathf.Clamp(GameTime.GetInstance().FixedTimeSinceSceneStart / 3600f*3f/2f, 0f, 1f);
+		//hourRatio = 0.5f;
 
 		if (Preset.VitalitySpeed > 0)
         {
