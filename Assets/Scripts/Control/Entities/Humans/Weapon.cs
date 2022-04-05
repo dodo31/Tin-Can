@@ -25,6 +25,8 @@ public class Weapon : MonoBehaviour
 	{
 		if (this.IsHitting())
 		{
+			_collider.enabled = true;
+			
 			List<Collider2D> collidingColliders = new List<Collider2D>();
 			_collider.OverlapCollider(_collisionsToolkit.ContactFilter, collidingColliders);
 
@@ -34,6 +36,10 @@ public class Weapon : MonoBehaviour
 			{
 				OnHit?.Invoke(collidingEntity);
 			}
+		}
+		else
+		{
+			_collider.enabled = false;
 		}
 	}
 
