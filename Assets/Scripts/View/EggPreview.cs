@@ -1,11 +1,12 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class EggPreview : MonoBehaviour
 {
 	public TMP_Text EggsIncomingText;
-	
+
 	public TMP_Text EntitiesCountPrefixText;
 	public TMP_Text EntitiesCountText;
 
@@ -16,6 +17,18 @@ public class EggPreview : MonoBehaviour
 	public Sprite InactiveBackground;
 	public Sprite ActiveBackground;
 
+	public Button _mainButton;
+
+	public void Awake()
+	{
+		_mainButton = this.GetComponent<Button>();
+		
+		_mainButton.onClick.AddListener(() =>
+		{
+			EventSystem.current.SetSelectedGameObject(null);
+		});
+	}
+
 	public void SetInactive()
 	{
 		EggsIncomingText.gameObject.SetActive(true);
@@ -23,9 +36,9 @@ public class EggPreview : MonoBehaviour
 		EntitiesCountText.gameObject.SetActive(false);
 
 		Background.sprite = InactiveBackground;
-		
+
 		Egg.gameObject.SetActive(false);
-		
+
 		EggDecoration.gameObject.SetActive(false);
 	}
 
@@ -38,7 +51,7 @@ public class EggPreview : MonoBehaviour
 		Background.sprite = ActiveBackground;
 
 		Egg.gameObject.SetActive(true);
-		
+
 		EggDecoration.gameObject.SetActive(true);
 	}
 
