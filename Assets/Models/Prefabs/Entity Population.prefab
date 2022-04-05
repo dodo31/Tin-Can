@@ -249,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   image: {fileID: 7294952874278068651}
+  frame: {fileID: 3557737288721997677}
   textMeshProEntityAmount: {fileID: 3920249949097523738}
 --- !u!1 &9035169810383108855
 GameObject:

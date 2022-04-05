@@ -35,7 +35,7 @@ public class BottomBarController : MonoBehaviour
 
 	protected void Start()
 	{
-		this.PopulationInfoGroupViews();
+		this.BuildPopulationInfoGroupViews();
 		
 		SpawnEggsButton.SetInactive();
 		EggPreview.SetInactive();
@@ -66,7 +66,6 @@ public class BottomBarController : MonoBehaviour
 	{
 		EggPreview.SetEgg(preset);
 		EggPreview.SetActive();
-		// newEggEntityInfoGroupView.UpdateFromPreset(preset);
 	}
 
 	public void SetNewEggEntityAmount(int amount)
@@ -83,10 +82,15 @@ public class BottomBarController : MonoBehaviour
 		}
 
 		EggPreview.SetEggAmount(amount);
+	}
 
-		// newEggButton.gameObject.SetActive(amount > 0);
-		// newEggText.gameObject.SetActive(amount > 0);
-		// newEggEntityInfoGroupView.UpdateEntityAmount(amount);
+	public void SetEntityAmout(EntityType type, int newAmount)
+	{
+		if (entityInfoGroupViews.ContainsKey(type))
+		{
+			EntityInfoGroupView infoGroupView = entityInfoGroupViews[type];
+			infoGroupView.UpdateEntityAmount(newAmount);
+		}
 	}
 
 	public void OffsetEntityAmout(EntityType type, int offset)
@@ -98,7 +102,7 @@ public class BottomBarController : MonoBehaviour
 		}
 	}
 
-	private void PopulationInfoGroupViews()
+	private void BuildPopulationInfoGroupViews()
 	{
 		entityInfoGroupViews.Clear();
 		entityTypes = new List<EntityType>();
@@ -109,6 +113,8 @@ public class BottomBarController : MonoBehaviour
 			{
 				entityInfoGroupViews.Add(type, this.InstantiatePopulationInfoGroup(type));
 				entityTypes.Add(type);
+				
+				this.SetEntityAmout(type, 0);
 			}
 		}
 	}
