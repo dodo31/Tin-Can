@@ -19,12 +19,16 @@ public abstract class Entity : MonoBehaviour
 	protected CollisionsToolkit _collisionsToolkit;
 
 	protected SpriteRenderer _mainSprite;
-	
+
 	protected Animator _mainAnimator;
-	
+
+	protected ParticleSystem _particleSystem;
+
 	protected LifeBarView _lifeBarView;
 
 	private float _lastHitTime;
+
+	private bool _spawnedFromEgg;
 
 	public event Action<EntityType, Vector3> OnBirth;
 	public event Action<Entity> OnDeath;
@@ -35,30 +39,41 @@ public abstract class Entity : MonoBehaviour
 
 		_mainSprite = this.GetComponent<SpriteRenderer>();
 		_mainAnimator = this.GetComponent<Animator>();
-		
+
+		_particleSystem = this.GetComponentInChildren<ParticleSystem>();
+
 		_lifeBarView = this.GetComponentInChildren<LifeBarView>();
 
 		_collisionsToolkit = new CollisionsToolkit();
 		_lastHitTime = 0;
 
 		transform.localScale = Vector3.zero;
+
+		_spawnedFromEgg = false;
 	}
 
 	protected virtual void Start()
 	{
-		int count = Physics2D.OverlapCircleAll(transform.position, 20).Where((collider) =>
+		if (!_spawnedFromEgg && !(this is Egg))
 		{
-			GameObject go = collider.gameObject;
-			Entity entity = go.GetComponent<Entity>();
-			if (entity == null) return false;
-			return entity.Type == this.Type;
-		}).Count();
-		//Debug.Log(Type);
-		if (count > EntityPresetBase.GetInstance()[Type].MaxEntities)
-		{
-			Die();
-		}
+			int count = Physics2D.OverlapCircleAll(transform.position, 20).Where((collider) =>
+			{
+				GameObject go = collider.gameObject;
+				Entity entity = go.GetComponent<Entity>();
 
+				if (entity == null)
+				{
+					return false;
+				}
+
+				return entity.Type == this.Type;
+			}).Count();
+
+			if (!_spawnedFromEgg && count > EntityPresetBase.GetInstance()[Type].MaxEntities)
+			{
+				this.Die();
+			}
+		}
 	}
 
 	protected virtual void Update()
@@ -69,7 +84,7 @@ public abstract class Entity : MonoBehaviour
 	protected virtual void FixedUpdate()
 	{
 		// Au final c'est à x3/2 pour que la partie soit pliée en 40 minutes à coup sûr
-		float hourRatio = Mathf.Clamp(GameTime.GetInstance().FixedTimeSinceSceneStart / 3600f * 3f / 2f, 0f, 1f);
+		float hourRatio = Mathf.Clamp(GameTime.GetInstance().FixedTimeSinceSceneStart / 3600f * 5f / 2f, 0f, 2f);
 		_mainSprite.sortingOrder = -Mathf.FloorToInt(transform.position.y * 100);
 		//hourRatio = 0.5f;
 
@@ -109,7 +124,7 @@ public abstract class Entity : MonoBehaviour
 		this.SetVitality(Math.Max(Vitality - damage, 0));
 		bool isDead = (Vitality <= 0);
 
-		_mainAnimator?.SetTrigger("Hit");
+		// _mainAnimator?.SetTrigger("Hit");
 
 		if (isDead)
 		{
@@ -156,4 +171,8 @@ public abstract class Entity : MonoBehaviour
 	}
 
 	public Guid Id { get => _id; set => _id = value; }
+
+	public ParticleSystem ParticleSystem { get => _particleSystem; set => _particleSystem = value; }
+
+	public bool SpawnedFromEgg { get => _spawnedFromEgg; set => _spawnedFromEgg = value; }
 }

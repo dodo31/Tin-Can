@@ -24,7 +24,7 @@ public class EntityPresetBase
 					
 					CollideRadius = 0.34f,
 
-					VitalitySpeed = -0.01f,
+					VitalitySpeed = -0.04f,
 					MoveSpeed = 7.5f,
 
 					StartVitality = 500,
@@ -389,7 +389,7 @@ public class EntityPresetBase
 
 					Preys = new List<EntityType>()
 					{
-						EntityType.TREE_1,
+						EntityType.TERMITE_1,
 						EntityType.BUSH_1,
 					},
 

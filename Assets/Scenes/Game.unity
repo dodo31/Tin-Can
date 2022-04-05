@@ -2782,7 +2782,7 @@ GameObject:
   - component: {fileID: 908495022}
   - component: {fileID: 908495021}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: Event System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6044,8 +6044,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreView: {fileID: 1792792236}
-  ScoreOffset: 1.74e+10
-  TimeToScoreFactor: 500000
+  ScoreOffset: 150000000
+  TimeToScoreFactor: 14875000
 --- !u!1 &1729141354
 GameObject:
   m_ObjectHideFlags: 0
