@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3387918214497184434}
   - component: {fileID: 3387918214497184435}
-  - component: {fileID: -8139648244333446675}
   - component: {fileID: 5431626838244379063}
+  - component: {fileID: 6143844424836910224}
+  - component: {fileID: -8139648244333446675}
   m_Layer: 3
   m_Name: Vegetal
   m_TagString: Untagged
@@ -74,32 +75,17 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c2354afafa663a24099fb9e81323732f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.69, y: 3}
+  m_Size: {x: 6.4, y: 6.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-8139648244333446675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3387918214497184429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40197f3a390a4cd49a977091fdb93e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 4
-  Vitality: 0
-  HitboxCollider: {fileID: 5431626838244379063}
 --- !u!58 &5431626838244379063
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -116,6 +102,40 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!95 &6143844424836910224
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387918214497184429}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a1baf096f5f4dc48a4d16bcd35c61a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8139648244333446675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387918214497184429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40197f3a390a4cd49a977091fdb93e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 4
+  Vitality: 0
+  HitboxCollider: {fileID: 5431626838244379063}
 --- !u!1001 &7110371574444230047
 PrefabInstance:
   m_ObjectHideFlags: 0

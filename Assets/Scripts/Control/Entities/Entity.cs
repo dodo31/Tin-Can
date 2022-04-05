@@ -19,6 +19,9 @@ public abstract class Entity : MonoBehaviour
 	protected CollisionsToolkit _collisionsToolkit;
 
 	protected SpriteRenderer _mainSprite;
+	
+	protected Animator _mainAnimator;
+	
 	protected LifeBarView _lifeBarView;
 
 	private float _lastHitTime;
@@ -31,6 +34,8 @@ public abstract class Entity : MonoBehaviour
 		_id = Guid.NewGuid();
 
 		_mainSprite = this.GetComponent<SpriteRenderer>();
+		_mainAnimator = this.GetComponent<Animator>();
+		
 		_lifeBarView = this.GetComponentInChildren<LifeBarView>();
 
 		_collisionsToolkit = new CollisionsToolkit();
@@ -103,6 +108,8 @@ public abstract class Entity : MonoBehaviour
 
 		this.SetVitality(Math.Max(Vitality - damage, 0));
 		bool isDead = (Vitality <= 0);
+
+		_mainAnimator?.SetTrigger("Hit");
 
 		if (isDead)
 		{

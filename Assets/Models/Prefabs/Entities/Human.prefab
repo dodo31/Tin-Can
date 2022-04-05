@@ -109,9 +109,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3167453033806097659}
   - component: {fileID: 3167453033806097658}
-  - component: {fileID: 1150786829024421913}
   - component: {fileID: 5733156812381229054}
   - component: {fileID: 1138207854554729262}
+  - component: {fileID: 1786697189902672437}
+  - component: {fileID: 1150786829024421913}
   m_Layer: 3
   m_Name: Human
   m_TagString: Player
@@ -186,22 +187,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1150786829024421913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3167453033806097636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e3e125bcd0a6445ac881fa80810930, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
-  Vitality: 0
-  HitboxCollider: {fileID: 5733156812381229054}
-  Weapon: {fileID: 7079256528884615380}
 --- !u!58 &5733156812381229054
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -239,6 +224,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &1786697189902672437
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167453033806097636}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a1baf096f5f4dc48a4d16bcd35c61a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1150786829024421913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167453033806097636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e3e125bcd0a6445ac881fa80810930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
+  Vitality: 0
+  HitboxCollider: {fileID: 5733156812381229054}
+  Weapon: {fileID: 7079256528884615380}
 --- !u!1 &8848867621293963585
 GameObject:
   m_ObjectHideFlags: 0

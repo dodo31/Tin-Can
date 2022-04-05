@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3387918214497184434}
   - component: {fileID: 3387918214497184435}
-  - component: {fileID: 3387918214497184432}
   - component: {fileID: 5431626838244379063}
   - component: {fileID: -719931424938389916}
+  - component: {fileID: 2675571884744395197}
+  - component: {fileID: 3387918214497184432}
   m_Layer: 3
   m_Name: Animal
   m_TagString: Untagged
@@ -86,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3387918214497184432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3387918214497184429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd6b42b4e34ac646b354fee6fe354a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 1
-  Vitality: 0
-  HitboxCollider: {fileID: 5431626838244379063}
-  ProximityCollider: {fileID: -719931424938389916}
 --- !u!58 &5431626838244379063
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -134,6 +119,42 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!95 &2675571884744395197
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387918214497184429}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a1baf096f5f4dc48a4d16bcd35c61a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3387918214497184432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387918214497184429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd6b42b4e34ac646b354fee6fe354a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  Vitality: 0
+  HitboxCollider: {fileID: 5431626838244379063}
+  ProximityCollider: {fileID: -719931424938389916}
+  _currentState: 0
 --- !u!1001 &7416067718578475831
 PrefabInstance:
   m_ObjectHideFlags: 0
