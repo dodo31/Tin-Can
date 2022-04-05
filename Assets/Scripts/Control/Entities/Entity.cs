@@ -19,8 +19,7 @@ public abstract class Entity : MonoBehaviour
 	protected CollisionsToolkit _collisionsToolkit;
 
 	protected SpriteRenderer _mainSprite;
-	private LifeBarView _lifeBarView;
-
+	protected LifeBarView _lifeBarView;
 
 	private float _lastHitTime;
 

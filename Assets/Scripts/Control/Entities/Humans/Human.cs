@@ -65,6 +65,8 @@ public class Human : Entity
 	{
 		transform.position += delta;
 		transform.localScale = new Vector3(Mathf.Sign(delta.x), 1, 1);
+		_lifeBarView.transform.localScale = new Vector3(Mathf.Sign(delta.x), _lifeBarView.transform.localScale.y, 1);
+		
 		OnMoved?.Invoke(transform.position);
 	}
 
