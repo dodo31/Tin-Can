@@ -50,7 +50,7 @@ public class EntityPresetBase
 			{
 				EntityType.CHIKEN_1, new AnimalPreset()
 				{
-					MaxEntities = 20,
+					MaxEntities = 25,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Chiken 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Chiken Egg"),
 					
@@ -85,7 +85,7 @@ public class EntityPresetBase
 			{
 				EntityType.COW_1, new AnimalPreset()
 				{
-					MaxEntities = 10,
+					MaxEntities = 14,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Cow 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Cow Egg"),
 					
@@ -120,7 +120,7 @@ public class EntityPresetBase
 			{
 				EntityType.DIPLODOCUS_1, new AnimalPreset()
 				{
-					MaxEntities = 5,
+					MaxEntities = 8,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Diplodocus 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Diplodocus Egg"),
 					
@@ -155,7 +155,7 @@ public class EntityPresetBase
 			{
 				EntityType.FOX_1, new AnimalPreset()
 				{
-					MaxEntities = 10,
+					MaxEntities = 14,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Fox 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Fox Egg"),
 					
@@ -190,7 +190,7 @@ public class EntityPresetBase
 			{
 				EntityType.FROG_1, new AnimalPreset()
 				{
-					MaxEntities = 20,
+					MaxEntities = 26,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Frog 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Frog Egg"),
 					
@@ -218,14 +218,14 @@ public class EntityPresetBase
 
 					Predators = new List<EntityType>()
 					{
-						EntityType.FOX_1
+						EntityType.FOX_1, EntityType.SNAKE_1, EntityType.HUMAN_1
 					},
 				}
 			},
 			{
 				EntityType.GOAT_1, new AnimalPreset()
 				{
-					MaxEntities = 10,
+					MaxEntities = 14,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Goat 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Goat Egg"),
 					
@@ -260,7 +260,7 @@ public class EntityPresetBase
 			{
 				EntityType.RABBIT_1, new AnimalPreset()
 				{
-					MaxEntities = 15,
+					MaxEntities = 20,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Rabbit 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Rabbit Egg"),
 					
@@ -295,7 +295,7 @@ public class EntityPresetBase
 			{
 				EntityType.SNAKE_1, new AnimalPreset()
 				{
-					MaxEntities = 10,
+					MaxEntities = 14,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Snake 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Snake Egg"),
 					
@@ -318,7 +318,7 @@ public class EntityPresetBase
 
 					Preys = new List<EntityType>()
 					{
-						EntityType.RABBIT_1, EntityType.FOX_1, EntityType.TAPIR_1, EntityType.HUMAN_1
+						EntityType.RABBIT_1, EntityType.FOX_1, EntityType.TAPIR_1, EntityType.HUMAN_1, EntityType.FROG_1
 					},
 
 					Predators = new List<EntityType>()
@@ -330,7 +330,7 @@ public class EntityPresetBase
 			{
 				EntityType.T_REX_1, new AnimalPreset()
 				{
-					MaxEntities = 4,
+					MaxEntities = 8,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/T-Rex 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/T-Rex Egg"),
 					
@@ -365,7 +365,7 @@ public class EntityPresetBase
 			{
 				EntityType.TAPIR_1, new AnimalPreset()
 				{
-					MaxEntities = 10,
+					MaxEntities = 16,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Tapir 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Tapir Egg"),
 					
@@ -404,7 +404,7 @@ public class EntityPresetBase
 			{
 				EntityType.TERMITE_1, new AnimalPreset()
 				{
-					MaxEntities = 40,
+					MaxEntities = 50,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Termite 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Termite Egg"),
 					
@@ -439,7 +439,7 @@ public class EntityPresetBase
 			{
 				EntityType.BEAR_1, new AnimalPreset()
 				{
-					MaxEntities = 5,
+					MaxEntities = 12,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Animals/Bear 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Bear Egg"),
 					
@@ -467,7 +467,8 @@ public class EntityPresetBase
 						EntityType.CHIKEN_1,
 						EntityType.GOAT_1,
 						EntityType.HUMAN_1,
-						EntityType.BEE_HIVE_1
+						EntityType.BEE_HIVE_1,
+						EntityType.TERMITE_1
 					},
 
 					Predators = new List<EntityType>()
@@ -481,7 +482,7 @@ public class EntityPresetBase
 			{
 				EntityType.BEE_HIVE_1, new VegetalPreset()
 				{
-					MaxEntities = 10,
+					MaxEntities = 20,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Bee Hive 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Bee Hive Egg"),
 					
@@ -495,7 +496,7 @@ public class EntityPresetBase
 					MaxVitality = 80,
 
 					ReproductionThreshold = 0.6f,
-					ReproductionCost = 40,
+					ReproductionCost = 30,
 
 					NutritionalValue = 50,
 				}
@@ -517,7 +518,7 @@ public class EntityPresetBase
 					MaxVitality = 120,
 
 					ReproductionThreshold = 0.6f,
-					ReproductionCost = 40,
+					ReproductionCost = 30,
 
 					NutritionalValue = 30,
 				}
@@ -533,13 +534,13 @@ public class EntityPresetBase
 
 					CollideRadius = 0.49f,
 
-					VitalitySpeed = 0.03f,
+					VitalitySpeed = 0.05f,
 
-					StartVitality = 30,
-					MaxVitality = 60,
+					StartVitality = 50,
+					MaxVitality = 70,
 
 					ReproductionThreshold = 0.6f,
-					ReproductionCost = 40,
+					ReproductionCost = 20,
 
 					NutritionalValue = 20,
 				}
@@ -555,13 +556,13 @@ public class EntityPresetBase
 
 					CollideRadius = 0.7f,
 
-					VitalitySpeed = 0.1f,
+					VitalitySpeed = 0.15f,
 
 					StartVitality = 40,
 					MaxVitality = 80,
 
 					ReproductionThreshold = 0.6f,
-					ReproductionCost = 40,
+					ReproductionCost = 30,
 
 					NutritionalValue = 35,
 				}
@@ -577,13 +578,13 @@ public class EntityPresetBase
 
 					CollideRadius = 0.41f,
 
-					VitalitySpeed = 0.05f,
+					VitalitySpeed = 0.1f,
 
 					StartVitality = 125,
 					MaxVitality = 250,
 
 					ReproductionThreshold = 0.6f,
-					ReproductionCost = 40,
+					ReproductionCost = 100,
 
 					NutritionalValue = 80,
 				}
@@ -591,7 +592,7 @@ public class EntityPresetBase
 			{
 				EntityType.GRASS_1, new VegetalPreset()
 				{
-					MaxEntities = 70,
+					MaxEntities = 60,
 					Sprite = Resources.Load<Sprite>("Sprites/Entities/Vegetals/Grass 1"),
 					EggSprite = Resources.Load<Sprite>("Sprites/Entities/Eggs/Grass Egg"),
 					
@@ -599,13 +600,13 @@ public class EntityPresetBase
 
 					CollideRadius = 0.41f,
 
-					VitalitySpeed = 0.07f,
+					VitalitySpeed = 0.1f,
 
 					StartVitality = 20,
 					MaxVitality = 40,
 
 					ReproductionThreshold = 0.6f,
-					ReproductionCost = 40,
+					ReproductionCost = 20,
 
 					NutritionalValue = 15,
 				}
