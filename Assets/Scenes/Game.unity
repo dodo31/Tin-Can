@@ -6044,7 +6044,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreView: {fileID: 1792792236}
-  TimeToScoreFactor: 1000000
+  ScoreOffset: 1.74e+10
+  TimeToScoreFactor: 500000
 --- !u!1 &1729141354
 GameObject:
   m_ObjectHideFlags: 0

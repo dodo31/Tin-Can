@@ -29,10 +29,17 @@ public class ScoreView : MonoBehaviour
 				scoreFormattedText = '.' + scoreFormattedText;
 			}
 
-			scoreFormattedText = currentChar + scoreFormattedText;
+			if (i < 3)
+			{
+				scoreFormattedText = "0" + scoreFormattedText;
+			}
+			else
+			{
+				scoreFormattedText = currentChar + scoreFormattedText;
+			}
 		}
 
-		ScoreText.text = scoreFormattedText + " km";
+		ScoreText.text = scoreFormattedText + " KM";
 	}
 
 	public void SetScoreHeight(float size)

@@ -5,6 +5,8 @@ public class ScoreController : MonoBehaviour
 {
 	public ScoreView ScoreView;
 
+	public float ScoreOffset;
+
 	public float TimeToScoreFactor;
 	
 	private GameTime _gameTime;
@@ -21,7 +23,7 @@ public class ScoreController : MonoBehaviour
 
 	protected void FixedUpdate()
 	{
-		long score = (long)(_gameTime.FixedTimeSinceSceneStart * TimeToScoreFactor /** UnityEngine.Random.Range(1f, 1.001f)*/);
+		long score = (long)(ScoreOffset + (_gameTime.FixedTimeSinceSceneStart) * TimeToScoreFactor /** UnityEngine.Random.Range(1f, 1.001f)*/);
 		ScoreView.SetScore(score);
 	}
 
