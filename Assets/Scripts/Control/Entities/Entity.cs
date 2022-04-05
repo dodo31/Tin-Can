@@ -63,7 +63,7 @@ public abstract class Entity : MonoBehaviour
 
 	protected virtual void FixedUpdate()
 	{
-		// Au final c'est � x3/2 pour que la partie soit pli�e en 40 minutes � coup s�r
+		// Au final c'est à x3/2 pour que la partie soit pliée en 40 minutes à coup sûr
 		float hourRatio = Mathf.Clamp(GameTime.GetInstance().FixedTimeSinceSceneStart / 3600f * 3f / 2f, 0f, 1f);
 		_mainSprite.sortingOrder = -Mathf.FloorToInt(transform.position.y * 100);
 		//hourRatio = 0.5f;
