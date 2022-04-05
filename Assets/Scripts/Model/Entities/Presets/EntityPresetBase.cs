@@ -25,7 +25,7 @@ public class EntityPresetBase
 					CollideRadius = 0.34f,
 
 					VitalitySpeed = -0.01f,
-					MoveSpeed = 0.04f,
+					MoveSpeed = 7.5f,
 
 					StartVitality = 500,
 					MaxVitality = 500,

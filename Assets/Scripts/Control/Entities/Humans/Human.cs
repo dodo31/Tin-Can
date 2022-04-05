@@ -40,22 +40,22 @@ public class Human : Entity
 		
 		if (Input.GetKey(KeyCode.UpArrow))
 		{
-			totalMotion += Vector3.up * HumanPreset.MoveSpeed * Time.timeScale;
+			totalMotion += Vector3.up * HumanPreset.MoveSpeed * Time.timeScale * Time.deltaTime;
 		}
 
 		if (Input.GetKey(KeyCode.DownArrow))
 		{
-			totalMotion += Vector3.down * HumanPreset.MoveSpeed * Time.timeScale;
+			totalMotion += Vector3.down * HumanPreset.MoveSpeed * Time.timeScale * Time.deltaTime;
 		}
 
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
-			totalMotion += Vector3.left * HumanPreset.MoveSpeed * Time.timeScale;
+			totalMotion += Vector3.left * HumanPreset.MoveSpeed * Time.timeScale * Time.deltaTime;
 		}
 
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
-			totalMotion += Vector3.right * HumanPreset.MoveSpeed * Time.timeScale;
+			totalMotion += Vector3.right * HumanPreset.MoveSpeed * Time.timeScale * Time.deltaTime;
 		}
 
 		return totalMotion;

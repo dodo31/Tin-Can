@@ -37,7 +37,6 @@ public abstract class Entity : MonoBehaviour
 		_lastHitTime = 0;
 
 		transform.localScale = Vector3.zero;
-
 	}
 
 	protected virtual void Start()
@@ -64,16 +63,18 @@ public abstract class Entity : MonoBehaviour
 
 	protected virtual void FixedUpdate()
 	{
-		// Au final c'est à x3/2 pour que la partie soit pliée en 40 minutes à coup sûr
-		float hourRatio = Mathf.Clamp(GameTime.GetInstance().FixedTimeSinceSceneStart / 3600f*3f/2f, 0f, 1f);
+		// Au final c'est ï¿½ x3/2 pour que la partie soit pliï¿½e en 40 minutes ï¿½ coup sï¿½r
+		float hourRatio = Mathf.Clamp(GameTime.GetInstance().FixedTimeSinceSceneStart / 3600f * 3f / 2f, 0f, 1f);
+		_mainSprite.sortingOrder = -Mathf.FloorToInt(transform.position.y * 100);
 		//hourRatio = 0.5f;
 
 		if (Preset.VitalitySpeed > 0)
-        {
-			this.SetVitality(Mathf.Clamp(Vitality + Preset.VitalitySpeed * (1-hourRatio), 0, Preset.MaxVitality));
+		{
+			this.SetVitality(Mathf.Clamp(Vitality + Preset.VitalitySpeed * (1 - hourRatio), 0, Preset.MaxVitality));
 
-		} else 
-			this.SetVitality(Mathf.Clamp(Vitality + Preset.VitalitySpeed * (1 + hourRatio*4), 0, Preset.MaxVitality));
+		}
+		else
+			this.SetVitality(Mathf.Clamp(Vitality + Preset.VitalitySpeed * (1 + hourRatio * 4), 0, Preset.MaxVitality));
 
 		if (Vitality <= 0)
 		{

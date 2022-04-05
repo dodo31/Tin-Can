@@ -13,12 +13,16 @@ public class Egg : Entity
 
 	protected override void Awake()
 	{
+		base.Awake();
+
 		_hatchingTime = Time.fixedTime + HATCHING_DELAY;
 
 		_isVibbing = false;
 		_animator = this.GetComponent<Animator>();
+
+		_mainSprite = this.GetComponentInChildren<SpriteRenderer>();
 	}
-	
+
 	protected override void FixedUpdate()
 	{
 		this.GrowIfRequired();
