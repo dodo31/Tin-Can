@@ -1,6 +1,6 @@
-# TinCan
+# Tin Can
 
-TinCan is a video game developped in 3 days during the Lundum Dare 50, in year 2021.
+Tin Can is a video game developped in 3 days during the Lundum Dare 50, in year 2021.
 
 You can find the gameplay description here:
 https://ldjam.com/events/ludum-dare/50/tin-can
